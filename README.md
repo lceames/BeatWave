@@ -60,12 +60,10 @@ without interrupting the Progress Bar or refreshing the page.
 **Objective:** Auth includes optional image upload for cover and profile pictures.
 User page displays user images and tracks. Tracks can be played and commented.
 
-### Phase 6: - Wave Form (1 day)
-
-**Objective:** Track items display in wave form, highlighting as track progresses.
-
 
 ### Bonus Features (TBD)
-- [ ] Like Tracks
+- [ ] Wave Form for tracks
+- [ ] Track Show pages
+- [ ] Like tracks
 - [ ] Follows
 - [ ] Stream is populated with tracks of followed users

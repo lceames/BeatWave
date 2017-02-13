@@ -1,11 +1,14 @@
 ```js
 {
-  currentUser: {
-    id: 1,
-    username: "music-lover99",
-    description: "whatever",
-    tracks: {{1: 1}, {2: 2}} //Hold onto only ids or full track info?
-  },
+  session: {
+    currentUser: {
+      id: 1,
+      username: "music-lover99",
+      description: "whatever",
+      tracks: {{1: 1}, {2: 2}} //Hold onto only ids or full track info?
+    },
+    errors: {}
+  }
 
   forms: {
     signUp: {errors: []},
