@@ -1,72 +1,65 @@
 ## Component Hierarchy
 
-**AuthFormContainer**
- - AuthForm
+**Home**
+ - HomeHeader
+ - CreateAccountFormContainer
+ - LoginFormContainer
+ - DiscoverTrackIndex
+ - HomeFooter
+ - ProgressBar
 
-**HomeContainer**
- - Home
- - Sidebar
+**DiscoverTrackIndex**
+ -DiscoverTrackIndexItem
 
-**NotesContainer**
- - NotesHeader
-  * NoteIndex
+**DiscoverTrackIndexItem**
 
-**NotebookContainer**
- - NotebookHeader
-  + NoteIndex
+**CreateAccountFormContainer**
+  - CreateAccountForm
 
-**SearchResultsContainer**
- - Search
- - NoteIndex
+**LoginFormContainer**
+  - LoginForm
 
-**TagContainer**
- - NotebookHeader
-  + NoteIndex
+**StreamContainer**
+ - Stream
 
-**NoteIndex**
- - NoteIndexItem
-  + NoteDetail
-    + NoteTools
-    - NotebookSearch
-    - Tags
-      - Tag
-    * Note
+**Stream**
+ - NavBar
+ - StreamTrackIndex
+ - ProgressBar
+ - CommentForm
 
-**NewNoteContainer**
- - NewNote
-  - RTETools
-  - NewNoteButton
+**StreamTrackIndex**
+ -StreamTrackIndexItem
 
-**Search**
+**UserShow**
+ - StreamTrackIndex
+ - Stats
 
-**NewNotebook**
- - NewNotebook
+**NavBar**
 
-**NewTag**
- - NewTag
+**ProgressBar**
+ -PlayPauseButton
+ -TrackProgressIcon
 
-**NotebookSearch**
- + AutoSearch
- * AutoSearchResults
+**TrackProgressIcon**
 
-**TagsSearch**
- + AutoSearch
- * AutoSearchResults
+**PlayPauseButton**
+
+**Upload**
+
+BONUS
+
+**DiscoverContainer**
+ - Discover
+
+**Stats**
 
 ## Routes
 
 |Path   | Component   |
 |-------|-------------|
-| "/sign-up" | "AuthFormContainer" |
-| "/sign-in" | "AuthFormContainer" |
-| "/home" | "HomeContainer" |
-| "/home/note/:noteId" | "NotesContainer" |
-| "/home/notebook/:notebookId/note/:noteId" | "NotebookContainer" |
-| "/home/tag/:tagId/note/:notedId" | "TagContainer" |
-| "/home/search-results" | "SearchResultsContainer"
-| "/new-note" | "NewNoteContainer" |
-| "/search" | "Search" |
-| "/new-notebook" | "NewNotebook" |
-| "/new-tag" | "NewTag" |
-| "/tag-search" | "TagSearch" |
-| "/notebook-search" | "NotebookSearch" |
+| "/" | "Home" |
+| "/stream" | "StreamContainer" |
+| "/:trackId" | "TrackShowContainer" |
+| "/users/:userId" | "UserShowContainer" |
+| "/users/:userId/upload" | "UploadTrack"

@@ -2,34 +2,50 @@
 {
   currentUser: {
     id: 1,
-    username: "app-academy"
+    username: "music-lover99",
+    description: "whatever",
+    tracks: {{1: 1}, {2: 2}} //Hold onto only ids or full track info?
   },
+
   forms: {
     signUp: {errors: []},
     logIn: {errors: []},
-    createNote: {errors: ["body can't be blank"]}
+    createComment: {errors: ["body can't be blank"]},
+    upload: {errors: []}
   },
-  notes: {
-    1: {
-      title: "Sample State",
-      body: "is useful to plan",
-      author_id: 1,
-      notebook_id: 1
-      tags: {
-        1: {
-          id: 1
-          name: "Coding"
-        }
+
+  currentTrack: {
+    active: true,
+    elapsedTime: 47,
+    paused: false,
+    queueId: 0
+  },
+
+  trackQueue: [
+      {
+        trackId: 1,
+        trackTitle: "Sweet Tune",
+        author: "music-lover99",
+        url: "aws/something",
+        lengthInSeconds: 234,
+        description: "Pure velvet mate"
+      },
+      {
+        trackId: 2,
+        trackTitle: "Autumnal Mountain",
+        author: "dope-dj411",
+        url: "aws/somethingelse",
+        lengthInSeconds: 234,
+        description: "Like hiking in October"
+      },
+      {
+        trackId: 3,
+        trackTitle: "Gentle Mist",
+        author: "softy64",
+        url: "aws/anotherthing",
+        lengthInSeconds: 234,
+        description: "A gentle choon"
       }
-    }
-  },
-  notebooks: {
-    1: {
-      title: "Redux",
-      author_id: 1,
-      description: "is cool"
-    }
-  }
-  tagFilters: [1, 7, 14] // Used to track selected Tags for filtering of notes
+    ]
 }
 ```

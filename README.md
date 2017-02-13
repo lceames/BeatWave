@@ -1,24 +1,71 @@
-# README
+# BeatWave
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+[Heroku link][heroku]
 
-Things you may want to cover:
+[Trello link][trello]
 
-* Ruby version
+[heroku]: http://www.herokuapp.com
+[trello]: https://trello.com
 
-* System dependencies
+## Minimum Viable Product
 
-* Configuration
+BeatWave is a web application inspired by SoundCloud built using Ruby on Rails
+and React/Redux.  BeatWave allows users to:
 
-* Database creation
+- [ ] Create a new account
+- [ ] Login and Logout
+- [ ] Upload audio files to create new tracks
+- [ ] Play songs in progress bar with continuous play
+- [ ] Comment on tracks
+- [ ] View and play other user's tracks
+- [ ] Follow other users
 
-* Database initialization
 
-* How to run the test suite
+## Design Docs
+* [View Wireframes][wireframes]
+* [React Components][components]
+* [API endpoints][api-endpoints]
+* [DB schema][schema]
+* [Sample State][sample-state]
 
-* Services (job queues, cache servers, search engines, etc.)
+[wireframes]: docs/wireframes
+[components]: docs/component-hierarchy.md
+[sample-state]: docs/sample-state.md
+[api-endpoints]: docs/api-endpoints.md
+[schema]: docs/schema.md
 
-* Deployment instructions
+## Implementation Timeline
 
-* ...
+### Phase 1: Backend setup and Front End User Authentication (2 days)
+
+**Objective:** Functioning rails project with front-end Authentication
+
+### Phase 2: Tracks Model, API, and components (2 days)
+
+**Objective:** Tracks can be created, read, and destroyed through
+the API.
+
+### Phase 3: Stream and Progress Bar (2 days)
+
+**Objective:** Stream is populated with tracks by other users. Progress Bar,
+once initiated, uses queue to continuously play Stream's tracks.
+
+### Phase 4: Comments (1 day)
+
+**Objective:** Stream's tracks can be commented upon, and update accordingly
+without interrupting the Progress Bar or refreshing the page.
+
+### Phase 5: User Show Page and update Auth to include profile picture (1 day)
+
+**Objective:** Auth includes optional image upload for cover and profile pictures.
+User page displays user images and tracks. Tracks can be played and commented.
+
+### Phase 6: - Wave Form (1 day)
+
+**Objective:** Track items display in wave form, highlighting as track progresses.
+
+
+### Bonus Features (TBD)
+- [ ] Like Tracks
+- [ ] Follows
+- [ ] Stream is populated with tracks of followed users
