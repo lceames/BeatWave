@@ -32,8 +32,8 @@
 
 ### Comments
 
-- `GET /api/:trackId/comments`
+- `GET /api/comments`
   -fetches tracks for particular song
-- `POST /api/:trackId/comments`
+- `POST /api/comments`
   -adds comment to track
-- `DELETE /api/:trackId/comments/:commentId`
+- `DELETE /api/comments/:commentId`

@@ -26,10 +26,18 @@
  - NavBar
  - StreamTrackIndex
  - ProgressBar
- - CommentForm
 
 **StreamTrackIndex**
  -StreamTrackIndexItem
+
+**StreamTrackIndexItem**
+ -CommentIndex
+ -CommentForm
+
+**CommentIndex**
+ -CommentIndexItem
+
+**CommentIndexItem**
 
 **UserShow**
  - StreamTrackIndex
