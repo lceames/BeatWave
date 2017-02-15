@@ -4,6 +4,7 @@ class Api::UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       log_in!(@user)
+      debugger
       render :show
     else
       render json: @user.errors.to_a, status: 422

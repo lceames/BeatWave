@@ -8,7 +8,7 @@ export const login = (user) => {
 
 export const logout = () => {
   return $.ajax({
-    method: 'POST',
+    method: 'DELETE',
     url: 'api/session'
   });
 };

@@ -1,5 +1,5 @@
 import React from 'react';
-import { merge } from 'lodash/merge';
+import merge  from 'lodash/merge';
 import { RECEIVE_CURRENT_USER, RECEIVE_ERRORS, RESET_ERRORS } from '../actions/session_actions';
 
 
@@ -11,7 +11,8 @@ const sessionReducer = (oldState = { currentUser: null, errors: [] }, action) =>
     case(RECEIVE_ERRORS):
       return merge({}, oldState, {errors: action.errors});
     case(RESET_ERRORS):
-      return merge({}, oldState, {errors: []});
+      let errors = { currentUser: null, errors: [] };
+      return errors;
     default:
       return oldState;
   }
