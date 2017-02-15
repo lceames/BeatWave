@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import UserNavSection from './user_nav_section';
-import { logout } from '../../actions/session_actions';
+import { logout, login } from '../../actions/session_actions';
 
 const mapStateToProps = (state) => {
   let loggedIn = state.session.currentUser ? true : false;
@@ -10,7 +10,10 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = dispatch => {
-  return { logout: () => dispatch(logout()) };
+  return {
+    logout: () => dispatch(logout()),
+    loginGuest: () => dispatch(login({username: "guest", password: "password"}))
+  };
 };
 
 export default connect(

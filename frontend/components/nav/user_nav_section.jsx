@@ -26,21 +26,46 @@ export default class UserNavSection extends React.Component {
   }
   render () {
     if (this.props.loggedIn) {
-      return <button onClick={this.props.logout}>Log Out</button>
+      return (
+        <div className="nav-user-section">
+          <button onClick={this.props.logout}>Log Out</button>
+        </div>
+      )
     }
 
     return (
-      <nav>
-        <button onClick={() => this.openModal("login")}>Sign In</button>
-        <button onClick={() => this.openModal("sign up")}>Sign Up</button>
+      <div className="nav-user-section">
+        <button id="guest-account" onClick={this.props.loginGuest}>Guest Account</button>
+        <p>or</p>
+        <button id="sign-in" onClick={() => this.openModal("login")}>Sign In</button>
+        <p>or</p>
+        <button id="create-account" onClick={() => this.openModal("sign up")}>Create Account</button>
         <Modal
           isOpen={this.state.modalIsOpen}
           onRequestClose={this.closeModal}
+          contentLabel="auth modal"
+          style={customStyles}
         >
-          <SessionFormContainer formType={this.state.formType}/>
+          <SessionFormContainer closeModal={this.closeModal} formType={this.state.formType}/>
 
         </Modal>
-      </nav>
+      </div>
     )
   }
 }
+
+
+const customStyles = {
+  content : {
+    position: "static",
+    border: "1px solid rgb(204, 204, 204)",
+    background: "rgb(255, 255, 255)",
+    overflow: "auto",
+    outline: "none",
+    padding: "20px",
+    width: "450px",
+    height: "550px",
+    margin: "80px auto",
+
+    }
+};

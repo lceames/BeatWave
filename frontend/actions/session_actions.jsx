@@ -8,7 +8,7 @@ export const RESET_ERRORS = "RESET_ERRORS";
 export const login = (user) => dispatch => {
   return SessionApiUtil.login(user).then(
     (user) => dispatch(receiveCurrentUser(user)),
-    (errors) => dispatch(receiveErrors(errors))
+    (errors) => dispatch(receiveErrors(errors.responseJSON))
   );
 };
 
@@ -19,7 +19,7 @@ export const logout = () => dispatch => {
 export const createUser = user => dispatch => {
   return SessionApiUtil.createUser(user).then(
     (user) => dispatch(receiveCurrentUser(user)),
-    (errors) => dispatch(receiveErrors(errors))
+    (errors) => dispatch(receiveErrors(errors.responseJSON))
   );
 };
 

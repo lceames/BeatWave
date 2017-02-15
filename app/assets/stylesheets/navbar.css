@@ -1,0 +1,86 @@
+.nav-bar {
+  display: flex;
+  justify-content: space-around;
+  background-color: #333;
+}
+
+.nav-user-section {
+  display: flex;
+  justify-content: center;
+}
+
+.nav-user-section p {
+  align-self: center;
+  margin: 8px;
+  color: #ccc;
+}
+
+.nav-user-section button {
+  align-self: center;
+  height: 26px;
+  font: 11px;
+  font-family: sans-serif;
+  padding: 2px 11px 2px 10px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.nav-user-section #sign-in, #guest-account {
+  background-color: transparent;
+  border: 1px solid #e5e5e5;
+  border-color: #666;
+  color: #fff;
+  font-family: "Interstate","Lucida Grande","Lucida Sans Unicode","Lucida Sans",Garuda,Verdana,Tahoma,sans-serif;
+}
+
+.nav-user-section #create-account {
+  background-color: #f50;
+  border-color: #f50;
+  color: #fff;
+}
+
+.user-form {
+  align-self: center;
+  align-items: center;
+  margin-top: 240px;
+}
+
+.user-form input {
+  display: block;
+  width: 400px;
+}
+
+input[type="text"] {
+    display: block;
+    width: 400px;
+    /* height: 40px; */
+    font-size: 18px;
+    line-height: 24px;
+    padding: 7px 8px;
+    border-radius: 5px;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+    box-sizing: border-box;
+    align-content: center;
+}
+
+input[type="submit"] {
+    background-color: #f50;
+    border-color: #f50;
+    color: #fff;
+    font-size: 16px;
+    line-height: 18px;
+    padding: 10px 15px;
+    height: 40px;
+    display: inline-block;
+    position: relative;
+    border: 1px solid #e5e5e5;
+    border-radius: 3px;
+    white-space: nowrap;
+    font-family: "Interstate","Lucida Grande","Lucida Sans Unicode","Lucida Sans",Garuda,Verdana,Tahoma,sans-serif;
+    font-weight: 100;
+    text-align: center;
+    vertical-align: baseline;
+    box-sizing: border-box;
+}

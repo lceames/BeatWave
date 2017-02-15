@@ -32,7 +32,7 @@ class SessionForm extends React.Component {
     e.preventDefault();
     let action = this.props.formType === "login" ? this.props.login : this.props.signup;
     let user = Object.assign({}, this.state);
-    action(user);
+    action(user).then(() => this.props.closeModal());
   }
 
   render () {
@@ -49,7 +49,7 @@ class SessionForm extends React.Component {
     return (
       <div>
         {errors}
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.handleSubmit} className="user-form">
           {emailInput}
           <input type="text" placeholder="Username" onChange={this.update('username')}></input>
           <input type="text" placeholder="Password" onChange={this.update('password')}></input>
