@@ -1,6 +1,7 @@
 import React from 'react';
 import Modal from 'react-modal';
 import SessionFormContainer from '../session/session_form_container';
+import { hashHistory } from 'react-router';
 
 export default class UserNavSection extends React.Component {
   constructor (props) {
@@ -12,6 +13,7 @@ export default class UserNavSection extends React.Component {
 
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
+    this.handleLogout = this.handleLogout.bind(this);
   }
 
   openModal (formType) {
@@ -21,6 +23,10 @@ export default class UserNavSection extends React.Component {
     });
   }
 
+  handleLogout () {
+    this.props.logout();
+  }
+
   closeModal () {
     this.setState({modalIsOpen: false});
   }
@@ -28,18 +34,18 @@ export default class UserNavSection extends React.Component {
     if (this.props.loggedIn) {
       return (
         <div className="nav-user-section">
-          <button onClick={this.props.logout}>Log Out</button>
+          <button onClick={this.handleLogout}>Log Out</button>
         </div>
       )
     }
 
     return (
       <div className="nav-user-section">
-        <button id="guest-account" onClick={this.props.loginGuest}>Guest Account</button>
+        <button id="guest-account" onClick={this.props.loginGuest}>Guest account</button>
         <p>or</p>
-        <button id="sign-in" onClick={() => this.openModal("login")}>Sign In</button>
+        <button id="sign-in" onClick={() => this.openModal("login")}>Sign in</button>
         <p>or</p>
-        <button id="create-account" onClick={() => this.openModal("sign up")}>Create Account</button>
+        <button id="create-account" onClick={() => this.openModal("sign up")}>Create account</button>
         <Modal
           isOpen={this.state.modalIsOpen}
           onRequestClose={this.closeModal}

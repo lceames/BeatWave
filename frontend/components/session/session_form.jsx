@@ -1,4 +1,5 @@
 import React from 'react';
+import { hashHistory } from 'react-router';
 
 class SessionForm extends React.Component {
 
@@ -32,7 +33,13 @@ class SessionForm extends React.Component {
     e.preventDefault();
     let action = this.props.formType === "login" ? this.props.login : this.props.signup;
     let user = Object.assign({}, this.state);
-    action(user).then(() => this.props.closeModal());
+    action(user).then(() => this.redirectToStream());
+  }
+
+  redirectToStream () {
+    debugger
+    this.props.closeModal();
+    hashHistory.push('/stream');
   }
 
   render () {
