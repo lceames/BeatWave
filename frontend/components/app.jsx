@@ -6,7 +6,7 @@ import NavBar from './nav/navbar.jsx';
 
 export default (props) => {
   return (
-    <div>
+    <div className="app">
       <NavBar location={props.location.pathname}/>
       { props.children }
     </div>

@@ -1,0 +1,18 @@
+#splash-header {
+  top: 0;
+  z-index: -1;
+  width: 100%;
+  height: 450px;
+  position: relative;
+}
+
+.splash {
+  width: 1200px;
+  margin: 0 auto;
+}
+
+.nav-splash {
+  top: 0;
+  background-color: transparent;
+  position: absolute;
+}

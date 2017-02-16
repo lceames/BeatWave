@@ -39,7 +39,7 @@ export default class UserNavSection extends React.Component {
     if (this.props.loggedIn) {
       return (
         <div className="nav-user-section">
-          <button onClick={this.handleLogout}>Log Out</button>
+          <button id="log-out" onClick={this.handleLogout}>Log Out</button>
         </div>
       )
     }

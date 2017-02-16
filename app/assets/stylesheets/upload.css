@@ -1,0 +1,41 @@
+.upload h3 {
+  margin-top: 0;
+}
+
+.upload {
+  background-color: #fff;
+}
+
+#upload-form {
+  margin-top: 90px;
+  padding-left: 10%;
+  padding-right: 10%;
+  border: 1px solid #f2f2f2;
+  width: 800px;
+  height: 350px;
+}
+
+#upload-form h3 {
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 1;
+  font-weight: 400;
+  margin: 18px 0 0;
+  -webkit-margin-before: 0.67em;
+  -webkit-margin-after: 0.67em;
+  -webkit-margin-start: 0px;
+  -webkit-margin-end: 0px;
+  text-align: center;
+}
+
+#upload-form button {
+  line-height: 18px;
+  padding: 10px 15px;
+  height: 40px;
+  cursor: pointer;
+  font-weight: 100;
+  text-align: center;
+  vertical-align: baseline;
+  display: inline-block;
+  margin-top: 77px;
+}

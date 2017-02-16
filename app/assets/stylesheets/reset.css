@@ -6,10 +6,41 @@ section, p, footer, small {
   border: 0;
   outline: 0;
   font: inherit;
-  color: inherit;
+  background-color: inherit;
   text-align: inherit;
   text-decoration: inherit;
   vertical-align: inherit;
   box-sizing: inherit;
   background: transparent;
+}
+
+body {
+  width: 100%;
+  background-color: #f2f2f2;
+  height: 100%;
+  font-family: "Interstate","Lucida Grande","Lucida Sans Unicode","Lucida Sans",Garuda,Verdana,Tahoma,sans-serif;
+}
+
+img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+#guest-account {
+  width: 132px;
+}
+
+#sign-in {
+  width: 75px;
+}
+
+button {
+  background-color: #f50;
+  border-color: #f50;
+  color: #ccc;
+  font-size: 16px;
+  line-height: 18px;
+  padding: 10px 15px;
+  height: 40px;
 }

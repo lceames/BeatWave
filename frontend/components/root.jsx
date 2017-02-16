@@ -5,6 +5,7 @@ import App from './app.jsx';
 import SessionFormContainer from './session/session_form_container';
 import Splash from './splash';
 import Stream from './stream';
+import UploadContainer from './upload/upload_container';
 
 export default ({store}) => {
   function redirectIfLoggedIn(nextState, replace) {
@@ -19,6 +20,7 @@ export default ({store}) => {
         <Route path='/' component={App}>
           <IndexRoute component={Splash} onEnter={redirectIfLoggedIn} />
           <Route path='/stream' component={Stream} />
+          <Route path='/upload' component={UploadContainer} />
         </Route>
       </Router>
     </Provider>
