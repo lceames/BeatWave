@@ -85,7 +85,7 @@
   width: 400px;
 }
 
-input[type="text"] {
+input[type="text"], input[type="password"] {
   margin-top: 10px;
   display: block;
   width: 400px;
