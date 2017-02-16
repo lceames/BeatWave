@@ -37,7 +37,6 @@ class SessionForm extends React.Component {
   }
 
   redirectToStream () {
-    debugger
     this.props.closeModal();
     hashHistory.push('/stream');
   }

@@ -24,7 +24,7 @@ export default class UserNavSection extends React.Component {
   }
 
   handleLogout () {
-    this.props.logout();
+    this.props.logout().then(hashHistory.push('/'));
   }
 
   closeModal () {
