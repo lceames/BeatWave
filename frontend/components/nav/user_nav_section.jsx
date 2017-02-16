@@ -14,6 +14,7 @@ export default class UserNavSection extends React.Component {
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
+    this.loginGuest = this.loginGuest.bind(this);
   }
 
   openModal (formType) {
@@ -24,7 +25,11 @@ export default class UserNavSection extends React.Component {
   }
 
   handleLogout () {
-    this.props.logout().then(hashHistory.push('/'));
+    this.props.logout().then( () => hashHistory.push('/'));
+  }
+
+  loginGuest () {
+    this.props.loginGuest().then( () => hashHistory.push('/stream'));
   }
 
   closeModal () {
@@ -41,7 +46,7 @@ export default class UserNavSection extends React.Component {
 
     return (
       <div className="nav-user-section">
-        <button id="guest-account" onClick={this.props.loginGuest}>Guest account</button>
+        <button id="guest-account" onClick={this.loginGuest}>Guest account</button>
         <p>or</p>
         <button id="sign-in" onClick={() => this.openModal("login")}>Sign in</button>
         <p>or</p>

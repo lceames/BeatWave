@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import UserNavSection from './user_nav_section';
 import { logout, login } from '../../actions/session_actions';
+import { hashHistory } from 'react-redux';
 
 const mapStateToProps = (state) => {
   let loggedIn = state.session.currentUser ? true : false;

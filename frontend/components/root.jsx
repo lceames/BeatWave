@@ -8,7 +8,6 @@ import Stream from './stream';
 
 export default ({store}) => {
   function redirectIfLoggedIn(nextState, replace) {
-    debugger
     if (store.getState().session.currentUser) {
       replace('/stream');
     }
