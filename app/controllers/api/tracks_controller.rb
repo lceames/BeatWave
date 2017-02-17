@@ -16,7 +16,8 @@ class Api::TracksController < ApplicationController
 
   def index
     if params[:filter] == "stream"
-      @tracks = Track.where.not({user_id: current_user.id})
+      # @tracks = Track.where.not({user_id: current_user.id}) #change stream to only render other users' tracks
+      @tracks = Track.all
     end
     render :index
   end

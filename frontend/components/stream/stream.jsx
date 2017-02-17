@@ -1,6 +1,6 @@
 import React from 'react';
 import {hashHistory} from 'react-router';
-import StreamIndexItem from './stream_index_item';
+import StreamIndexItemContainer from './stream_index_item_container';
 
 export default class Stream extends React.Component {
 
@@ -18,9 +18,8 @@ export default class Stream extends React.Component {
     }
 
     let tracks = this.props.tracks.map( (track) => {
-      return <StreamIndexItem track={track} key={track.id} />
+      return <StreamIndexItemContainer track={track} key={track.id} />
     })
-    debugger
 
     return (
       <div className="stream content">

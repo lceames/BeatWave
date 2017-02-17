@@ -3,6 +3,7 @@ import * as TrackApiUtil from '../util/track_api_util';
 
 export const RECEIVE_TRACK = "RECEIVE_TRACK";
 export const RECEIVE_TRACKS = "RECEIVE_TRACKS";
+export const SET_CURRENT_TRACK = "SET_CURRENT_TRACK";
 
 export const fetchTrack = (id) => dispatch => {
   return TrackApiUtil.fetchTrack(id).then(
@@ -35,5 +36,12 @@ export const receiveTrack = track => {
   return {
     type: RECEIVE_TRACK,
     track
+  };
+};
+
+export const setCurrentTrack = currentTrackItem => {
+  return {
+    type: SET_CURRENT_TRACK,
+    currentTrackItem
   };
 };

@@ -1,9 +1,9 @@
 import React from 'react';
 import { combineReducers } from 'redux';
 import sessionReducer from './sessions_reducer';
-import tracksReducer from './tracks_reducer';
+import queueReducer from './queue_reducer';
 
 export default combineReducers({
   session: sessionReducer,
-  trackQueue: tracksReducer
+  trackQueue: queueReducer
 });
