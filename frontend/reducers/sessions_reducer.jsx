@@ -1,7 +1,6 @@
 import React from 'react';
 import merge  from 'lodash/merge';
 import { RECEIVE_CURRENT_USER, RECEIVE_ERRORS, RESET_ERRORS } from '../actions/session_actions';
-// window.merge = merge;
 
 const sessionReducer = (oldState = { currentUser: null, errors: [] }, action) => {
   Object.freeze(oldState);

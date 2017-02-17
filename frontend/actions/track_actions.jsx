@@ -10,10 +10,26 @@ export const fetchTrack = (id) => dispatch => {
   );
 };
 
+export const fetchTracks = (filter) => dispatch => {
+  return TrackApiUtil.fetchTracks(filter).then(
+    (tracks) => {
+      debugger
+      dispatch(receiveTracks(tracks));
+    }
+  );
+};
+
 export const createTrack = (track) => dispatch => {
   return TrackApiUtil.createTrack(track).then(
     (track) => dispatch(receiveTrack(track))
   );
+};
+
+export const receiveTracks = tracks => {
+  return {
+    type: RECEIVE_TRACKS,
+    tracks
+  };
 };
 
 export const receiveTrack = track => {

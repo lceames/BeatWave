@@ -5,7 +5,6 @@ class Api::TracksController < ApplicationController
   end
 
   def create
-    debugger
     @track = Track.new(track_params)
     @track.user_id = current_user.id
     if @track.save
@@ -13,6 +12,13 @@ class Api::TracksController < ApplicationController
     else
       render json: @track.errors.full_messages
     end
+  end
+
+  def index
+    if params[:filter] == "stream"
+      @tracks = Track.where.not({user_id: current_user.id})
+    end
+    render :index
   end
 
   private

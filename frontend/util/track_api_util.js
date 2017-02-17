@@ -14,3 +14,11 @@ export const createTrack = track => {
     data: track
   });
 };
+
+export const fetchTracks = filter => {
+  return $.ajax({
+    method: 'GET',
+    url: 'api/tracks',
+    data: {filter}
+  });
+};
