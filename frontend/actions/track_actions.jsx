@@ -13,7 +13,6 @@ export const fetchTrack = (id) => dispatch => {
 export const fetchTracks = (filter) => dispatch => {
   return TrackApiUtil.fetchTracks(filter).then(
     (tracks) => {
-      debugger
       dispatch(receiveTracks(tracks));
     }
   );

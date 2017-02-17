@@ -4,7 +4,7 @@ import { Router, Route, IndexRoute, hashHistory } from 'react-router';
 import App from './app.jsx';
 import SessionFormContainer from './session/session_form_container';
 import Splash from './splash';
-import Stream from './stream';
+import StreamContainer from './stream/stream_container';
 import UploadContainer from './upload/upload_container';
 
 export default ({store}) => {
@@ -19,7 +19,7 @@ export default ({store}) => {
       <Router history={hashHistory}>
         <Route path='/' component={App}>
           <IndexRoute component={Splash} onEnter={redirectIfLoggedIn} />
-          <Route path='/stream' component={Stream} />
+          <Route path='/stream' component={StreamContainer} />
           <Route path='/upload' component={UploadContainer} />
         </Route>
       </Router>

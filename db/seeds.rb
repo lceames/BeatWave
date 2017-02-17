@@ -23,25 +23,21 @@ jimoh_id = User.find_by({username: "jimoh"}).id
 Track.delete_all
 
 life = Track.new({user_id: jorge_id, title: "Life", description: "by JDilla"})
-life.audio = File.open('app/assets/audio/life.mp3')
+life.audio = "http://s3.amazonaws.com/beatwave-dev/tracks/audios/000/000/008/original/life.mp3?1487344012"
 life.save!
 
 cigs = Track.new({user_id: marshall_id, title: "Cigarettes and Coffee", description: "Otis Redding's classic melancholia"})
-cigs.audio = File.open('app/assets/audio/cigarettes-and-coffee.mp3')
+cigs.audio = "http://s3.amazonaws.com/beatwave-dev/tracks/audios/000/000/009/original/cigarettes-and-coffee.mp3?1487344018"
 cigs.save!
 
 you = Track.new({user_id: jimoh_id, title: "You and me", description: "Discovered in a yard sale decades after recording"})
-you.audio = File.open('app/assets/audio/you-and-me.mp3')
+you.audio = "http://s3.amazonaws.com/beatwave-dev/tracks/audios/000/000/010/original/you-and-me.mp3?1487344019"
 you.save!
 
 talk = Track.new({user_id: marshall_id, title: "Talk To Me, You'll Understand", description: "House"})
-talk.audio = File.open('app/assets/audio/talk-to-me.mp3')
+talk.audio = "http://s3.amazonaws.com/beatwave-dev/tracks/audios/000/000/011/original/talk-to-me.mp3?1487344021"
 talk.save!
 
 done = Track.new({user_id: jorge_id, title: "Getting It Done", description: "Another banger by Ross From Friends"})
-done.audio = File.open('app/assets/audio/getting-it-done.mp3')
-done.save!
-
-found = Track.new({user_id: jorge_id, title: "I Found You", description: "Soulful one by the Shakes"})
-done.audio = File.open('app/assets/audio/i-found-you.mp3')
+done.audio = "http://s3.amazonaws.com/beatwave-dev/tracks/audios/000/000/012/original/i-found-you.mp3?1487344045"
 done.save!
