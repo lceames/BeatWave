@@ -4,13 +4,13 @@ import { setCurrentTrack } from '../../actions/track_actions';
 import ProgressBar from './progress_bar';
 
 const mapStateToProps = state => {
-  let active;
-  if (state.currentTrack) {
-    active = true;
-    currentTrack = state.trackQueue.currentTrack;
-    queue = state.trackQueue.queue;
+  if (state.trackQueue.currentTrack) {
+    let active = true;
+    let currentTrack = state.trackQueue.currentTrack;
+    let queue = state.trackQueue.queue;
     return { active, currentTrack, queue };
   }
+  return {};
 };
 
 const mapDispatchToProps = dispatch => {
