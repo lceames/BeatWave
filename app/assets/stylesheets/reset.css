@@ -4,7 +4,6 @@ section, p, footer, small {
   margin: 0;
   padding: 0;
   border: 0;
-  outline: 0;
   font: inherit;
   background-color: inherit;
   text-align: inherit;
@@ -43,4 +42,5 @@ button {
   line-height: 18px;
   padding: 10px 15px;
   height: 40px;
+  outline: none;
 }

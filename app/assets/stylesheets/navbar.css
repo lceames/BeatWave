@@ -18,6 +18,12 @@ html {
   margin-left: 10%;
 }
 
+.errors {
+  color: #f50;
+  list-style: none;
+  font-size: 12px;
+}
+
 #log-out {
   width: 80px;
 }

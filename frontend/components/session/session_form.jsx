@@ -54,11 +54,11 @@ class SessionForm extends React.Component {
 
     return (
       <div>
-        {errors}
         <form onSubmit={this.handleSubmit} className="user-form">
           {emailInput}
           <input type="text" placeholder="Username" onChange={this.update('username')}></input>
           <input type="password" placeholder="Password" onChange={this.update('password')}></input>
+          <ul className="errors">{errors}</ul>
           <label>
             <input type="submit"></input>
           </label>
