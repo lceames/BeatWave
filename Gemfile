@@ -27,6 +27,8 @@ gem 'jquery-rails'
 gem 'jbuilder', '~> 2.5'
 
 gem 'paperclip',"~> 5.0.0.beta1"
+gem 'aws-sdk', '>= 2.0'
+gem 'figaro'
 
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
