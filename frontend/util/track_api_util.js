@@ -4,3 +4,13 @@ export const fetchTrack = id => {
     url: `api/tracks/${id}`
   });
 };
+
+export const createTrack = track => {
+  return $.ajax({
+    method: 'POST',
+    url: `api/tracks`,
+    contentType: false,
+    processData: false,
+    data: track
+  });
+};

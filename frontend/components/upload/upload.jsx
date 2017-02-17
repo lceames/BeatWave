@@ -7,28 +7,33 @@ export default class Upload extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      body: "",
+      title: "",
       description: "",
+      audioFile: null,
       modalIsOpen: false
     };
 
     this.handleFile = this.handleFile.bind(this);
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
-  }
-
-  componentDidMount() {
-    this.props.fetchTrack(1);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleFile (e) {
     let file = e.currentTarget.files[0];
     if (file) {
+      this.setState({audioFile: file});
       this.openModal();
     }
   }
 
-  handleSubmit () {
+  handleSubmit (e) {
+    e.preventDefault();
+    let formData = new FormData();
+    formData.append("track[title]", this.state.title);
+    formData.append("track[description]", this.state.description);
+    formData.append("track[audio]", this.state.audioFile);
+    this.props.createTrack(formData);
   }
 
   openModal () {
@@ -39,6 +44,12 @@ export default class Upload extends React.Component {
 
   closeModal () {
     this.setState({modalIsOpen: false});
+  }
+
+  update(field) {
+    return (e) => {
+      this.setState({[field]: e.target.value});
+    };
   }
 
   render () {
@@ -58,8 +69,8 @@ export default class Upload extends React.Component {
         >
         <h1>Upload Track</h1>
         <form onSubmit={this.handleSubmit}>
-          <input type='text' value={this.state.title} placeholder="Title"/>
-          <input type='text' value={this.state.title}placeholder="Description"/>
+          <input type='text' value={this.state.title} placeholder="Title" onChange={this.update('title')}/>
+          <input type='text' value={this.state.description}placeholder="Description" onChange={this.update('description')}/>
           <input type='submit' />
         </form>
         </Modal>

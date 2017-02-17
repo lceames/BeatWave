@@ -10,6 +10,12 @@ export const fetchTrack = (id) => dispatch => {
   );
 };
 
+export const createTrack = (track) => dispatch => {
+  return TrackApiUtil.createTrack(track).then(
+    (track) => dispatch(receiveTrack(track))
+  );
+};
+
 export const receiveTrack = track => {
   return {
     type: RECEIVE_TRACK,
