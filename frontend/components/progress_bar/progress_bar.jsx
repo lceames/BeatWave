@@ -8,6 +8,7 @@ export default class ProgressBar extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    debugger
     if (nextProps.currentTrack) {
       setInterval(this.updateElapsedTime.bind(this), 1000);
       this.state = nextProps.currentTrack;
