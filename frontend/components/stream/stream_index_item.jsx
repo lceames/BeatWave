@@ -21,7 +21,7 @@ export default class StreamIndexItem extends React.Component {
       <li>
         <h2>{this.props.track.title}</h2>
         <h3>{this.props.track.id}</h3>
-        <audio id={this.props.track.id} muted="true">
+        <audio id={this.props.track.id} >
             <source src={this.props.track.url} type="audio/mpeg"></source>
         </audio>
         <button onClick={ this.handlePlay }>Play</button>

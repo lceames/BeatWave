@@ -5,23 +5,50 @@ export default class ProgressBar extends React.Component {
     super(props);
     this.updateElapsedTime = this.updateElapsedTime.bind(this);
     this.handleRewind = this.handleRewind.bind(this);
+    this.handleNext = this.handleNext.bind(this);
+    this.handlePlay = this.handlePlay.bind(this);
+    this.handlePause = this.handlePause.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
-    debugger
     if (nextProps.currentTrack) {
-      setInterval(this.updateElapsedTime.bind(this), 1000);
+      this.setState({intervalId: setInterval(this.updateElapsedTime.bind(this), 1000)});
       this.state = nextProps.currentTrack;
+      this.state.intervalId = null;
     }
   }
 
-  handleRewind() {
+  handlePlay() {
+    let audioTag = document.getElementById(this.state.track.id);
+    this.setState({
+      intervalId: setInterval(this.updateElapsedTime.bind(this), 1000),
+      paused: false
+    });
+    audioTag.play();
   }
-  //
-  // playPause() {
-  //   let trackEl = document.getElementById(this.state.currentTrack.track);
-  //   trackEl.pause();
-  // }
+
+  handlePause() {
+    let audioTag = document.getElementById(this.state.track.id);
+    clearInterval(this.state.intervalId);
+    this.setState({paused: true});
+    audioTag.pause();
+  }
+
+  handleRewind() {
+    let audioTag = document.getElementById(this.state.track.id);
+    audioTag.currentTime = 0;
+    this.setState({elapsedTime: 0});
+  }
+
+  handleNext() {
+    let queueIndex = this.props.currentTrack.queueIndex + 1;
+    let track = this.props.queue[queueIndex];
+    let audio = document.getElementById(track.id);
+    let duration = Math.floor(audio.duration);
+    let currentTrackItem = { queueIndex, duration, track };
+    this.props.setCurrentTrack(currentTrackItem);
+    audio.play();
+  }
 
   updateElapsedTime() {
     if (!this.state) {
@@ -32,13 +59,7 @@ export default class ProgressBar extends React.Component {
       this.setState({elapsedTime: this.state.elapsedTime + 1});
     }
     else {
-      let queueIndex = this.props.currentTrack.queueIndex + 1;
-      let track = this.props.queue[queueIndex];
-      let audio = document.getElementById(track.id);
-      let duration = Math.floor(audio.duration);
-      let currentTrackItem = { queueIndex, duration, track };
-      this.props.setCurrentTrack(currentTrackItem);
-      audio.play();
+      this.handleNext();
     }
   }
 
@@ -52,22 +73,26 @@ export default class ProgressBar extends React.Component {
   }
 
   render () {
+    if (!this.props.currentTrack) {return <div></div> }
     let playPause;
-    if (this.props.currentTrack) {
-      let playPause = this.props.currentTrack.paused === false ? "play" : "pause";
+
+    if (this.state.paused) {
+      playPause = <i className="fa fa-play fa-lg" aria-hidden="true" onClick={this.handlePlay}></i>
     }
     else {
-      return <div></div>
+      playPause = <i className="fa fa-pause" aria-hidden="true" onClick={this.handlePause}></i>
     }
-    let seconds = this.state.duration % 60;
-    let minutes = Math.floor(this.state.duration / 60);
+
+    let seconds = (this.state.duration % 60).toString();
+    if (seconds.length === 1) { seconds = `0${seconds}`}
+    let minutes = Math.floor(this.state.duration / 60)
 
     return (
       <div className="progress-bar">
         <nav className="control-buttons">
-          <i className="fa fa-step-backward fa-lg" aria-hidden="true"></i>
-          <i className="fa fa-play fa-lg" aria-hidden="true"></i>
-          <i className="fa fa-step-forward fa-lg" aria-hidden="true"></i>
+          <i className="fa fa-step-backward fa-lg" aria-hidden="true" onClick={this.handleRewind}></i>
+          {playPause}
+          <i className="fa fa-step-forward fa-lg" aria-hidden="true" onClick={this.handleNext}></i>
         </nav>
         <div className="bar-section">
           <span className="elapsed-time">{this.renderElapsedTime.apply(this)}</span>
