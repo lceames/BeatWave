@@ -25,7 +25,6 @@ const queueReducer = (oldState = { currentTrack: null, queue: [] }, action) => {
     case(SET_CURRENT_TRACK):
       let currentTrack = merge(currentTrackDefault, action.currentTrackItem);
       queue = [...oldState.queue];
-      queue = queue.slice(currentTrack.queueIndex);
       return {
         currentTrack,
         queue

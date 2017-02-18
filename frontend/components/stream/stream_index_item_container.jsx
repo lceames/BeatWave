@@ -6,6 +6,7 @@ import StreamIndexItem from './stream_index_item';
 const mapStateToProps = state => {
   return {
     queue: state.trackQueue.queue,
+    currentTrack: state.trackQueue.currentTrack
   };
 };
 

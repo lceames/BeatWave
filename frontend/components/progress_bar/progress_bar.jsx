@@ -11,6 +11,7 @@ export default class ProgressBar extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    clearInterval(this.state.intervalId);
     if (nextProps.currentTrack) {
       this.setState({intervalId: setInterval(this.updateElapsedTime.bind(this), 1000)});
       this.state = nextProps.currentTrack;
@@ -19,6 +20,7 @@ export default class ProgressBar extends React.Component {
   }
 
   handlePlay() {
+    debugger
     let audioTag = document.getElementById(this.state.track.id);
     this.setState({
       intervalId: setInterval(this.updateElapsedTime.bind(this), 1000),
@@ -41,6 +43,12 @@ export default class ProgressBar extends React.Component {
   }
 
   handleNext() {
+    let lastTrackId = (this.props.currentTrack.track.id).toString();
+    let lastTrackAudio = document.getElementById(lastTrackId);
+    lastTrackAudio.pause();
+    lastTrackAudio.currentTime = 0;
+
+
     let queueIndex = this.props.currentTrack.queueIndex + 1;
     let track = this.props.queue[queueIndex];
     let audio = document.getElementById(track.id);
@@ -80,7 +88,7 @@ export default class ProgressBar extends React.Component {
       playPause = <i className="fa fa-play fa-lg" aria-hidden="true" onClick={this.handlePlay}></i>
     }
     else {
-      playPause = <i className="fa fa-pause" aria-hidden="true" onClick={this.handlePause}></i>
+      playPause = <i className="fa fa-pause fa-lg" aria-hidden="true" onClick={this.handlePause}></i>
     }
 
     let seconds = (this.state.duration % 60).toString();

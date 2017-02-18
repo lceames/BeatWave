@@ -3,10 +3,18 @@ import React from 'react';
 export default class StreamIndexItem extends React.Component {
   constructor(props) {
     super();
-    this.handlePlay = this.handlePlay.bind(this);
+    this.setCurrentTrack = this.setCurrentTrack.bind(this);
   }
 
-  handlePlay(e) {
+  setCurrentTrack(e) {
+    let lastTrackId;
+    let lastTrackAudio;
+    if (this.props.currentTrack) {
+      lastTrackId = (this.props.currentTrack.track.id).toString();
+      lastTrackAudio = document.getElementById(lastTrackId);
+      lastTrackAudio.pause();
+      lastTrackAudio.currentTime = 0;
+    }
     let audio = document.getElementById(this.props.track.id);
     let duration = Math.floor(audio.duration);
     let queueIndex = this.props.queue.findIndex((el) => el === this.props.track);
@@ -24,7 +32,7 @@ export default class StreamIndexItem extends React.Component {
         <audio id={this.props.track.id} >
             <source src={this.props.track.url} type="audio/mpeg"></source>
         </audio>
-        <button onClick={ this.handlePlay }>Play</button>
+        <button onClick={ this.setCurrentTrack }>Play</button>
       </li>
     )
   }
