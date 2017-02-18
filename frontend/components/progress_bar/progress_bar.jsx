@@ -11,16 +11,17 @@ export default class ProgressBar extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    clearInterval(this.state.intervalId);
+    if (this.state) {
+      clearInterval(this.state.intervalId);
+    }
+
     if (nextProps.currentTrack) {
-      this.setState({intervalId: setInterval(this.updateElapsedTime.bind(this), 1000)});
       this.state = nextProps.currentTrack;
-      this.state.intervalId = null;
+      this.setState({intervalId: setInterval(this.updateElapsedTime.bind(this), 1000)});
     }
   }
 
   handlePlay() {
-    debugger
     let audioTag = document.getElementById(this.state.track.id);
     this.setState({
       intervalId: setInterval(this.updateElapsedTime.bind(this), 1000),
