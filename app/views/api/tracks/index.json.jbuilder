@@ -4,4 +4,5 @@ json.array! @tracks do |track|
   json.title track.title
   json.description track.description
   json.url track.audio.url
+  json.image track.image.url
 end

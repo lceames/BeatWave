@@ -1,0 +1,10 @@
+.track-image {
+  height: 162px;
+  width: 162px;
+  border: 1px solid lightgray;
+}
+
+.stream-index-item {
+  display: flex;
+  padding: 30px;
+}
