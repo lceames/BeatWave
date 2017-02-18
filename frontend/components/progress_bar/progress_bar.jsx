@@ -4,6 +4,7 @@ export default class ProgressBar extends React.Component {
   constructor(props) {
     super(props);
     this.updateElapsedTime = this.updateElapsedTime.bind(this);
+    this.handleRewind = this.handleRewind.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -13,10 +14,19 @@ export default class ProgressBar extends React.Component {
     }
   }
 
+  handleRewind() {
+  }
+  //
+  // playPause() {
+  //   let trackEl = document.getElementById(this.state.currentTrack.track);
+  //   trackEl.pause();
+  // }
+
   updateElapsedTime() {
     if (!this.state) {
       return;
     }
+
     if (this.state.elapsedTime < this.props.currentTrack.duration) {
       this.setState({elapsedTime: this.state.elapsedTime + 1});
     }
@@ -39,15 +49,20 @@ export default class ProgressBar extends React.Component {
     else {
       return <div></div>
     }
+    console.log(this.state.duration)
+    let seconds = this.state.duration % 60;
+    let minutes = Math.floor(this.state.duration / 60);
 
     return (
       <div className="progress-bar">
-        <button className="rewind"></button>
-        <button className={playPause}></button>
-        <button className="fast-forward"></button>
-        <p>{this.state.elapsedTime}</p>
-        <p>{this.state.duration}</p>
-        <p>{this.state.track.title}</p>
+        <nav className="control-buttons">
+          <i className="fa fa-step-backward fa-lg" aria-hidden="true"></i>
+          <i className="fa fa-play fa-lg" aria-hidden="true"></i>
+          <i className="fa fa-step-forward fa-lg" aria-hidden="true"></i>
+        </nav>
+        <span className="elapsed-time">{this.state.elapsedTime}</span>
+        <span className="duration">{minutes}:{seconds}</span>
+        <span className="title">{this.state.track.title}</span>
       </div>
     );
   }
