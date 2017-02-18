@@ -41,6 +41,15 @@ export default class ProgressBar extends React.Component {
     }
   }
 
+  renderElapsedTime () {
+    let seconds = (this.state.elapsedTime % 60).toString();
+    let minutes = Math.floor(this.state.elapsedTime / 60).toString();
+    if (seconds.length < 2) {
+      seconds = "0" + seconds;
+    }
+    return `${minutes}:${seconds}`;
+  }
+
   render () {
     let playPause;
     if (this.props.currentTrack) {
@@ -49,7 +58,6 @@ export default class ProgressBar extends React.Component {
     else {
       return <div></div>
     }
-    console.log(this.state.duration)
     let seconds = this.state.duration % 60;
     let minutes = Math.floor(this.state.duration / 60);
 
@@ -60,8 +68,11 @@ export default class ProgressBar extends React.Component {
           <i className="fa fa-play fa-lg" aria-hidden="true"></i>
           <i className="fa fa-step-forward fa-lg" aria-hidden="true"></i>
         </nav>
-        <span className="elapsed-time">{this.state.elapsedTime}</span>
-        <span className="duration">{minutes}:{seconds}</span>
+        <div className="bar-section">
+          <span className="elapsed-time">{this.renderElapsedTime.apply(this)}</span>
+          <progress className="bar" value={this.state.elapsedTime/this.state.duration}></progress>
+          <span className="duration">{minutes}:{seconds}</span>
+          </div>
         <span className="title">{this.state.track.title}</span>
       </div>
     );

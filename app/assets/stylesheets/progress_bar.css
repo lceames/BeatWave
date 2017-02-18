@@ -17,22 +17,36 @@
 }
 
 .progress-bar .duration {
-  margin-left: 34%;
+  margin-left: 3%;
 }
 
 .progress-bar .rewind {
   background-image: url('https://maxcdn.icons8.com/Share/icon/Media_Controls//rewind_filled1600.png');
 }
 
-.fa-step-backward, .fa-play, .fa-step-forward {
-  padding: 17px;
+.progress-bar .bar-section {
+  display: flex;
+  align-content: space-between;
+  width: 33%;
 }
 
-.elapsed-time {
-  margin-left: 118px;
+.fa-step-backward, .fa-play, .fa-step-forward {
+  padding: 17px;
 }
 
 .elapsed-time, .duration, .title {
   font-size: 12px;
   padding-top: 18px;
 }
+
+progress {
+  color: #f50;
+  width: 95%;
+  height: 1px;
+  background: #f50;
+  margin-top: 26px;
+  margin-left: 12px;
+}
+
+progress::-webkit-progress-bar { background: lightgray; }
+progress::-webkit-progress-value { background: #f50; }
