@@ -6,7 +6,7 @@ import { fetchTrack } from '../../actions/track_actions';
 export default (props) => {
   window.fetchTrack = fetchTrack;
   let className = props.location === "/" ? "nav-bar nav-splash" : "nav-bar" ;
-  let home = currentUser ? "/stream" : "/";
+  let home = window.currentUser ? "/stream" : "/";
   return (
     <nav className={className}>
       <div className="left-header-section">

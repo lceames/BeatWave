@@ -8,6 +8,7 @@ export const PAUSE_CURRENT_TRACK = "PAUSE_CURRENT_TRACK";
 export const UPDATE_ELAPSED_TIME = "UPDATE_ELAPSED_TIME";
 export const PLAY_CURRENT_TRACK = "PLAY_CURRENT_TRACK";
 export const HANDLE_REWIND = "HANDLE_REWIND";
+export const REMOVE_TRACK = "REMOVE_TRACK";
 
 export const fetchTrack = (id) => dispatch => {
   return TrackApiUtil.fetchTrack(id).then(
@@ -29,6 +30,12 @@ export const createTrack = (track) => dispatch => {
   );
 };
 
+export const deleteTrack = (id) => dispatch => {
+  return TrackApiUtil.deleteTrack(id).then(
+    (track) => dispatch(removeTrack(track))
+  );
+};
+
 export const receiveTracks = tracks => {
   return {
     type: RECEIVE_TRACKS,
@@ -39,6 +46,13 @@ export const receiveTracks = tracks => {
 export const receiveTrack = track => {
   return {
     type: RECEIVE_TRACK,
+    track
+  };
+};
+
+export const removeTrack = track => {
+  return {
+    type: REMOVE_TRACK,
     track
   };
 };

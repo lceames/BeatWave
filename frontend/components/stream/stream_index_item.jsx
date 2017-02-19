@@ -4,6 +4,16 @@ export default class StreamIndexItem extends React.Component {
   constructor(props) {
     super();
     this.setCurrentTrack = this.setCurrentTrack.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
+  }
+
+  handleDelete() {
+    let queueIndex;
+    // if (this.props.currentTrack && this.props.currentTrack.id === this.props.track.id) {
+    //   queueIndex = this.props.queue.findIndex(this.props.track);
+    //   setCurrentTrack(queueIndex)
+    // }
+    this.props.deleteTrack(this.props.track.id);
   }
 
   setCurrentTrack(e) {
@@ -27,17 +37,26 @@ export default class StreamIndexItem extends React.Component {
   render () {
     const { track, queue, currentTrack } = this.props;
     let playPause;
+    let deleteTrack = <div></div>;
+
     if (!currentTrack || track.id !== currentTrack.track.id || currentTrack.paused === true) {
       playPause = <i className="fa fa-play-circle fa-3x" aria-hidden="true" onClick={this.setCurrentTrack}></i>
     }
     else {
       playPause = <i className="fa fa-pause-circle fa-3x" aria-hidden="true" onClick={this.setCurrentTrack}></i>
     }
+
+    if (window.currentUser && window.currentUser.id === track.user_id) {
+      deleteTrack = <button onClick={this.handleDelete}>Delete Track</button>
+    }
+
     return (
       <li className="stream-index-item">
         <img src={track.image} className="track-image"/>
         {playPause}
         <h2 className="track-title">{track.title}</h2>
+        {deleteTrack}
+
         <audio id={track.id} >
             <source src={track.url} type="audio/mpeg"></source>
         </audio>

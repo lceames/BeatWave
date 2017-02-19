@@ -6,6 +6,8 @@ import SessionFormContainer from './session/session_form_container';
 import Splash from './splash';
 import StreamContainer from './stream/stream_container';
 import UploadContainer from './upload/upload_container';
+import UserShow from './user_show';
+import TrackShow from './track_show';
 
 export default ({store}) => {
   function redirectIfLoggedIn(nextState, replace) {
@@ -21,6 +23,8 @@ export default ({store}) => {
           <IndexRoute component={Splash} onEnter={redirectIfLoggedIn} />
           <Route path='/stream' component={StreamContainer} />
           <Route path='/upload' component={UploadContainer} />
+          <Route path='/:userId' component={UserShow}/>
+          <Route path='/:userId/:trackId' component={TrackShow}/>
         </Route>
       </Router>
     </Provider>

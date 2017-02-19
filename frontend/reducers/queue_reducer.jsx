@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  RECEIVE_TRACK, RECEIVE_TRACKS, SET_CURRENT_TRACK, PAUSE_CURRENT_TRACK, UPDATE_ELAPSED_TIME, PLAY_CURRENT_TRACK, HANDLE_REWIND
+  REMOVE_TRACK, RECEIVE_TRACK, RECEIVE_TRACKS, SET_CURRENT_TRACK, PAUSE_CURRENT_TRACK, UPDATE_ELAPSED_TIME, PLAY_CURRENT_TRACK, HANDLE_REWIND
   } from '../actions/track_actions';
 import merge from 'lodash/merge';
 
@@ -9,6 +9,8 @@ const queueReducer = (oldState = { currentTrack: null, queue: [] }, action) => {
   let currentTrackDefault = { elapsedTime: 0, paused: false };
   let queue;
   let newState;
+  let currentUser;
+  let queueIndex;
 
   switch(action.type) {
     case(RECEIVE_TRACK):
@@ -18,6 +20,18 @@ const queueReducer = (oldState = { currentTrack: null, queue: [] }, action) => {
         currentTrack: oldState.currentTrack,
         queue
       };
+    case(REMOVE_TRACK): {
+      queue = [...oldState.queue];
+      debugger
+      queueIndex = queue.findIndex( (track) => track.id === action.track.id);
+      if (queueIndex) { delete queue[queueIndex]; }
+      if (currentTrack) { currentTrack = merge({}, oldState.currentTrack); }
+
+      return {
+        currentTrack,
+        queue
+      };
+    }
     case(RECEIVE_TRACKS):
       queue = [...oldState.queue];
       queue = queue.concat(action.tracks);

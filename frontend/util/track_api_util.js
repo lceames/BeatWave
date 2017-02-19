@@ -15,6 +15,13 @@ export const createTrack = track => {
   });
 };
 
+export const deleteTrack = id => {
+  return $.ajax({
+    method: 'DELETE',
+    url: `api/tracks/${id}`
+  });
+};
+
 export const fetchTracks = filter => {
   return $.ajax({
     method: 'GET',

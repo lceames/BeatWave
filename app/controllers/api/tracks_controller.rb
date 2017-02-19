@@ -22,6 +22,12 @@ class Api::TracksController < ApplicationController
     render :index
   end
 
+  def destroy
+    @track = Track.find(params[:id])
+    Track.delete(params[:id])
+    render :show
+  end
+
   private
 
   def track_params

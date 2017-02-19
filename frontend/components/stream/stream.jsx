@@ -3,11 +3,6 @@ import {hashHistory} from 'react-router';
 import StreamIndexItemContainer from './stream_index_item_container';
 
 export default class Stream extends React.Component {
-
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
     this.props.fetchTracks("stream");
   }

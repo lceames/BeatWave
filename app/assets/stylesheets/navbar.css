@@ -13,6 +13,12 @@
 .nav-bar .right-header-section {
   display: flex;
   margin-right: 6%;
+  align-items: center;
+}
+
+
+.nav-bar #upload:hover {
+  color: #fff;
 }
 
 .home {
@@ -66,6 +72,10 @@ html {
 
 #log-out {
   width: 80px;
+}
+
+#log-out:hover {
+  color: #fff;
 }
 
 
