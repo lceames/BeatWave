@@ -1,6 +1,9 @@
-.main-content {
-  height: 100%;
-  margin-left: 10%;
-  margin-right: 10%;
+.stream {
   background-color: #fff;
+}
+
+
+
+.app {
+  background-color: #F9F9F9;
 }
