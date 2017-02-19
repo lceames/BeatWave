@@ -4,6 +4,10 @@ import * as TrackApiUtil from '../util/track_api_util';
 export const RECEIVE_TRACK = "RECEIVE_TRACK";
 export const RECEIVE_TRACKS = "RECEIVE_TRACKS";
 export const SET_CURRENT_TRACK = "SET_CURRENT_TRACK";
+export const PAUSE_CURRENT_TRACK = "PAUSE_CURRENT_TRACK";
+export const UPDATE_ELAPSED_TIME = "UPDATE_ELAPSED_TIME";
+export const PLAY_CURRENT_TRACK = "PLAY_CURRENT_TRACK";
+export const HANDLE_REWIND = "HANDLE_REWIND";
 
 export const fetchTrack = (id) => dispatch => {
   return TrackApiUtil.fetchTrack(id).then(
@@ -43,5 +47,29 @@ export const setCurrentTrack = currentTrackItem => {
   return {
     type: SET_CURRENT_TRACK,
     currentTrackItem
+  };
+};
+
+export const pauseCurrentTrack = () => {
+  return {
+    type: PAUSE_CURRENT_TRACK
+  };
+};
+
+export const playCurrentTrack = () => {
+  return {
+    type: PLAY_CURRENT_TRACK
+  };
+};
+
+export const updateElapsedTime = () => {
+  return {
+    type: UPDATE_ELAPSED_TIME
+  };
+};
+
+export const handleRewind = () => {
+  return {
+    type: HANDLE_REWIND
   };
 };

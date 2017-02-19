@@ -8,3 +8,18 @@
   display: flex;
   padding: 30px;
 }
+
+.stream-index-item .track-title {
+  padding-top: 12px;
+  font-size: 15px;
+  line-height: 1.2;
+  color: #333;
+  font-weight: 100;
+  cursor: auto;
+  font-family: "Interstate","Lucida Grande","Lucida Sans Unicode","Lucida Sans",Garuda,Verdana,Tahoma,sans-serif;
+}
+
+.stream-index-item .fa {
+  color: #f50;
+  padding: 12px;
+}

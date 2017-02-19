@@ -27,24 +27,20 @@ export default class StreamIndexItem extends React.Component {
   render () {
     const { track, queue, currentTrack } = this.props;
     let playPause;
-    // 
-    // if (track.id === currentTrack.track.id && currentTrack.paused === false) {
-    //   playPause = <i className="fa fa-pause fa-lg" aria-hidden="true" onClick={this.setCurrentTrack}></i>
-    //
-    // }
-    // else {
-    //   playPause = <i className="fa fa-play fa-lg" aria-hidden="true" onClick={this.setCurrentTrack}></i>
-    // }
-
+    if (!currentTrack || track.id !== currentTrack.track.id || currentTrack.paused === true) {
+      playPause = <i className="fa fa-play-circle fa-3x" aria-hidden="true" onClick={this.setCurrentTrack}></i>
+    }
+    else {
+      playPause = <i className="fa fa-pause-circle fa-3x" aria-hidden="true" onClick={this.setCurrentTrack}></i>
+    }
     return (
       <li className="stream-index-item">
         <img src={track.image} className="track-image"/>
-        <h2>{track.title}</h2>
-        <h3>{track.id}</h3>
+        {playPause}
+        <h2 className="track-title">{track.title}</h2>
         <audio id={track.id} >
             <source src={track.url} type="audio/mpeg"></source>
         </audio>
-        <button onClick={ this.setCurrentTrack }>Play</button>
       </li>
     )
   }
