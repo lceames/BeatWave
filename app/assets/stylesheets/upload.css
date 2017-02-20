@@ -1,19 +1,22 @@
-
-.upload {
+.upload-content {
   background-color: #fff;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: top;
 }
 
-#upload-form {
-  margin: 0 auto;
-  margin-top: 95px;
-  padding-left: 10%;
-  padding-right: 10%;
+.upload-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 6%;
   border: 1px solid #f2f2f2;
+  height: 45%;
   width: 55%;
-  height: 350px;
 }
 
-#upload-form h3 {
+.upload-form h3 {
   margin-top: 40px;
   font-size: 24px;
   font-weight: 400;
@@ -23,7 +26,7 @@
   font-family: "Interstate","Lucida Grande","Lucida Sans Unicode","Lucida Sans",Garuda,Verdana,Tahoma,sans-serif;
 }
 
-#upload-form button {
+.upload-form button {
   margin: 0 auto;
   line-height: 18px;
   padding: 10px 15px;

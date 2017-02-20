@@ -32,8 +32,7 @@ const queueReducer = (oldState = { currentTrack: null, queue: [] }, action) => {
       };
     }
     case(RECEIVE_TRACKS):
-      queue = [...oldState.queue];
-      queue = queue.concat(action.tracks);
+      queue = action.tracks;
       return {
         currentTrack: oldState.currentTrack,
         queue
