@@ -1,7 +1,5 @@
 import React from 'react';
 import Modal from 'react-modal';
-import FileInput from 'react-file-input';
-
 
 export default class Upload extends React.Component {
 
@@ -57,11 +55,9 @@ export default class Upload extends React.Component {
     return (
       <div className="upload content">
         <nav id="upload-form">
-          <FileInput name="myImage"
-                  accept=".png,.gif"
-                  placeholder="../../../app/assets/images/record.png"
-                  className="track-upload"
-                  onChange={this.handleFile} />
+          <label>Choose a file to upload
+            <input type='file' onChange={this.handleFile}></input>
+          </label>
         </nav>
         <Modal
           isOpen={this.state.modalIsOpen}
