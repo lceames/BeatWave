@@ -56,7 +56,9 @@ export default class Upload extends React.Component {
       <div className="upload-content">
         <nav className="upload-form">
           <h3>Upload to BeatWave</h3>
-          <input type='file' onChange={this.handleFile}></input>
+          <label className="custom-file-input">Choose a file to upload
+            <input className="upload-track" type='file' onChange={this.handleFile}></input>
+          </label>
         </nav>
         <Modal
           isOpen={this.state.modalIsOpen}

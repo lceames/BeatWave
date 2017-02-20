@@ -6,6 +6,21 @@
   align-items: top;
 }
 
+.upload-track {
+  visibility: hidden
+}
+
+.custom-file-input {
+  width: 200px;
+  height: 40px;
+  background-color: #f50;
+  text-align: center;
+  border-radius: 3px;
+  color: white;
+  font-size: 16px;
+  line-height: 18px;
+}
+
 .upload-form {
   display: flex;
   flex-direction: column;

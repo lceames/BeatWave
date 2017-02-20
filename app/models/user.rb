@@ -7,6 +7,9 @@ class User < ApplicationRecord
 
   has_many :tweets
 
+  has_attached_file :image, default_url: "/images/record.png"
+  validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
+
   def self.find_by_credentials(username, password)
     user = User.find_by(username: username)
     user && user.is_password?(password) ? user : nil

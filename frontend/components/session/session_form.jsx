@@ -7,7 +7,8 @@ class SessionForm extends React.Component {
     super();
     this.state = {
       email: "",
-      password: ""
+      password: "",
+      profilePicture: null
     };
     this.update = this.update.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -41,8 +42,14 @@ class SessionForm extends React.Component {
     hashHistory.push('/stream');
   }
 
+  handleFile (e) {
+    let file = e.currentTarget.files[0];
+    this.setState({profilePicture: file});
+  }
+
   render () {
     let emailInput = <input type="text" placeholder="Email" onChange={this.update('email')}></input>
+    let fileInput = <input className="upload-profile-picture" type='file' onChange={this.handleFile}></input>
     let errors = ""
 
     if (this.props.errors) {

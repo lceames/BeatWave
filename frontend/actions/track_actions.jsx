@@ -77,9 +77,10 @@ export const playCurrentTrack = () => {
   };
 };
 
-export const updateElapsedTime = () => {
+export const updateElapsedTime = (time) => {
   return {
-    type: UPDATE_ELAPSED_TIME
+    type: UPDATE_ELAPSED_TIME,
+    time
   };
 };
 

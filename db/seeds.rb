@@ -8,11 +8,21 @@
 
 User.delete_all
 
-User.create({username: "jorge", email: "spain@spain.org", password: "spain123"})
-User.create({username: "quinn", email: "canada@canada.org", password: "canada123"})
-User.create({username: "marshall", email: "france@france.org", password: "france123"})
-User.create({username: "jimoh", email: "usa@usa.org", password: "usa123"})
-User.create({username: "guest", email: "guest@gmail.com", password: "password"})
+jorge = User.new({username: "jorge", email: "spain@spain.org", password: "spain123"})
+jorge.image = "http://s3.amazonaws.com/beatwave-dev/tracks/images/000/000/032/original/record.png?1487454165"
+jorge.save!
+quinn = quinn = User.new({username: "quinn", email: "canada@canada.org", password: "canada123"})
+quinn.image = "http://s3.amazonaws.com/beatwave-dev/tracks/images/000/000/032/original/record.png?1487454165"
+quinn.save!
+marshall = User.new({username: "marshall", email: "france@france.org", password: "france123"})
+marshall.image = "http://s3.amazonaws.com/beatwave-dev/tracks/images/000/000/032/original/record.png?1487454165"
+marshall.save!
+jimoh = User.new({username: "jimoh", email: "usa@usa.org", password: "usa123"})
+jimoh.image = "http://s3.amazonaws.com/beatwave-dev/tracks/images/000/000/032/original/record.png?1487454165"
+jimoh.save!
+guest = User.new({username: "guest", email: "guest@gmail.com", password: "password"})
+guest.image = "http://s3.amazonaws.com/beatwave-dev/tracks/images/000/000/032/original/record.png?1487454165"
+guest.save!
 
 jorge_id = User.find_by({username: "jorge"}).id
 quinn_id = User.find_by({username: "quinn"}).id

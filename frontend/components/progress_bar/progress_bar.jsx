@@ -8,44 +8,40 @@ export default class ProgressBar extends React.Component {
     this.handleNext = this.handleNext.bind(this);
     this.handlePlay = this.handlePlay.bind(this);
     this.handlePause = this.handlePause.bind(this);
-    this.state = { intervalId: null };
+    this.state = { elapsedTime: 0, loaded: false };
   }
 
   componentWillReceiveProps(nextProps) {
     if (!this.props.currentTrack) {
-      let id = setInterval(this.updateElapsedTime.bind(this), 1000);
-      console.log(id);
-      this.setState({intervalId: id});
-      console.log("new interval");
-      console.log(this.state.id);
       return;
     }
     if (this.props.currentTrack.track.id !== nextProps.currentTrack.track.id) {
-      clearInterval(this.state.intervalId);
-      console.log("change interval");
-      this.setState({intervalId: setInterval(this.updateElapsedTime.bind(this), 1000)});
+      this.setState({loaded: false});
+    }
+  }
+
+  componentDidUpdate(prevState, prevProps) {
+    if (!this.state.loaded) {
+      debugger
+      this.audioTag.play();
+      this.setState({loaded: true});
     }
   }
 
   handlePlay() {
-    let audioTag = document.getElementById(this.props.currentTrack.track.id);
-    let id = setInterval(this.updateElapsedTime.bind(this), 1000);
-    this.setState({ intervalId: id });
     this.props.playCurrentTrack();
-    audioTag.play();
+    this.audioTag.play();
   }
 
   handlePause() {
-    let audioTag = document.getElementById(this.props.currentTrack.track.id);
-    clearInterval(this.state.intervalId);
     this.props.pauseCurrentTrack();
-    audioTag.pause();
+    this.audioTag.pause();
   }
 
   handleRewind() {
-    let audioTag = document.getElementById(this.props.currentTrack.track.id);
-    audioTag.currentTime = 0;
+    this.audioTag.currentTime = 0;
     this.props.handleRewind();
+    this.setState({elapsedTime: 0});
   }
 
   handleNext() {
@@ -54,19 +50,19 @@ export default class ProgressBar extends React.Component {
     lastTrackAudio.pause();
     lastTrackAudio.currentTime = 0;
 
-
     let queueIndex = this.props.currentTrack.queueIndex + 1;
     let track = this.props.queue[queueIndex];
     let audio = document.getElementById(track.id);
-    let duration = Math.floor(audio.duration);
-    let currentTrackItem = { queueIndex, duration, track };
+    let currentTrackItem = { queueIndex, track };
     this.props.setCurrentTrack(currentTrackItem);
-    audio.play();
   }
 
   updateElapsedTime() {
-    if (this.props.currentTrack.elapsedTime < this.props.currentTrack.duration) {
-      this.props.updateElapsedTime();
+    let elapsedTime;
+    if (this.audioTag.currentTime < this.audioTag.duration) {
+      elapsedTime = Math.floor(this.audioTag.currentTime);
+      this.props.updateElapsedTime(elapsedTime);
+      this.setState({elapsedTime: elapsedTime});
     }
     else {
       this.handleNext();
@@ -74,18 +70,43 @@ export default class ProgressBar extends React.Component {
   }
 
   renderElapsedTime () {
-    let audio = document.getElementById(this.props.currentTrack.track.id);
-    let seconds = (this.props.currentTrack.elapsedTime % 60).toString();
-    let minutes = Math.floor(this.props.currentTrack.elapsedTime / 60).toString();
+    if (!this.audioTag) { return "0:00"; }
+    let seconds = (this.state.elapsedTime % 60).toString();
+    let minutes = Math.floor(this.state.elapsedTime / 60).toString();
     if (seconds.length < 2) {
       seconds = "0" + seconds;
     }
     return `${minutes}:${seconds}`;
   }
 
+  handleProgress() {
+    if (this.audioTag) {
+      return this.audioTag.currentTime/this.audioTag.duration;
+    }
+    else {
+      return 0;
+    }
+  }
+
+  handleDuration() {
+    let duration;
+    if (!this.audioTag || !this.audioTag.duration) {
+      return "";
+    }
+    else {
+      duration = Math.floor(this.audioTag.duration);
+      let seconds = (duration % 60).toString();
+      let minutes = Math.floor(duration / 60).toString();
+      if (seconds.length < 2) {
+        seconds = "0" + seconds;
+      }
+      return `${minutes}:${seconds}`;
+    }
+  }
+
   render () {
     const { currentTrack, queue } = this.props;
-    if (!currentTrack) {return <div></div> }
+    if (!currentTrack) {return <div></div>; }
     let playPause;
     if (currentTrack.paused) {
       playPause = <i className="fa fa-play fa-lg" aria-hidden="true" onClick={this.handlePlay}></i>
@@ -93,10 +114,6 @@ export default class ProgressBar extends React.Component {
     else {
       playPause = <i className="fa fa-pause fa-lg" aria-hidden="true" onClick={this.handlePause}></i>
     }
-
-    let seconds = (currentTrack.duration % 60).toString();
-    if (seconds.length === 1) { seconds = `0${seconds}`}
-    let minutes = Math.floor(currentTrack.duration / 60)
 
     return (
       <div className="progress-bar">
@@ -107,10 +124,13 @@ export default class ProgressBar extends React.Component {
         </nav>
         <div className="bar-section">
           <span className="elapsed-time">{this.renderElapsedTime.apply(this)}</span>
-          <progress className="bar" value={currentTrack.elapsedTime/currentTrack.duration}></progress>
-          <span className="duration">{minutes}:{seconds}</span>
-          </div>
+          <progress className="bar" value={this.handleProgress.apply(this)}></progress>
+          <span className="duration">{this.handleDuration.apply(this)}</span>
+        </div>
         <span className="title">{currentTrack.track.title}</span>
+        <audio onTimeUpdate={this.updateElapsedTime} id={currentTrack.track.id} ref={(tag) => this.audioTag = tag}>
+            <source src={currentTrack.track.url} type="audio/mpeg"></source>
+        </audio>
       </div>
     );
   }

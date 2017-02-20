@@ -54,7 +54,7 @@ const queueReducer = (oldState = { currentTrack: null, queue: [] }, action) => {
       return newState;
     case(UPDATE_ELAPSED_TIME):
       newState = merge({}, oldState);
-      newState.currentTrack.elapsedTime += 1;
+      newState.currentTrack.elapsedTime = action.time;
       return newState;
     case(HANDLE_REWIND):
       newState = merge({}, oldState);

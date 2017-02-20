@@ -33,13 +33,10 @@ export default class StreamIndexItem extends React.Component {
       lastTrackAudio.pause();
       lastTrackAudio.currentTime = 0;
     }
-    let audio = document.getElementById(this.props.track.id);
-    let duration = Math.floor(audio.duration);
     let queueIndex = this.props.queue.findIndex((el) => el === this.props.track);
     let track = this.props.track;
-    let currentTrackItem = { queueIndex, duration, track };
+    let currentTrackItem = { queueIndex, track };
     this.props.setCurrentTrack(currentTrackItem);
-    audio.play();
   }
 
   render () {
@@ -67,10 +64,6 @@ export default class StreamIndexItem extends React.Component {
           {playPause}
           <Link className="track-title" to={`/${track.user_id}/${track.id}`}>{track.title}</Link>
           {deleteTrack}
-
-          <audio id={track.id} >
-              <source src={track.url} type="audio/mpeg"></source>
-          </audio>
         </div>
       </li>
     )
