@@ -1,16 +1,16 @@
 import React from 'react';
 import { hashHistory } from 'react-router';
+import NavBar from './nav/navbar';
+import StreamContainer from './stream/stream_container';
 
 export default (props) => {
   return (
     <div className="splash">
-      <nav className="splash-nav">
-        <button className="logo-background">
-          <img id="logo" src={window.images.beatWaveLogo}/>
-        </button>
-      </nav>
-      <img id="splash-header" src={window.images.splashHeader}/>
-      <h1>Splash</h1>
+      <div className="header-section">
+        <NavBar location={props.location.pathname}/>
+        <img id="splash-header" src={window.images.splashHeader}/>
+      </div>
+      <StreamContainer />
     </div>
   )
 };

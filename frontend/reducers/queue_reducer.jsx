@@ -22,7 +22,6 @@ const queueReducer = (oldState = { currentTrack: null, queue: [] }, action) => {
       };
     case(REMOVE_TRACK): {
       queue = [...oldState.queue];
-      debugger
       queueIndex = queue.findIndex( (track) => track.id === action.track.id);
       if (queueIndex) { delete queue[queueIndex]; }
       if (currentTrack) { currentTrack = merge({}, oldState.currentTrack); }

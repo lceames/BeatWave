@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { setCurrentTrack, pauseCurrentTrack, updateElapsedTime, playCurrentTrack } from '../../actions/track_actions';
+import { handleRewind, setCurrentTrack, pauseCurrentTrack, updateElapsedTime, playCurrentTrack } from '../../actions/track_actions';
 import ProgressBar from './progress_bar';
 
 const mapStateToProps = state => {
@@ -18,7 +18,7 @@ const mapDispatchToProps = dispatch => {
     pauseCurrentTrack: () => dispatch(pauseCurrentTrack()),
     updateElapsedTime: () => dispatch(updateElapsedTime()),
     playCurrentTrack: () => dispatch(playCurrentTrack()),
-    handleRewind: () => dispatch(handleRewind)
+    handleRewind: () => dispatch(handleRewind())
   };
 };
 

@@ -4,8 +4,23 @@
   border: 1px solid lightgray;
 }
 
-.stream-index-item {
+.stream-item-content {
   display: flex;
+  list-style: none;
+}
+
+.stream-item-author {
+  padding-bottom: 18px;
+  font-size: 12px;
+  color: #999;
+}
+
+.author-link {
+  color: #333;
+}
+
+.stream-index-item {
+  list-style: none;
   padding: 30px;
 }
 

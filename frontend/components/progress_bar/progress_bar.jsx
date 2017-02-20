@@ -45,7 +45,7 @@ export default class ProgressBar extends React.Component {
   handleRewind() {
     let audioTag = document.getElementById(this.props.currentTrack.track.id);
     audioTag.currentTime = 0;
-    this.setState({elapsedTime: 0});
+    this.props.handleRewind();
   }
 
   handleNext() {

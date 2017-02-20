@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router';
 
 export default class StreamIndexItem extends React.Component {
   constructor(props) {
@@ -14,6 +15,13 @@ export default class StreamIndexItem extends React.Component {
     //   setCurrentTrack(queueIndex)
     // }
     this.props.deleteTrack(this.props.track.id);
+  }
+
+  handlePause() {
+    let audioTag = document.getElementById(this.props.currentTrack.track.id);
+    clearInterval(this.state.intervalId);
+    this.props.pauseCurrentTrack();
+    audioTag.pause();
   }
 
   setCurrentTrack(e) {
@@ -43,7 +51,7 @@ export default class StreamIndexItem extends React.Component {
       playPause = <i className="fa fa-play-circle fa-3x" aria-hidden="true" onClick={this.setCurrentTrack}></i>
     }
     else {
-      playPause = <i className="fa fa-pause-circle fa-3x" aria-hidden="true" onClick={this.setCurrentTrack}></i>
+      playPause = <i className="fa fa-pause-circle fa-3x" aria-hidden="true" onClick={this.handlePause}></i>
     }
 
     if (window.currentUser && window.currentUser.id === track.user_id) {
@@ -52,14 +60,18 @@ export default class StreamIndexItem extends React.Component {
 
     return (
       <li className="stream-index-item">
-        <img src={track.image} className="track-image"/>
-        {playPause}
-        <h2 className="track-title">{track.title}</h2>
-        {deleteTrack}
+        <p className="stream-item-author"><Link to={`/${track.user_id}`} className="author-link">{track.author} </Link>
+          posted <Link className="author-link" to={`/${track.user_id}/${track.id}`}>a track</Link></p>
+        <div className="stream-item-content">
+          <img src={track.image} className="track-image"/>
+          {playPause}
+          <Link className="track-title" to={`/${track.user_id}/${track.id}`}>{track.title}</Link>
+          {deleteTrack}
 
-        <audio id={track.id} >
-            <source src={track.url} type="audio/mpeg"></source>
-        </audio>
+          <audio id={track.id} >
+              <source src={track.url} type="audio/mpeg"></source>
+          </audio>
+        </div>
       </li>
     )
   }

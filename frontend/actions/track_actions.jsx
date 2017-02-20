@@ -9,6 +9,7 @@ export const UPDATE_ELAPSED_TIME = "UPDATE_ELAPSED_TIME";
 export const PLAY_CURRENT_TRACK = "PLAY_CURRENT_TRACK";
 export const HANDLE_REWIND = "HANDLE_REWIND";
 export const REMOVE_TRACK = "REMOVE_TRACK";
+export const RESET_ELAPSED_TIME = "RESET_ELAPSED_TIME";
 
 export const fetchTrack = (id) => dispatch => {
   return TrackApiUtil.fetchTrack(id).then(

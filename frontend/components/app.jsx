@@ -5,9 +5,10 @@ import NavBar from './nav/navbar.jsx';
 import ProgressBarContainer from './progress_bar/progress_bar_container';
 
 export default (props) => {
+  let navBar = props.location.pathname === "/" ? "" : <NavBar location={props.location.pathname}/>
   return (
     <div className="app">
-      <NavBar location={props.location.pathname}/>
+      {navBar}
       <ProgressBarContainer />
       { props.children }
     </div>
