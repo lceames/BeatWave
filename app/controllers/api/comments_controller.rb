@@ -1,11 +1,10 @@
 class Api::CommentsController < ApplicationController
   def create
-    debugger
     comment = Comment.new(comment_params)
     comment[:user_id] = current_user.id
-    @track = comment.track
 
     if comment.save
+      @track = comment.track
       render 'api/tracks/show'
     end
   end

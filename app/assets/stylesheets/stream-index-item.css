@@ -9,6 +9,11 @@
   list-style: none;
 }
 
+.comment-thumb {
+  width: 12px;
+  height: 12px;
+}
+
 .stream-item-author {
   padding-bottom: 18px;
   font-size: 12px;

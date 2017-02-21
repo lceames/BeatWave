@@ -6,5 +6,8 @@ json.array! @tracks do |track|
   json.url track.audio.url
   json.image track.image.url
   json.user_id track.user_id
-  json.comments track.comments
+  json.comments track.comments do |comment|
+    json.thumb comment.user.image.url
+    json.comment comment
+  end
 end

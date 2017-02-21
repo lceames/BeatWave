@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
+import Comment from './comment';
 
 export default class StreamIndexItem extends React.Component {
   constructor(props) {
@@ -18,7 +19,7 @@ export default class StreamIndexItem extends React.Component {
     // }
     this.props.deleteTrack(this.props.track.id);
   }
-
+  
   handlePause() {
     let audioTag = document.getElementById(this.props.currentTrack.track.id);
     clearInterval(this.state.intervalId);
@@ -42,13 +43,12 @@ export default class StreamIndexItem extends React.Component {
   }
 
   handleChange(e) {
-    let elapsedTime = this.props.currentTrack ? this.props.currentTrack.elapsedTime : null;
+    let elapsedTime = this.props.currentTrack ? this.props.currentTrack.elapsedTime : 0;
     let comment;
     if (e.keyCode === 13) {
       comment = Object.assign({}, this.state);
       comment["track_id"] = this.props.track.id;
       comment["elapsed_time"] = elapsedTime;
-      debugger
       this.props.createComment(comment);
     }
     else {
@@ -72,6 +72,10 @@ export default class StreamIndexItem extends React.Component {
       deleteTrack = <button onClick={this.handleDelete}>Delete Track</button>
     }
 
+    let comments = track.comments.map( (comment) => {
+      return <Comment comment={comment} key={comment.id}/>
+    })
+
     return (
       <li className="stream-index-item">
         <p className="stream-item-author"><Link to={`/${track.user_id}`} className="author-link">{track.author} </Link>
@@ -80,6 +84,9 @@ export default class StreamIndexItem extends React.Component {
           <img src={track.image} className="track-image"/>
           {playPause}
           <Link className="track-title" to={`/${track.user_id}/${track.id}`}>{track.title}</Link>
+          <div className="comments">
+            {comments}
+          </div>
           <div className="new-comment">
             <form>
               <input type="text" placeholder="Write a comment" className="comment-text"
