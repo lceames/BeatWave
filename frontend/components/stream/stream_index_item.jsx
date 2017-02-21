@@ -7,7 +7,7 @@ export default class StreamIndexItem extends React.Component {
     this.setCurrentTrack = this.setCurrentTrack.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.state = { comment: "" };
+    this.state = { body: "" };
   }
 
   handleDelete() {
@@ -42,14 +42,17 @@ export default class StreamIndexItem extends React.Component {
   }
 
   handleChange(e) {
+    let elapsedTime = this.props.currentTrack ? this.props.currentTrack.elapsedTime : null;
     let comment;
     if (e.keyCode === 13) {
       comment = Object.assign({}, this.state);
-      comment["track-id"] = this.props.track.id;
-      this.props.addComment(comment);
+      comment["track_id"] = this.props.track.id;
+      comment["elapsed_time"] = elapsedTime;
+      debugger
+      this.props.createComment(comment);
     }
     else {
-      this.setState({comment: e.currentTarget.value + e.key});
+      this.setState({body: e.currentTarget.value + e.key});
     }
   }
 
