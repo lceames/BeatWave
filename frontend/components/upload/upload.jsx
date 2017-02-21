@@ -76,8 +76,8 @@ export default class Upload extends React.Component {
           contentLabel="upload-modal"
           style={customStyles}
         >
-        <h1>Upload Track</h1>
-        <form onSubmit={this.handleSubmit}>
+        <form className="upload-form-content" onSubmit={this.handleSubmit}>
+          <h1>Upload Track</h1>
           <input type='text' value={this.state.title} placeholder="Title" onChange={this.update('title')}/>
           <input type='text' value={this.state.description}placeholder="Description" onChange={this.update('description')}/>
           <label className="custom-file-input">Choose a thumbnail image

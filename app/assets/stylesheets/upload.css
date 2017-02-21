@@ -20,6 +20,29 @@
   font-size: 16px;
   line-height: 40px;
 }
+.upload-form, .upload-form-content {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+}
+
+.upload-form-content {
+  border: none;
+  height: 45%;
+  width: 55%;
+  align-items: center;
+  margin-top: 6%;
+}
+
+.upload-form-content .custom-file-input {
+  margin-top: 4%;
+}
+
+
+
+.upload-thumb {
+  display: none;
+}
 
 .upload-form {
   display: flex;

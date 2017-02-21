@@ -141,7 +141,7 @@ export default class ProgressBar extends React.Component {
           <img src={currentTrack.track.image} className="track-image"/>
           <div className="title-author">
             <Link className="author-link" to={`/${currentTrack.track.user_id}/${currentTrack.track.id}`}>Playing track</Link>
-            <span className="title">{currentTrack.track.title}</span>
+            <Link className="title" to={`/${currentTrack.track.user_id}/${currentTrack.track.id}`}>{currentTrack.track.title}</Link>
           </div>
         </div>
         <audio src={currentTrack.track.url} type="audio/mpeg"
