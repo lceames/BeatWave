@@ -8,6 +8,7 @@ export default class StreamIndexItem extends React.Component {
     this.setCurrentTrack = this.setCurrentTrack.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handlePause = this.handlePause.bind(this);
     this.state = { body: "" };
   }
 
@@ -19,11 +20,9 @@ export default class StreamIndexItem extends React.Component {
     // }
     this.props.deleteTrack(this.props.track.id);
   }
-  
+
   handlePause() {
     let audioTag = document.getElementById(this.props.currentTrack.track.id);
-    clearInterval(this.state.intervalId);
-    this.props.pauseCurrentTrack();
     audioTag.pause();
   }
 
@@ -84,7 +83,7 @@ export default class StreamIndexItem extends React.Component {
           <img src={track.image} className="track-image"/>
           {playPause}
           <Link className="track-title" to={`/${track.user_id}/${track.id}`}>{track.title}</Link>
-          <div className="comments">
+          {/*<div className="comments">
             {comments}
           </div>
           <div className="new-comment">
@@ -93,8 +92,7 @@ export default class StreamIndexItem extends React.Component {
               onKeyUp={this.handleChange} value={this.state.comment}
               />
             </form>
-          </div>
-          {deleteTrack}
+          </div>*/}
         </div>
       </li>
     )

@@ -39,9 +39,17 @@ export default class ProgressBar extends React.Component {
   }
 
   handleRewind() {
-    this.audioTag.currentTime = 0;
-    this.props.handleRewind();
-    this.setState({elapsedTime: 0});
+    if (Math.floor(this.audioTag.currentTime) === 0) {
+      let queueIndex = this.props.currentTrack.queueIndex - 1;
+      let track = this.props.queue[queueIndex];
+      let currentTrackItem = { queueIndex, track };
+      this.props.setCurrentTrack(currentTrackItem);
+    }
+    else {
+      this.audioTag.currentTime = 0;
+      this.props.handleRewind();
+      this.setState({elapsedTime: 0});
+    }
   }
 
   handleNext() {
@@ -52,7 +60,6 @@ export default class ProgressBar extends React.Component {
 
     let queueIndex = this.props.currentTrack.queueIndex + 1;
     let track = this.props.queue[queueIndex];
-    let audio = document.getElementById(track.id);
     let currentTrackItem = { queueIndex, track };
     this.props.setCurrentTrack(currentTrackItem);
   }
