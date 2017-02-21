@@ -9,6 +9,7 @@ export default class Upload extends React.Component {
       title: "",
       description: "",
       audioFile: null,
+      imageFile: null,
       modalIsOpen: false
     };
 
@@ -16,6 +17,7 @@ export default class Upload extends React.Component {
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleThumb = this.handleThumb.bind(this);
   }
 
   handleFile (e) {
@@ -26,12 +28,20 @@ export default class Upload extends React.Component {
     }
   }
 
+  handleThumb (e) {
+    let file = e.currentTarget.files[0];
+    if (file) {
+      this.setState({imageFile: file});
+    }
+  }
+
   handleSubmit (e) {
     e.preventDefault();
     let formData = new FormData();
     formData.append("track[title]", this.state.title);
     formData.append("track[description]", this.state.description);
     formData.append("track[audio]", this.state.audioFile);
+    formData.append("track[image]", this.state.imageFile);
     this.props.createTrack(formData);
   }
 
@@ -70,6 +80,9 @@ export default class Upload extends React.Component {
         <form onSubmit={this.handleSubmit}>
           <input type='text' value={this.state.title} placeholder="Title" onChange={this.update('title')}/>
           <input type='text' value={this.state.description}placeholder="Description" onChange={this.update('description')}/>
+          <label className="custom-file-input">Choose a thumbnail image
+            <input className="upload-thumb" type='file' onChange={this.handleThumb}></input>
+          </label>
           <input type='submit' />
         </form>
         </Modal>

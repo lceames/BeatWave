@@ -38,7 +38,9 @@ class SessionForm extends React.Component {
     formData.append("user[username]", this.state.username);
     formData.append("user[email]", this.state.email);
     formData.append("user[password]", this.state.email);
-    formData.append("user[image]", this.state.profilePicture);
+    if (this.state.profilePicture) {
+      formData.append("user[image]", this.state.profilePicture);
+    }
     let action = this.props.formType === "login" ? this.props.login : this.props.signup;
     let user = Object.assign({}, this.state);
     if (this.props.formType === "login") {
