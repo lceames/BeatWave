@@ -1,5 +1,5 @@
 import React from 'react';
-import StreamIndexItemContainer from './stream/stream_index_item';
+import StreamIndexItemContainer from './stream/stream_index_item_container';
 
 export default class UserShow extends React.Component {
   constructor(props) {

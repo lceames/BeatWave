@@ -1,0 +1,7 @@
+.comment .body, .comment .author{
+  display: none;
+}
+
+.comment:hover .body {
+  display: block;
+}

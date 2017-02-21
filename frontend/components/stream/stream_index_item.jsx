@@ -35,7 +35,6 @@ export default class StreamIndexItem extends React.Component {
     //   lastTrackAudio.pause();
     //   lastTrackAudio.currentTime = 0;
     // }
-    debugger
     let queueIndex = this.props.queue.findIndex((el) => el === this.props.track);
     let track = this.props.track;
     let currentTrackItem = { queueIndex, track };
@@ -81,24 +80,26 @@ export default class StreamIndexItem extends React.Component {
     let comments = track.comments.map( (comment) => {
       return <Comment comment={comment} key={comment.id}/>
     })
-
     return (
       <li className="stream-index-item">
         {poster}
         <div className="stream-item-content">
           <img src={track.image} className="track-image"/>
           {playPause}
-          <Link className="track-title" to={`/${track.user_id}/${track.id}`}>{track.title}</Link>
-          {/*<div className="comments">
-            {comments}
+          <div className="right-track-section">
+            <Link className="track-title" to={`/${track.user_id}/${track.id}`}>{track.title}</Link>
+            <div className="comments">
+              {comments}
+            </div>
+            <div className="new-comment">
+              <img src={window.currentUser.image}/>
+              <form>
+                <input type="text" placeholder="Write a comment" className="comment-text"
+                onKeyUp={this.handleChange} value={this.state.comment}
+                />
+              </form>
+            </div>
           </div>
-          <div className="new-comment">
-            <form>
-              <input type="text" placeholder="Write a comment" className="comment-text"
-              onKeyUp={this.handleChange} value={this.state.comment}
-              />
-            </form>
-          </div>*/}
         </div>
       </li>
     )
