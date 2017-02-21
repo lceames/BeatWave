@@ -44,6 +44,33 @@
   padding-top: 18px;
 }
 
+.progress-bar .track-image {
+  height: 30px;
+  width: 30px;
+}
+
+.track-info {
+  display: flex;
+  align-items: center;
+  margin-left: 10%;
+}
+
+.track-info .title-author{
+  display: flex;
+  flex-direction: column;
+  justify-content:
+}
+
+.track-info .title {
+  padding-left: 10px;
+}
+
+.author-link {
+  color: #999;
+  font-size: 11px;
+  line-height: 16px;
+}
+
 progress {
   color: #f50;
   width: 95%;

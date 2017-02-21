@@ -6,12 +6,14 @@ class SessionForm extends React.Component {
   constructor (props) {
     super();
     this.state = {
+      username: "",
       email: "",
       password: "",
       profilePicture: null
     };
     this.update = this.update.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleFile = this.handleFile.bind(this);
   }
 
   componentWillReceiveProps (newProps) {
@@ -32,9 +34,19 @@ class SessionForm extends React.Component {
 
   handleSubmit (e) {
     e.preventDefault();
+    let formData = new FormData();
+    formData.append("user[username]", this.state.username);
+    formData.append("user[email]", this.state.email);
+    formData.append("user[password]", this.state.email);
+    formData.append("user[image]", this.state.profilePicture);
     let action = this.props.formType === "login" ? this.props.login : this.props.signup;
     let user = Object.assign({}, this.state);
-    action(user).then(() => this.redirectToStream());
+    if (this.props.formType === "login") {
+      action(user).then(() => this.redirectToStream());
+    }
+    else {
+      action(formData).then(() => this.redirectToStream());
+    }
   }
 
   redirectToStream () {
@@ -57,7 +69,10 @@ class SessionForm extends React.Component {
         return <li key={idx}>{error}</li>
       })
     }
-    if (this.props.formType === "login") { emailInput = ""}
+    if (this.props.formType === "login") {
+      emailInput = "";
+      fileInput = ""
+    }
 
     return (
       <div>
@@ -65,6 +80,7 @@ class SessionForm extends React.Component {
           {emailInput}
           <input type="text" placeholder="Username" onChange={this.update('username')}></input>
           <input type="password" placeholder="Password" onChange={this.update('password')}></input>
+          {fileInput}
           <ul className="errors">{errors}</ul>
           <label>
             <input type="submit"></input>

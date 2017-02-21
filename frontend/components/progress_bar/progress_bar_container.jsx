@@ -16,7 +16,7 @@ const mapDispatchToProps = dispatch => {
   return {
     setCurrentTrack: (currentTrackItem) => dispatch(setCurrentTrack(currentTrackItem)),
     pauseCurrentTrack: () => dispatch(pauseCurrentTrack()),
-    updateElapsedTime: () => dispatch(updateElapsedTime()),
+    updateElapsedTime: (time) => dispatch(updateElapsedTime(time)),
     playCurrentTrack: () => dispatch(playCurrentTrack()),
     handleRewind: () => dispatch(handleRewind())
   };

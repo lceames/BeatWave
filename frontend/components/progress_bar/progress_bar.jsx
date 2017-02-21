@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router';
 
 export default class ProgressBar extends React.Component {
   constructor(props) {
@@ -22,7 +23,6 @@ export default class ProgressBar extends React.Component {
 
   componentDidUpdate(prevState, prevProps) {
     if (!this.state.loaded) {
-      debugger
       this.audioTag.play();
       this.setState({loaded: true});
     }
@@ -47,7 +47,7 @@ export default class ProgressBar extends React.Component {
   handleNext() {
     let lastTrackId = (this.props.currentTrack.track.id).toString();
     let lastTrackAudio = document.getElementById(lastTrackId);
-    lastTrackAudio.pause();
+    // lastTrackAudio.pause();
     lastTrackAudio.currentTime = 0;
 
     let queueIndex = this.props.currentTrack.queueIndex + 1;
@@ -58,11 +58,13 @@ export default class ProgressBar extends React.Component {
   }
 
   updateElapsedTime() {
-    let elapsedTime;
-    if (this.audioTag.currentTime < this.audioTag.duration) {
-      elapsedTime = Math.floor(this.audioTag.currentTime);
+    if (!this.audioTag.duration) {
+      return;
+    }
+
+    const elapsedTime = Math.floor(this.audioTag.currentTime);
+    if (elapsedTime < Math.floor(this.audioTag.duration)) {
       this.props.updateElapsedTime(elapsedTime);
-      this.setState({elapsedTime: elapsedTime});
     }
     else {
       this.handleNext();
@@ -71,8 +73,8 @@ export default class ProgressBar extends React.Component {
 
   renderElapsedTime () {
     if (!this.audioTag) { return "0:00"; }
-    let seconds = (this.state.elapsedTime % 60).toString();
-    let minutes = Math.floor(this.state.elapsedTime / 60).toString();
+    let seconds = (this.props.currentTrack.elapsedTime % 60).toString();
+    let minutes = Math.floor(this.props.currentTrack.elapsedTime / 60).toString();
     if (seconds.length < 2) {
       seconds = "0" + seconds;
     }
@@ -127,9 +129,15 @@ export default class ProgressBar extends React.Component {
           <progress className="bar" value={this.handleProgress.apply(this)}></progress>
           <span className="duration">{this.handleDuration.apply(this)}</span>
         </div>
-        <span className="title">{currentTrack.track.title}</span>
-        <audio onTimeUpdate={this.updateElapsedTime} id={currentTrack.track.id} ref={(tag) => this.audioTag = tag}>
-            <source src={currentTrack.track.url} type="audio/mpeg"></source>
+        <div className="track-info">
+          <img src={currentTrack.track.image} className="track-image"/>
+          <div className="title-author">
+            <Link className="author-link" to={`/${currentTrack.track.user_id}/${currentTrack.track.id}`}>Playing track</Link>
+            <span className="title">{currentTrack.track.title}</span>
+          </div>
+        </div>
+        <audio src={currentTrack.track.url} type="audio/mpeg"
+          onTimeUpdate={this.updateElapsedTime} id={currentTrack.track.id} ref={(tag) => this.audioTag = tag}>
         </audio>
       </div>
     );

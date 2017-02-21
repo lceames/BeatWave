@@ -6,6 +6,7 @@ export default class StreamIndexItem extends React.Component {
     super();
     this.setCurrentTrack = this.setCurrentTrack.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
+    this.submitOnEnter = this.submitOnEnter.bind(this);
   }
 
   handleDelete() {
@@ -27,16 +28,20 @@ export default class StreamIndexItem extends React.Component {
   setCurrentTrack(e) {
     let lastTrackId;
     let lastTrackAudio;
-    if (this.props.currentTrack) {
-      lastTrackId = (this.props.currentTrack.track.id).toString();
-      lastTrackAudio = document.getElementById(lastTrackId);
-      lastTrackAudio.pause();
-      lastTrackAudio.currentTime = 0;
-    }
+    // if (this.props.currentTrack) {
+    //   lastTrackId = (this.props.currentTrack.track.id).toString();
+    //   lastTrackAudio = document.getElementById(lastTrackId);
+    //   lastTrackAudio.pause();
+    //   lastTrackAudio.currentTime = 0;
+    // }
     let queueIndex = this.props.queue.findIndex((el) => el === this.props.track);
     let track = this.props.track;
     let currentTrackItem = { queueIndex, track };
     this.props.setCurrentTrack(currentTrackItem);
+  }
+
+  submitOnEnter(e) {
+    debugger
   }
 
   render () {
@@ -63,6 +68,13 @@ export default class StreamIndexItem extends React.Component {
           <img src={track.image} className="track-image"/>
           {playPause}
           <Link className="track-title" to={`/${track.user_id}/${track.id}`}>{track.title}</Link>
+          <div className="new-comment">
+            <form>
+              <input type="text" placeholder="Write a comment" className="comment-text"
+              onKeyDown={this.submitOnEnter}
+              />
+            </form>
+          </div>
           {deleteTrack}
         </div>
       </li>
