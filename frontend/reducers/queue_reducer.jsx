@@ -15,7 +15,7 @@ const queueReducer = (oldState = { currentTrack: null, queue: [] }, action) => {
   switch(action.type) {
     case(RECEIVE_TRACK):
       queue = [...oldState.queue];
-      queue.push(action.tracks);
+      queue = merge({}, queue, action.track);
       return {
         currentTrack: oldState.currentTrack,
         queue

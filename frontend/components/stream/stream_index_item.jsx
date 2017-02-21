@@ -43,7 +43,6 @@ export default class StreamIndexItem extends React.Component {
 
   handleChange(e) {
     let comment;
-    debugger
     if (e.keyCode === 13) {
       comment = Object.assign({}, this.state);
       comment["track-id"] = this.props.track.id;
