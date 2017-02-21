@@ -6,7 +6,8 @@ export default class StreamIndexItem extends React.Component {
     super();
     this.setCurrentTrack = this.setCurrentTrack.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
-    this.submitOnEnter = this.submitOnEnter.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.state = { comment: "" };
   }
 
   handleDelete() {
@@ -40,8 +41,17 @@ export default class StreamIndexItem extends React.Component {
     this.props.setCurrentTrack(currentTrackItem);
   }
 
-  submitOnEnter(e) {
+  handleChange(e) {
+    let comment;
     debugger
+    if (e.keyCode === 13) {
+      comment = Object.assign({}, this.state);
+      comment["track-id"] = this.props.track.id;
+      this.props.addComment(comment);
+    }
+    else {
+      this.setState({comment: e.currentTarget.value + e.key});
+    }
   }
 
   render () {
@@ -71,7 +81,7 @@ export default class StreamIndexItem extends React.Component {
           <div className="new-comment">
             <form>
               <input type="text" placeholder="Write a comment" className="comment-text"
-              onKeyDown={this.submitOnEnter}
+              onKeyUp={this.handleChange} value={this.state.comment}
               />
             </form>
           </div>
