@@ -17,8 +17,8 @@ export const fetchTrack = (id) => dispatch => {
   );
 };
 
-export const fetchTracks = (filter) => dispatch => {
-  return TrackApiUtil.fetchTracks(filter).then(
+export const fetchTracks = (type, id) => dispatch => {
+  return TrackApiUtil.fetchTracks(type, id).then(
     (tracks) => {
       dispatch(receiveTracks(tracks));
     }

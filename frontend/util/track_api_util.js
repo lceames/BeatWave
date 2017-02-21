@@ -22,10 +22,10 @@ export const deleteTrack = id => {
   });
 };
 
-export const fetchTracks = filter => {
+export const fetchTracks = (type, id) => {
   return $.ajax({
     method: 'GET',
     url: 'api/tracks',
-    data: {filter}
+    data: { type, id}
   });
 };
