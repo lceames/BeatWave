@@ -59,6 +59,7 @@ export default class ProgressBar extends React.Component {
     lastTrackAudio.currentTime = 0;
 
     let queueIndex = this.props.currentTrack.queueIndex + 1;
+    if (this.props.queue.length === queueIndex) { queueIndex = 0; }
     let track = this.props.queue[queueIndex];
     let currentTrackItem = { queueIndex, track };
     this.props.setCurrentTrack(currentTrackItem);
