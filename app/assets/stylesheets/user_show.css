@@ -2,6 +2,42 @@
   position: relative;
 }
 
+.profile-picture:hover .update-profile-image {
+}
+
+.update-profile-image {
+  position: absolute;
+  top: 189px;
+  left: 71px;
+  z-index: 1;
+  color: white;
+  display: inline-block;
+  position: relative;
+  height: 26px;
+  margin: 0;
+  padding: 2px 11px 2px 10px;
+  border: 1px solid #e5e5e5;
+  border-radius: 3px;
+  background-color: #fff;
+  cursor: pointer;
+  color: #333;
+  font-size: 14px;
+  line-height: 20px;
+  white-space: nowrap;
+  font-family: "Interstate","Lucida Grande","Lucida Sans Unicode","Lucida Sans",Garuda,Verdana,Tahoma,sans-serif;
+  font-weight: 100;
+  text-align: center;
+  vertical-align: baseline;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  box-sizing: border-box;
+  }
+
+.upload-image {
+  display: none;
+}
+
 .user-show-content .background {
   position: absolute;
   width: 100%;

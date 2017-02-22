@@ -2,7 +2,7 @@ import React from 'react';
 import { fetchTracks } from '../actions/track_actions';
 import UserShow from './user_show';
 import { connect } from 'react-redux';
-import { fetchUser } from '../actions/user_actions';
+import { fetchUser, updateUserImage } from '../actions/user_actions';
 
 const mapStateToProps = state => {
   return {
@@ -14,7 +14,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     fetchTracks: (type, id) => dispatch(fetchTracks(type, id)),
-    fetchUser: (id) => dispatch(fetchUser(id))
+    fetchUser: (id) => dispatch(fetchUser(id)),
+    updateUserImage: (user, id) => dispatch(updateUserImage(user, id))
   };
 };
 

@@ -4,3 +4,14 @@ export const fetchUser = id => {
     url: `api/users/${id}`
   });
 };
+
+export const updateUserImage = (image, id) => {
+  debugger
+  return $.ajax({
+    method: 'PATCH',
+    url: `api/users/${id}`,
+    contentType: false,
+    processData: false,
+    data: image
+  });
+};

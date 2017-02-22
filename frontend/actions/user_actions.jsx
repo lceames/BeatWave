@@ -9,6 +9,12 @@ export const fetchUser = id => dispatch => {
   );
 };
 
+export const updateUserImage = (image, id) => dispatch => {
+  return userApiUtil.updateUserImage(image, id).then(
+    (user) => dispatch(receiveUserProfile(user))
+  );
+};
+
 export const receiveUserProfile = user => {
   return {
     type: RECEIVE_USER_PROFILE,
