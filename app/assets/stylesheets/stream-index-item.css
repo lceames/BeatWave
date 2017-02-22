@@ -2,6 +2,7 @@
   height: 162px;
   width: 162px;
   border: 1px solid lightgray;
+  cursor: pointer;
 }
 
 .stream-item-content {

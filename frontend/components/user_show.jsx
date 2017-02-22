@@ -25,9 +25,9 @@ export default class UserShow extends React.Component {
         <div className="type">
           <h2>Tracks</h2>
         </div>
-        <div className="tracks">
-          {tracks}
-        </div>
+          <div className="stream-content">
+              {tracks}
+          </div>
       </div>
     )
   }

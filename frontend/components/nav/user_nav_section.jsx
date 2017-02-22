@@ -29,7 +29,10 @@ export default class UserNavSection extends React.Component {
   }
 
   loginGuest () {
-    this.props.loginGuest().then( () => hashHistory.push('/stream'));
+    this.props.loginGuest().then( (user) => {
+      window.currentUser = user;
+      hashHistory.push('/stream');
+    });
   }
 
   closeModal () {

@@ -18,6 +18,7 @@
 }
 
 .user-show-content {
+  position: relative;
   margin-left: 6%;
   margin-right: 6%;
   background-color: white;
@@ -48,9 +49,10 @@
   height: 42px;
 }
 
-.tracks {
+.user-show-content .stream-content {
   position: absolute;
   top: 350px;
+  width: 100%;
 }
 
 .type h2 {

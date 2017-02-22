@@ -7,5 +7,8 @@ json.image asset_path(@track.image.url)
 json.user_id @track.user_id
 json.comments @track.comments do |comment|
   json.thumb comment.user.image.url
-  json.comment comment
-end 
+  json.body comment.body
+  json.author comment.user.username
+  json.id comment.id
+  json.elapsedTime comment.elapsed_time
+end

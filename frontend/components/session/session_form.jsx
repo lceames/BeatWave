@@ -44,14 +44,15 @@ class SessionForm extends React.Component {
     let action = this.props.formType === "login" ? this.props.login : this.props.signup;
     let user = Object.assign({}, this.state);
     if (this.props.formType === "login") {
-      action(user).then(() => this.redirectToStream());
+      action(user).then((user) => this.redirectToStream(currentUser));
     }
     else {
-      action(formData).then(() => this.redirectToStream());
+      action(formData).then((currentUser) => this.redirectToStream(currentUser));
     }
   }
 
-  redirectToStream () {
+  redirectToStream (user) {
+    window.currentUser = user;
     this.props.closeModal();
     hashHistory.push('/stream');
   }

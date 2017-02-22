@@ -8,7 +8,7 @@ export default class Stream extends React.Component {
   }
 
   render () {
-    if (!this.props.tracks) {
+    if (!this.props.tracks || this.props.tracks.length === 0) {
       return (<div></div>)
     }
 

@@ -23,7 +23,6 @@ const queueReducer = (oldState = { currentTrack: null, queue: [] }, action) => {
           return track;
         }
       });
-
       return {
         currentTrack: oldState.currentTrack,
         queue

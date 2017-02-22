@@ -10,7 +10,6 @@ export default (props) => {
         <NavBar location={props.location.pathname}/>
         <img id="splash-header" src={window.images.splashHeader}/>
       </div>
-      <StreamContainer />
     </div>
   )
 };

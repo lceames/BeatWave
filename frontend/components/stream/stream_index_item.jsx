@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router';
+import { Link, hashHistory } from 'react-router';
 import Comment from './comment';
 
 export default class StreamIndexItem extends React.Component {
@@ -14,31 +14,29 @@ export default class StreamIndexItem extends React.Component {
 
   handleDelete() {
     let queueIndex;
-    // if (this.props.currentTrack && this.props.currentTrack.id === this.props.track.id) {
-    //   queueIndex = this.props.queue.findIndex(this.props.track);
-    //   setCurrentTrack(queueIndex)
-    // }
     this.props.deleteTrack(this.props.track.id);
   }
 
   handlePause() {
     let audioTag = document.getElementById(this.props.currentTrack.track.id);
+    this.props.pauseCurrentTrack();
     audioTag.pause();
   }
 
   setCurrentTrack(e) {
-    let lastTrackId;
-    let lastTrackAudio;
-    // if (this.props.currentTrack) {
-    //   lastTrackId = (this.props.currentTrack.track.id).toString();
-    //   lastTrackAudio = document.getElementById(lastTrackId);
-    //   lastTrackAudio.pause();
-    //   lastTrackAudio.currentTime = 0;
-    // }
-    let queueIndex = this.props.queue.findIndex((el) => el === this.props.track);
-    let track = this.props.track;
-    let currentTrackItem = { queueIndex, track };
-    this.props.setCurrentTrack(currentTrackItem);
+    if (this.props.currentTrack && this.props.currentTrack.paused) {
+      let audioTag = document.getElementById(this.props.currentTrack.track.id);
+      this.props.playCurrentTrack();
+      audioTag.play();
+    }
+    else {
+      let lastTrackId;
+      let lastTrackAudio;
+      let queueIndex = this.props.queue.findIndex((el) => el === this.props.track);
+      let track = this.props.track;
+      let currentTrackItem = { queueIndex, track };
+      this.props.setCurrentTrack(currentTrackItem);
+    }
   }
 
   handleChange(e) {
@@ -49,6 +47,11 @@ export default class StreamIndexItem extends React.Component {
       comment["track_id"] = this.props.track.id;
       comment["elapsed_time"] = elapsedTime;
       this.props.createComment(comment);
+      this.setState({body: ""})
+    }
+    else if (e.keyCode === 8) {
+      let body = this.state.body;
+      this.setState({body: body.slice(0, body.length - 1)});
     }
     else {
       this.setState({body: e.currentTarget.value + e.key});
@@ -84,7 +87,7 @@ export default class StreamIndexItem extends React.Component {
       <li className="stream-index-item">
         {poster}
         <div className="stream-item-content">
-          <img src={track.image} className="track-image"/>
+          <img src={track.image} className="track-image" onClick={ () => hashHistory.push(`/${track.user_id}/${track.id}`)}/>
           {playPause}
           <div className="right-track-section">
             <Link className="track-title" to={`/${track.user_id}/${track.id}`}>{track.title}</Link>
@@ -95,7 +98,7 @@ export default class StreamIndexItem extends React.Component {
               <img src={window.currentUser.image}/>
               <form>
                 <input type="text" placeholder="Write a comment" className="comment-text"
-                onKeyUp={this.handleChange} value={this.state.comment}
+                onKeyUp={this.handleChange} value={this.state.body}
                 />
               </form>
             </div>
