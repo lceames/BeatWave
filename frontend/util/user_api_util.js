@@ -6,7 +6,6 @@ export const fetchUser = id => {
 };
 
 export const updateUserImage = (image, id) => {
-  debugger
   return $.ajax({
     method: 'PATCH',
     url: `api/users/${id}`,

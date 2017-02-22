@@ -1,6 +1,7 @@
 import React from 'react';
 import {
-  REMOVE_TRACK, RECEIVE_TRACK, RECEIVE_TRACKS, SET_CURRENT_TRACK, PAUSE_CURRENT_TRACK, UPDATE_ELAPSED_TIME, PLAY_CURRENT_TRACK, HANDLE_REWIND
+  REMOVE_TRACK, RECEIVE_TRACK, RECEIVE_TRACKS, SET_CURRENT_TRACK, RESET_TRACKS,
+  PAUSE_CURRENT_TRACK, UPDATE_ELAPSED_TIME, PLAY_CURRENT_TRACK, HANDLE_REWIND
   } from '../actions/track_actions';
 import merge from 'lodash/merge';
 
@@ -51,6 +52,8 @@ const queueReducer = (oldState = { currentTrack: null, queue: [] }, action) => {
         currentTrack,
         queue
       };
+    case(RESET_TRACKS):
+      return { currentTrack: null, queue: [] }
     case(PAUSE_CURRENT_TRACK):
       newState = merge({}, oldState);
       newState.currentTrack.paused = true;

@@ -25,8 +25,12 @@ export default class UserShow extends React.Component {
   }
 
   componentDidMount() {
-    this.props.fetchTracks('user-show', this.props.params.userId);
     this.props.fetchUser(this.props.params.userId);
+    this.props.fetchTracks('user-show', this.props.params.userId);
+  }
+
+  componentWillUnmount() {
+    this.props.resetTracks();
   }
 
   handleProfileImage (e) {
@@ -44,19 +48,24 @@ export default class UserShow extends React.Component {
       return <StreamIndexItemContainer track={track} key={track.id} type="show"/>
     });
     let updateUserImage = "";
-    if (window.currentUser.id === parseInt(this.props.params.userId)) {
+
+    if (this.props.currentUser.id === parseInt(this.props.params.userId)) {
       updateUserImage =
         <label className="update-profile-image">Update image
           <input type="file" className="upload-image" onChange={this.handleProfileImage}></input>
         </label>
     }
 
+    if (!this.props.userProfile || this.props.userProfile.id !== parseInt(this.props.params.userId)) {
+      return <div></div>
+    }
+
     return (
       <div className="user-show-content">
         <div className="header">
           <img className="background" src={window.images.userHeader}/>
-          <img className="profile-picture" src={this.props.user.image} />
-          <h1>{this.props.user.username}</h1>
+          <img className="profile-picture" src={this.props.userProfile.image} />
+          <h1>{this.props.userProfile.username}</h1>
           {updateUserImage}
         </div>
         <div className="type">

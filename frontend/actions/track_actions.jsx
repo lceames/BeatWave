@@ -10,6 +10,7 @@ export const PLAY_CURRENT_TRACK = "PLAY_CURRENT_TRACK";
 export const HANDLE_REWIND = "HANDLE_REWIND";
 export const REMOVE_TRACK = "REMOVE_TRACK";
 export const RESET_ELAPSED_TIME = "RESET_ELAPSED_TIME";
+export const RESET_TRACKS = "RESET_TRACKS";
 
 export const fetchTrack = (id) => dispatch => {
   return TrackApiUtil.fetchTrack(id).then(
@@ -41,6 +42,12 @@ export const receiveTracks = tracks => {
   return {
     type: RECEIVE_TRACKS,
     tracks
+  };
+};
+
+export const resetTracks = () => {
+  return {
+    type: RESET_TRACKS
   };
 };
 
