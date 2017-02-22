@@ -13,7 +13,6 @@ export default class StreamIndexItem extends React.Component {
   }
 
   handleDelete() {
-    let queueIndex;
     this.props.deleteTrack(this.props.track.id);
   }
 
@@ -72,7 +71,7 @@ export default class StreamIndexItem extends React.Component {
     }
 
     if (window.currentUser && window.currentUser.id === track.user_id) {
-      deleteTrack = <button onClick={this.handleDelete}>Delete Track</button>
+      deleteTrack = <i onClick={this.handleDelete} className="fa fa-trash-o" aria-hidden="true"></i>
     }
 
     if (!this.props.type) {
@@ -94,8 +93,9 @@ export default class StreamIndexItem extends React.Component {
             <div className="comments">
               {comments}
             </div>
+            {deleteTrack}
             <div className="new-comment">
-              <img src={window.currentUser.image}/>
+            {/*  <img src={window.currentUser.image}/> */}
               <form>
                 <input type="text" placeholder="Write a comment" className="comment-text"
                 onKeyUp={this.handleChange} value={this.state.body}

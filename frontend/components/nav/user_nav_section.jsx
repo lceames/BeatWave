@@ -40,9 +40,12 @@ export default class UserNavSection extends React.Component {
   }
   render () {
     if (this.props.loggedIn) {
+      const currentUser = this.props.currentUser
       return (
-        <div className="nav-user-section">
-          <button id="log-out" onClick={this.handleLogout}>Log Out</button>
+        <div className="nav-user-logged-in">
+          <img src={this.props.currentUser.image} className="user-nav-thumb"/>
+          <button className="user-show" onClick={() => hashHistory.push(`/${currentUser.id}`)}>{currentUser.username}</button>
+          <button className="log-out" onClick={this.handleLogout}>Log Out</button>
         </div>
       )
     }

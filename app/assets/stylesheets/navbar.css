@@ -16,9 +16,38 @@
   align-items: center;
 }
 
+.nav-user-logged-in {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.nav-user-logged-in .log-out, .nav-user-logged-in .user-show {
+  border-left: 1px solid #111;
+  background-color: transparent;
+  border: none;
+  font-family: "Interstate","Lucida Grande","Lucida Sans Unicode","Lucida Sans",Garuda,Verdana,Tahoma,sans-serif;
+  font-weight: 100;
+  text-align: center;
+  color: #ccc;
+  font-size: 14px;
+  cursor: pointer;
+  vertical-align: middle;
+  padding: 7px;
+}
+
+.log-out:hover, .user-show:hover {
+  color: white;
+}
 
 .nav-bar #upload:hover {
   color: #fff;
+}
+
+.user-nav-thumb {
+  width: 27px;
+  height: 27px;
+  border-radius: 50%;
 }
 
 .home {
@@ -80,6 +109,19 @@ html {
 
 
 #upload {
+  border-left: 1px solid #111;
+  background-color: transparent;
+  border: none;
+  font-family: "Interstate","Lucida Grande","Lucida Sans Unicode","Lucida Sans",Garuda,Verdana,Tahoma,sans-serif;
+  font-weight: 100;
+  text-align: center;
+  color: #ccc;
+  font-size: 14px;
+  cursor: pointer;
+  vertical-align: middle;
+}
+
+.user-button {
   border-left: 1px solid #111;
   background-color: transparent;
   border: none;

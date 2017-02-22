@@ -70,3 +70,8 @@
   display: flex;
   justify-content: space-around;
 }
+
+.right-track-section .fa{
+  color: #ccc;
+  cursor: pointer;
+}
