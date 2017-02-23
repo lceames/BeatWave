@@ -9,19 +9,7 @@ export default class UserShow extends React.Component {
       imageFile: null,
       modalIsOpen: false
     };
-    this.openModal = this.openModal.bind(this);
-    this.closeModal = this.closeModal.bind(this);
     this.handleProfileImage = this.handleProfileImage.bind(this);
-  }
-
-  openModal () {
-    this.setState({
-      modalIsOpen: true,
-    });
-  }
-
-  closeModal () {
-    this.setState({modalIsOpen: false});
   }
 
   componentDidMount() {
@@ -29,9 +17,9 @@ export default class UserShow extends React.Component {
     this.props.fetchTracks('user-show', this.props.params.userId);
   }
 
-  componentWillUnmount() {
-    this.props.resetTracks();
-  }
+  // componentWillUnmount() {
+  //   this.props.resetTracks();
+  // }
 
   handleProfileImage (e) {
     let file = e.currentTarget.files[0];
@@ -78,18 +66,3 @@ export default class UserShow extends React.Component {
     )
   }
 }
-
-const customStyles = {
-  content : {
-    position: "static",
-    border: "1px solid rgb(204, 204, 204)",
-    background: "rgb(255, 255, 255)",
-    overflow: "auto",
-    outline: "none",
-    padding: "20px",
-    width: "450px",
-    height: "550px",
-    margin: "80px auto",
-
-    }
-};

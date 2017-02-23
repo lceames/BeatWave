@@ -11,10 +11,17 @@ export const HANDLE_REWIND = "HANDLE_REWIND";
 export const REMOVE_TRACK = "REMOVE_TRACK";
 export const RESET_ELAPSED_TIME = "RESET_ELAPSED_TIME";
 export const RESET_TRACKS = "RESET_TRACKS";
+export const RECEIVE_TRACK_SHOW = "RECEIVE_TRACK_SHOW";
 
 export const fetchTrack = (id) => dispatch => {
   return TrackApiUtil.fetchTrack(id).then(
     (track) => dispatch(receiveTrack(track))
+  );
+};
+
+export const fetchTrackShow = (id) => dispatch => {
+  return TrackApiUtil.fetchTrack(id).then(
+    (track) => dispatch(receiveTrackShow(track))
   );
 };
 
@@ -54,6 +61,13 @@ export const resetTracks = () => {
 export const receiveTrack = track => {
   return {
     type: RECEIVE_TRACK,
+    track
+  };
+};
+
+export const receiveTrackShow = track => {
+  return {
+    type: RECEIVE_TRACK_SHOW,
     track
   };
 };

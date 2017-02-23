@@ -9,6 +9,7 @@ export default class StreamIndexItem extends React.Component {
     this.handleDelete = this.handleDelete.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handlePause = this.handlePause.bind(this);
+    this.handlePlay = this.handlePlay.bind(this);
     this.state = { body: "" };
   }
 
@@ -22,11 +23,15 @@ export default class StreamIndexItem extends React.Component {
     audioTag.pause();
   }
 
+  handlePlay() {
+    let audioTag = document.getElementById(this.props.currentTrack.track.id);
+    this.props.playCurrentTrack();
+    audioTag.play();
+  }
+
   setCurrentTrack(e) {
-    if (this.props.currentTrack && this.props.currentTrack.paused) {
-      let audioTag = document.getElementById(this.props.currentTrack.track.id);
-      this.props.playCurrentTrack();
-      audioTag.play();
+    if (this.props.currentTrack && this.props.currentTrack.id === this.props.track.id && this.props.currentTrack.paused) {
+      this.handlePlay();
     }
     else {
       let lastTrackId;

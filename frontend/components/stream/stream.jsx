@@ -7,9 +7,9 @@ export default class Stream extends React.Component {
     this.props.fetchTracks("stream");
   }
 
-  componentWillUnmount() {
-    this.props.resetTracks();
-  }
+  // componentWillUnmount() {
+  //   this.props.resetTracks();
+  // }
 
   render () {
     if (!this.props.tracks || this.props.tracks.length === 0) {
