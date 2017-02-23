@@ -12,6 +12,7 @@ export const REMOVE_TRACK = "REMOVE_TRACK";
 export const RESET_ELAPSED_TIME = "RESET_ELAPSED_TIME";
 export const RESET_TRACKS = "RESET_TRACKS";
 export const RECEIVE_TRACK_SHOW = "RECEIVE_TRACK_SHOW";
+export const RECEIVE_TRACK_ERRORS = "RECEIVE_TRACK_ERRORS";
 
 export const fetchTrack = (id) => dispatch => {
   return TrackApiUtil.fetchTrack(id).then(
@@ -35,7 +36,8 @@ export const fetchTracks = (type, id) => dispatch => {
 
 export const createTrack = (track) => dispatch => {
   return TrackApiUtil.createTrack(track).then(
-    (track) => dispatch(receiveTrack(track))
+    (track) => dispatch(receiveTrack(track)),
+    (errors) => dispatch(receiveTrackErrors(errors))
   );
 };
 
@@ -108,5 +110,13 @@ export const updateElapsedTime = (time) => {
 export const handleRewind = () => {
   return {
     type: HANDLE_REWIND
+  };
+};
+
+export const receiveTrackErrors = (errors) => {
+  debugger
+  return {
+    type: RECEIVE_TRACK_ERRORS,
+    errors
   };
 };

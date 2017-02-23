@@ -24,7 +24,6 @@ export default class ProgressBar extends React.Component {
 
   componentDidUpdate(prevState, prevProps) {
     if (!this.state.loaded && this.props.currentTrack.paused === false) {
-      debugger
       this.audioTag.play();
       this.setState({loaded: true});
     }

@@ -28,7 +28,6 @@
 
 .upload-form-content {
   border: none;
-  height: 45%;
   width: 55%;
   align-items: center;
   margin-top: 6%;
@@ -85,4 +84,12 @@
   width: 100px;
   height: 100px;
   background-color: black;
+}
+
+.upload-form-content h1 {
+  padding: 10px;
+}
+
+.upload-form-content .errors {
+  text-align: center;
 }
