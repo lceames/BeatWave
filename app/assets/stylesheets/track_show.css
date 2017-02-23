@@ -13,7 +13,7 @@
 }
 
 
-.user-show-content h1, .user-show-content h2 {
+.track-show-content h1, .track-show-content h2 {
   position: absolute;
   color: black;
   color: #fff;
@@ -26,6 +26,21 @@
   padding: 4px 7px;
 }
 
+.track-show-content h1 {
+  font-size: 16px;
+  line-height: 1.2;
+  padding: 2px 7px 3px;
+  left: 100px;
+  color: #ccc;
+  font-weight: 100;
+}
+
+.track-show-content h2 {
+  left: 130px;
+  font-size: 24px;
+  line-height: 37px;
+}
+
 .track-show-content {
   position: relative;
   margin-left: 6%;
@@ -36,6 +51,91 @@
   flex-direction: column;
 }
 
+.track-content {
+  top: 405px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.track-content .new-comment {
+  height: 45px;
+  width: 90%;
+}
+
+.track-content .comment-text {
+  height: 28px;
+}
+
+.track-content .user-thumb {
+  height: 122px;
+  width: 122px;
+  border-radius: 50%;
+}
+
+.track-content .user-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 150px;
+  margin-left: 20px;
+  margin-top: 20px;
+}
+
+.track-content .track-details {
+  display: flex;
+  justify-content: space-between;
+}
+
+.track-content .username {
+  font-weight: 100;
+  font-size: 14px;
+}
+
+.track-content .vertical-box {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  margin-top: 20px;
+  margin-left: 35px;
+}
+
+.track-content .comments {
+  border-top: 1px solid #f2f2f2;
+  display: flex;
+  flex-direction: column;
+}
+
+.track-content .description {
+  margin-bottom: 10px;
+}
+
+.track-content .comment {
+  padding: 25px;
+}
+
+.track-content .comment-thumb {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+
+.track-content .comment {
+  position: static;
+  display: flex;
+}
+
+.track-content .comment-body {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  font-size: 12px;
+}
+
+.track-show-content .comment-body .author, .track-show-content .comment-body .body {
+  display: block;
+}
 
 .track-show-content .fa-play-circle, .track-show-content .fa-pause-circle {
   position: absolute;

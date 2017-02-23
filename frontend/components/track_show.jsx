@@ -1,5 +1,6 @@
 import React from 'react';
 import StreamIndexItemContainer from './stream/stream_index_item_container';
+import Comment from './stream/comment';
 
 export default class TrackShow extends React.Component {
   constructor(props) {
@@ -7,6 +8,10 @@ export default class TrackShow extends React.Component {
     this.state = {
       imageFile: null
     };
+
+    this.setCurrentTrack = this.setCurrentTrack.bind(this);
+    this.handlePause = this.handlePause.bind(this);
+    this.handlePlay = this.handlePlay.bind(this);
   }
 
   componentDidMount() {
@@ -19,20 +24,33 @@ export default class TrackShow extends React.Component {
   }
 
   handlePause() {
-    let audioTag = document.getElementById(this.props.currentTrack.track.id);
+    let audioTag = document.getElementById(this.props.track[0].id);
     this.props.pauseCurrentTrack();
     audioTag.pause();
   }
 
   handlePlay() {
-    let audioTag = document.getElementById(this.props.currentTrack.track.id);
+    let audioTag = document.getElementById(this.props.track[0].id);
     this.props.playCurrentTrack();
     audioTag.play();
   }
 
+  setCurrentTrack(e) {
+    if (this.props.currentTrack && this.props.currentTrack.id === this.props.track.id && this.props.currentTrack.paused) {
+      this.handlePlay();
+    }
+    else {
+      let track = this.props.track[0];
+      let currentTrackItem = { queueIndex: 0, track };
+      debugger
+      this.props.setCurrentTrack(currentTrackItem);
+    }
+  }
+
+
   render() {
     const currentTrack = this.props.currentTrack;
-    const track = this.props.track;
+    const track = this.props.track[0];
 
     if (this.props.track.length === 0) {
       return <div></div>
@@ -57,22 +75,32 @@ export default class TrackShow extends React.Component {
           <img className="background" src={window.images.userHeader}/>
           <img className="track-thumb" src={this.props.track[0].image} />
           {playPause}
-          <h2>{this.props.track.author}</h2>
-          <h1>{this.props.track.title}</h1>
-            <div className="right-track-section">
+          <div className="track-info">
+            <h2>{track.title}</h2>
+            <h1>{track.author}</h1>
+          </div>
+        </div>
+        <div className="track-content">
+          <div className="new-comment">
+          {/*  <img src={window.currentUser.image}/> */}
+            <form>
+              <input type="text" placeholder="Write a comment" className="comment-text"
+              onKeyUp={this.handleChange} value={this.state.body}
+              />
+            </form>
+          </div>
+          <div className="track-details">
+            <div className="user-info">
+              <img src={this.props.userProfile.image} className="user-thumb" />
+              <h3 className="username">{this.props.userProfile.username}</h3>
+            </div>
+            <div className="vertical-box">
+              <p className="description">{track.description}</p>
               <div className="comments">
                 {comments}
               </div>
-              {deleteTrack}
-              <div className="new-comment">
-              {/*  <img src={window.currentUser.image}/> */}
-                <form>
-                  <input type="text" placeholder="Write a comment" className="comment-text"
-                  onKeyUp={this.handleChange} value={this.state.body}
-                  />
-                </form>
-              </div>
             </div>
+          </div>
         </div>
       </div>
     )
