@@ -16,14 +16,15 @@ export default class ProgressBar extends React.Component {
     if (!this.props.currentTrack) {
       return;
     }
-    
+
     if (this.props.currentTrack.track.id !== nextProps.currentTrack.track.id) {
       this.setState({loaded: false});
     }
   }
 
   componentDidUpdate(prevState, prevProps) {
-    if (!this.state.loaded) {
+    if (!this.state.loaded && this.props.currentTrack.paused === false) {
+      debugger
       this.audioTag.play();
       this.setState({loaded: true});
     }
@@ -64,7 +65,8 @@ export default class ProgressBar extends React.Component {
       queueIndex = 0;
     }
     let track = this.props.queue[queueIndex];
-    let currentTrackItem = { queueIndex, track };
+    let paused = this.props.currentTrack.paused;
+    let currentTrackItem = { queueIndex, track, paused };
     this.props.setCurrentTrack(currentTrackItem);
   }
 
