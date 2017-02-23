@@ -5,8 +5,11 @@
 }
 
 .user-form input {
-  display: block;
   width: 400px;
+}
+
+.user-form .upload-profile-picture {
+  display: none;
 }
 
 input[type="text"], input[type="password"] {
@@ -45,4 +48,22 @@ input[type="submit"] {
   vertical-align: baseline;
   box-sizing: border-box;
   width: 100%;
+}
+
+.user-form .custom-file-input {
+  width: 200px;
+  height: 40px;
+  background-color: #f50;
+  text-align: center;
+  border-radius: 3px;
+  color: white;
+  font-size: 16px;
+  line-height: 40px;
+  margin-top: 10px;
+}
+
+.user-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
