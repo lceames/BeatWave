@@ -10,6 +10,7 @@ export default class StreamIndexItem extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.handlePause = this.handlePause.bind(this);
     this.handlePlay = this.handlePlay.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
     this.state = { body: "" };
   }
 
@@ -43,23 +44,17 @@ export default class StreamIndexItem extends React.Component {
     }
   }
 
-  handleChange(e) {
+  handleSubmit(e) {
+    e.preventDefault();
     let elapsedTime = this.props.currentTrack ? this.props.currentTrack.elapsedTime : 0;
-    let comment;
-    if (e.keyCode === 13) {
-      comment = Object.assign({}, this.state);
-      comment["track_id"] = this.props.track.id;
-      comment["elapsed_time"] = elapsedTime;
-      this.props.createComment(comment);
-      this.setState({body: ""})
-    }
-    else if (e.keyCode === 8) {
-      let body = this.state.body;
-      this.setState({body: body.slice(0, body.length - 1)});
-    }
-    else {
-      this.setState({body: e.currentTarget.value + e.key});
-    }
+    let comment = Object.assign({}, this.state);
+    comment["track_id"] = this.props.track.id;
+    comment["elapsed_time"] = elapsedTime;
+    this.props.createComment(comment).then( () => this.setState({body: ""}));
+  }
+
+  handleChange(e) {
+    this.setState({body: e.target.value});
   }
 
   render () {
@@ -101,9 +96,9 @@ export default class StreamIndexItem extends React.Component {
             {deleteTrack}
             <div className="new-comment">
             {/*  <img src={window.currentUser.image}/> */}
-              <form>
+              <form onSubmit={this.handleSubmit}>
                 <input type="text" placeholder="Write a comment" className="comment-text"
-                onKeyUp={this.handleChange} value={this.state.body}
+                onChange={this.handleChange} value={this.state.body}
                 />
               </form>
             </div>

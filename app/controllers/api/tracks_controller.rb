@@ -17,10 +17,10 @@ class Api::TracksController < ApplicationController
   def index
     if params[:type] == "stream"
       # @tracks = Track.where.not({user_id: current_user.id}) #change stream to only render other users' tracks
-      @tracks = Track.all
+      @tracks = Track.all.includes(:comments)
     elsif params[:type] == "user-show"
       id = params[:id].to_i
-      @tracks = Track.all.where(user_id: id)
+      @tracks = Track.all.includes(:comments).where(user_id: id)
     end
     render :index
   end
