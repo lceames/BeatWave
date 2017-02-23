@@ -6,12 +6,13 @@ export default class TrackShow extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      imageFile: null
+      body: ""
     };
 
     this.setCurrentTrack = this.setCurrentTrack.bind(this);
     this.handlePause = this.handlePause.bind(this);
     this.handlePlay = this.handlePlay.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   componentDidMount() {
@@ -47,6 +48,24 @@ export default class TrackShow extends React.Component {
     }
   }
 
+  handleChange(e) {
+    let elapsedTime = this.props.currentTrack ? this.props.currentTrack.elapsedTime : 0;
+    let comment;
+    if (e.keyCode === 13) {
+      comment = Object.assign({}, this.state);
+      comment["track_id"] = this.props.track[0].id;
+      comment["elapsed_time"] = 0;
+      this.props.createComment(comment);
+      this.setState({body: ""})
+    }
+    else if (e.keyCode === 8) {
+      let body = this.state.body;
+      this.setState({body: body.slice(0, body.length - 1)});
+    }
+    else {
+      this.setState({body: e.currentTarget.value + e.key});
+    }
+  }
 
   render() {
     const currentTrack = this.props.currentTrack;
@@ -82,8 +101,8 @@ export default class TrackShow extends React.Component {
         </div>
         <div className="track-content">
           <div className="new-comment">
-          {/*  <img src={window.currentUser.image}/> */}
             <form>
+              <img className="user-thumb" src={this.props.currentUser.image}/>
               <input type="text" placeholder="Write a comment" className="comment-text"
               onKeyUp={this.handleChange} value={this.state.body}
               />

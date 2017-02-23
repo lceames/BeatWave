@@ -49,19 +49,21 @@ export default class UserShow extends React.Component {
     }
 
     return (
-      <div className="user-show-content">
-        <div className="header">
-          <img className="background" src={window.images.userHeader}/>
-          <img className="profile-picture" src={this.props.userProfile.image} />
-          <h1>{this.props.userProfile.username}</h1>
-          {updateUserImage}
-        </div>
-        <div className="type">
-          <h2>Tracks</h2>
-        </div>
-          <div className="stream-content">
-              {tracks}
+      <div className="user-show-container">
+        <div className="user-show-content">
+          <div className="header">
+            <img className="background" src={window.images.userHeader}/>
+            <img className="profile-picture" src={this.props.userProfile.image} />
+            <h1>{this.props.userProfile.username}</h1>
+            {updateUserImage}
           </div>
+          <div className="type">
+            <h2>Tracks</h2>
+          </div>
+            <div className="stream-content">
+                {tracks}
+            </div>
+        </div>
       </div>
     )
   }

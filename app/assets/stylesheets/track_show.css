@@ -111,7 +111,7 @@
 }
 
 .track-content .comment {
-  padding: 25px;
+  padding: 8px;
 }
 
 .track-content .comment-thumb {
@@ -145,4 +145,34 @@
   top: 27px;
   left: 27px;
   border-radius: 50%;
+}
+
+.new-comment form {
+  display: flex;
+  padding-bottom: 5px;
+}
+
+.track-show-content .new-comment {
+  height: 40px;
+  margin-left: 40px;
+  margin-bottom: 15px;
+}
+
+.track-show-content .track-details {
+  border-top: 1px solid #f2f2f2;
+}
+
+.track-show-content .new-comment .user-thumb {
+  border-radius: 0;
+  width: 40px;
+  height: 40px;
+}
+
+.track-info h2 {
+  top: 40px;
+  left: 120px;
+}
+
+.track-info h1 {
+  left: 122px;
 }

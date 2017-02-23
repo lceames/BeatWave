@@ -4,6 +4,8 @@
   display: flex;
   justify-content: center;
   align-items: top;
+  margin-left: 6%;
+  margin-right: 6%;
 }
 
 .upload-track {
