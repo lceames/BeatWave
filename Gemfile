@@ -25,6 +25,7 @@ gem 'coffee-rails', '~> 4.2'
 gem 'jquery-rails'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
+gem 'json-waveform'
 
 gem 'paperclip',"~> 5.0.0.beta1"
 gem 'aws-sdk', '>= 2.0'

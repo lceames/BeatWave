@@ -26,9 +26,8 @@ class Track < ApplicationRecord
 
   def get_peaks
     peaks = Dir.chdir('app/models/wav2json/build'){
-      return (`wav2json #{self.audio.url} --channels left -o -`)
+      (`wav2json #{self.audio.url} --channels left -o -`)
     }
-    debugger
     self.peaks = peaks["left"]
   end
 
