@@ -12,14 +12,10 @@
   right: 32px;
 }
 
-canvas #canvas {
-  position: absolute;
-}
-
-.canvas {
+.track-show-content .canvas {
   position: absolute;
   top: 99px;
-  left: 150px;
+  left: 50px;
 }
 
 .track-show-content h1, .track-show-content h2 {

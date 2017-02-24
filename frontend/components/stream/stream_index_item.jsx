@@ -3,6 +3,7 @@ import { Link, hashHistory } from 'react-router';
 import Comment from './comment';
 import PlayPause from './play_pause';
 import NewComment from './new_comment';
+import Waveform from '../waveform/waveform';
 
 export default class StreamIndexItem extends React.Component {
   constructor(props) {

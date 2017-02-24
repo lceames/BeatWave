@@ -11,8 +11,7 @@ export default class Waveform extends React.Component {
       };
 
       let peaks = catchingFeelings.left;
-      let peakInterval = Math.floor(peaks.length/200);
-      debugger
+      let peakInterval = Math.floor(peaks.length/130);
       let averageHeights = [];
       let sum = 0;
       for (let i = 0; i < peaks.length; i++) {
