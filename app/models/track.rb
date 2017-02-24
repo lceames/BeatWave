@@ -18,13 +18,26 @@
 #
 
 class Track < ApplicationRecord
-  validates :title, :user_id, :peaks, presence: true
+  validates :title, :user_id, presence: true
   belongs_to :user
   has_many :comments
-  before_validation :get_peaks
+  # before_validation :get_peaks
   serialize :peaks
+  # after_create :get_peaks_after
+
+  def get_peaks_after
+    debugger
+    file = open(self.audio.url)
+
+    waveform = JsonWaveform.generate(file, sample: 1000)
+  end
+
+  def audio_contents()
+    open(self.upload.queued_for_write.url)
+  end
 
   def get_peaks
+    debugger
     peaks = Dir.chdir('app/models/wav2json/build'){
       (`wav2json #{self.audio.url} --channels left -o -`)
     }
@@ -36,4 +49,13 @@ class Track < ApplicationRecord
 
   has_attached_file :image, default_url: "record.png", s3_protocol: :https
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
+
+  def audio_file=(file)
+    self.peaks = JsonWaveform.generate(file)
+    # peaks = Dir.chdir('app/models/wav2json/build'){
+    #   (`wav2json #{file.path} --channels left -o -`)
+    # }
+    # self.peaks = peaks["left"]
+    self.audio = file
+  end
 end
