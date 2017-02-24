@@ -13,6 +13,7 @@ export default class TrackShow extends React.Component {
     this.handlePause = this.handlePause.bind(this);
     this.handlePlay = this.handlePlay.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentDidMount() {
@@ -20,9 +21,9 @@ export default class TrackShow extends React.Component {
     this.props.fetchUser(this.props.params.userId);
   }
 
-  componentWillUnmount() {
-    this.props.resetTracks();
-  }
+  // componentWillUnmount() {
+  //   this.props.resetTracks();
+  // }
 
   handlePause() {
     let audioTag = document.getElementById(this.props.track[0].id);
@@ -36,6 +37,15 @@ export default class TrackShow extends React.Component {
     audioTag.play();
   }
 
+  handleSubmit(e) {
+    e.preventDefault();
+    let elapsedTime = this.props.currentTrack ? this.props.currentTrack.elapsedTime : 0;
+    let comment = Object.assign({}, this.state);
+    comment["track_id"] = this.props.track.id;
+    comment["elapsed_time"] = elapsedTime;
+    this.props.createComment(comment).then( () => this.setState({body: ""}));
+  }
+
   setCurrentTrack(e) {
     if (this.props.currentTrack && this.props.currentTrack.id === this.props.track.id && this.props.currentTrack.paused) {
       this.handlePlay();
@@ -43,28 +53,12 @@ export default class TrackShow extends React.Component {
     else {
       let track = this.props.track[0];
       let currentTrackItem = { queueIndex: 0, track };
-      debugger
       this.props.setCurrentTrack(currentTrackItem);
     }
   }
 
   handleChange(e) {
-    let elapsedTime = this.props.currentTrack ? this.props.currentTrack.elapsedTime : 0;
-    let comment;
-    if (e.keyCode === 13) {
-      comment = Object.assign({}, this.state);
-      comment["track_id"] = this.props.track[0].id;
-      comment["elapsed_time"] = 0;
-      this.props.createComment(comment);
-      this.setState({body: ""})
-    }
-    else if (e.keyCode === 8) {
-      let body = this.state.body;
-      this.setState({body: body.slice(0, body.length - 1)});
-    }
-    else {
-      this.setState({body: e.currentTarget.value + e.key});
-    }
+    this.setState({body: e.target.value});
   }
 
   render() {
@@ -101,10 +95,10 @@ export default class TrackShow extends React.Component {
         </div>
         <div className="track-content">
           <div className="new-comment">
-            <form>
+            <form onSubmit={this.handleSubmit}>
               <img className="user-thumb" src={this.props.currentUser.image}/>
               <input type="text" placeholder="Write a comment" className="comment-text"
-              onKeyUp={this.handleChange} value={this.state.body}
+              onChange={this.handleChange} value={this.state.body}
               />
             </form>
           </div>

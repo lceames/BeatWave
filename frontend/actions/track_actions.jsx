@@ -114,7 +114,6 @@ export const handleRewind = () => {
 };
 
 export const receiveTrackErrors = (errors) => {
-  debugger
   return {
     type: RECEIVE_TRACK_ERRORS,
     errors
