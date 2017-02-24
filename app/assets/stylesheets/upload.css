@@ -1,6 +1,6 @@
 .upload-content {
   background-color: #fff;
-  height: 100%;
+  min-height: 725px;
   display: flex;
   justify-content: center;
   align-items: top;
