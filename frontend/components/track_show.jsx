@@ -3,6 +3,7 @@ import StreamIndexItemContainer from './stream/stream_index_item_container';
 import Comment from './stream/comment';
 import NewComment from './stream/new_comment';
 import PlayPause from './stream/play_pause';
+import Waveform from './waveform/waveform';
 
 export default class TrackShow extends React.Component {
   constructor(props) {
@@ -58,8 +59,13 @@ export default class TrackShow extends React.Component {
     const currentTrack = this.props.currentTrack;
     const track = this.props.track[0];
 
+<<<<<<< HEAD
     if (this.props.track.length === 0 || !this.state.trackLoaded || !this.state.userLoaded) {
       return <div></div>
+=======
+    if (this.props.track.length === 0) {
+      return <canvas id='canvas' width="645" height="40" ></canvas>
+>>>>>>> continue on
     }
 
     let comments = track.comments.map( (comment) => {
@@ -76,6 +82,7 @@ export default class TrackShow extends React.Component {
             <h2>{track.title}</h2>
             <h1>{track.author}</h1>
           </div>
+          <Waveform class="waveform" track={track.id}/>
         </div>
         <div className="track-content">
           <NewComment track={this.props.track[0]}/>
@@ -95,5 +102,4 @@ export default class TrackShow extends React.Component {
       </div>
     )
   }
-
 }
