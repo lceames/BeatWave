@@ -1,6 +1,8 @@
 import React from 'react';
+import { createComment } from '../../actions/comment_actions';
+import { connect } from 'react-redux';
 
-export default class newComment extends React.Component {
+class NewComment extends React.Component {
 
   constructor(props) {
     super(props);
@@ -25,6 +27,7 @@ export default class newComment extends React.Component {
   }
 
   render () {
+
     return (
       <div className="new-comment">
         <img className="new-comment-thumb" src={this.props.currentUser.image}/>
@@ -37,3 +40,21 @@ export default class newComment extends React.Component {
     )
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    currentUser: state.session.currentUser
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    createComment: (comment) => dispatch(createComment(comment))
+  }
+}
+
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(NewComment)

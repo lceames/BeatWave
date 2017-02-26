@@ -1,6 +1,8 @@
 import React from 'react';
 import StreamIndexItemContainer from './stream/stream_index_item_container';
 import Comment from './stream/comment';
+import NewComment from './stream/new_comment';
+import PlayPause from './stream/play_pause';
 
 export default class TrackShow extends React.Component {
   constructor(props) {
@@ -68,15 +70,6 @@ export default class TrackShow extends React.Component {
     if (this.props.track.length === 0) {
       return <div></div>
     }
-    let playPause;
-
-    if (!currentTrack || track.id !== currentTrack.track.id || currentTrack.paused === true) {
-      playPause =
-        <i className="fa fa-play-circle fa-5x" aria-hidden="true" onClick={this.setCurrentTrack}></i>
-    }
-    else {
-      playPause = <i className="fa fa-pause-circle fa-5x" aria-hidden="true" onClick={this.handlePause}></i>
-    }
 
     let comments = track.comments.map( (comment) => {
       return <Comment comment={comment} key={comment.id}/>
@@ -87,21 +80,14 @@ export default class TrackShow extends React.Component {
         <div className="header">
           <img className="background" src={window.images.userHeader}/>
           <img className="track-thumb" src={this.props.track[0].image} />
-          {playPause}
+          <PlayPause type="track-show"/>
           <div className="track-info">
             <h2>{track.title}</h2>
             <h1>{track.author}</h1>
           </div>
         </div>
         <div className="track-content">
-          <div className="new-comment">
-            <form onSubmit={this.handleSubmit}>
-              <img className="user-thumb" src={this.props.currentUser.image}/>
-              <input type="text" placeholder="Write a comment" className="comment-text"
-              onChange={this.handleChange} value={this.state.body}
-              />
-            </form>
-          </div>
+          <NewComment />
           <div className="track-details">
             <div className="user-info">
               <img src={this.props.userProfile.image} className="user-thumb" />

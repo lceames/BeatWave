@@ -32,6 +32,7 @@ export default class StreamIndexItem extends React.Component {
     let comments = track.comments.map( (comment) => {
       return <Comment comment={comment} key={comment.id}/>
     })
+    let newComment = currentUser ? <NewComment track={track}/> : ""
 
     return (
       <li className="stream-index-item">
@@ -45,7 +46,7 @@ export default class StreamIndexItem extends React.Component {
               {comments}
             </div>
             {deleteTrack}
-            <NewComment currentUser={currentUser}/>
+            {newComment}
           </div>
         </div>
       </li>

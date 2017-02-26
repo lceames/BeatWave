@@ -40,12 +40,22 @@ class PlayPause extends React.Component {
   render () {
     const currentTrack = this.props.currentTrack;
     const track = this.props.track;
+    const size = this.props.type ? "fa-5x" : "fa-3x";
+    debugger
 
     if (!currentTrack || track.id !== currentTrack.track.id || currentTrack.paused === true) {
-      return <i className="fa fa-play-circle fa-3x" aria-hidden="true" onClick={this.setCurrentTrack}></i>
+      return (
+        <div className="play-pause">
+          <i className={`fa fa-play-circle ${size}`} aria-hidden="true" onClick={this.setCurrentTrack}></i>
+        </div>
+      )
     }
     else {
-      return <i className="fa fa-pause-circle fa-3x" aria-hidden="true" onClick={this.handlePause}></i>
+      return (
+        <div className="play-pause">
+          <i className={`fa fa-pause-circle ${size}`} aria-hidden="true" onClick={this.handlePause}></i>
+        </div>
+      )
     }
   }
 }
