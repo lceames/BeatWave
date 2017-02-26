@@ -8,8 +8,7 @@ class SessionForm extends React.Component {
     this.state = {
       username: "",
       email: "",
-      password: "",
-      profilePicture: null
+      password: ""
     };
     this.update = this.update.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -37,12 +36,15 @@ class SessionForm extends React.Component {
     let formData = new FormData();
     formData.append("user[username]", this.state.username);
     formData.append("user[email]", this.state.email);
-    formData.append("user[password]", this.state.email);
+    formData.append("user[password]", this.state.password);
+
     if (this.state.profilePicture) {
       formData.append("user[image]", this.state.profilePicture);
     }
+
     let action = this.props.formType === "login" ? this.props.login : this.props.signup;
     let user = Object.assign({}, this.state);
+    
     if (this.props.formType === "login") {
       action(user).then((currentUser) => this.redirectToStream(currentUser));
     }
@@ -62,29 +64,41 @@ class SessionForm extends React.Component {
   }
 
   render () {
-    let emailInput = <input type="text" placeholder="Email" onChange={this.update('email')}></input>
-    let fileInput =
-      <label className="user-thumb-upload">Attach profile picture
-        <input className="upload-profile-picture" type='file' onChange={this.handleFile}></input>
-      </label>
-    let errors = ""
+    let usernameClass = "username";
+    let passwordClass = "password";
+    let emailClass = "email";
+    let errors = "";
+    let emailInput = "";
+    let fileInput = "";
 
     if (this.props.errors) {
       errors = this.props.errors.map( (error, idx) => {
+        if (error.includes("Username")) {
+          usernameClass = "username error";
+        }
+        else if (error.includes("Password")) {
+          passwordClass = "password error";
+        }
+        else {
+          emailClass = "email error";
+        }
         return <li key={idx}>{error}</li>
       })
     }
-    if (this.props.formType === "login") {
-      emailInput = "";
-      fileInput = ""
+
+    if (this.props.formType !== "login") {
+      emailInput = <input className={emailClass} type="text" placeholder="Email" onChange={this.update('email')}></input>
+      fileInput = <label className="user-thumb-upload">Attach profile picture
+          <input className="upload-profile-picture" type='file' onChange={this.handleFile}></input>
+        </label>
     }
 
     return (
       <div className="user-form-container">
         <form onSubmit={this.handleSubmit} className="user-form">
           {emailInput}
-          <input type="text" placeholder="Username" onChange={this.update('username')}></input>
-          <input type="password" placeholder="Password" onChange={this.update('password')}></input>
+          <input className={usernameClass} type="text" placeholder="Username" onChange={this.update('username')}></input>
+          <input className={passwordClass} type="password" placeholder="Password" onChange={this.update('password')}></input>
           {fileInput}
           <ul className="errors">{errors}</ul>
           <input type="submit" value="Continue"></input>
