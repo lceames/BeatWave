@@ -19,8 +19,8 @@ class User < ApplicationRecord
 
   attr_reader :password
   validates :username, :email, :password_digest, :session_token, presence: true
-  validates :username, :email, :session_token, uniqueness: true
-  validates :password, length: { minimum: 6 }
+  # validates :username, :email, uniqueness: true
+  validates :password, length: { minimum: 6, allow_nil: true }
   after_initialize :ensure_session_token
 
   has_many :tweets
@@ -52,7 +52,7 @@ class User < ApplicationRecord
   end
 
   def reset_session_token!
-    update(session_token: User.random_token)
+    update!(session_token: User.random_token)
     session_token
   end
 
