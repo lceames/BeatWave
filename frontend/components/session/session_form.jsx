@@ -64,7 +64,7 @@ class SessionForm extends React.Component {
   render () {
     let emailInput = <input type="text" placeholder="Email" onChange={this.update('email')}></input>
     let fileInput =
-      <label className="custom-file-input">Attach profile picture
+      <label className="user-thumb-upload">Attach profile picture
         <input className="upload-profile-picture" type='file' onChange={this.handleFile}></input>
       </label>
     let errors = ""
@@ -80,7 +80,7 @@ class SessionForm extends React.Component {
     }
 
     return (
-      <div>
+      <div className="user-form-container">
         <form onSubmit={this.handleSubmit} className="user-form">
           {emailInput}
           <input type="text" placeholder="Username" onChange={this.update('username')}></input>
