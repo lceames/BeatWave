@@ -1,69 +1,34 @@
 # BeatWave
 
-[Heroku link][heroku]
+BeatWave is a music sharing web application inspired by SoundCloud built using Ruby on Rails and React/Redux.
 
-[Trello link][trello]
+[beatwave]: https://beatwave.herokuapp.com
 
-[heroku]: http://www.herokuapp.com
-[trello]: https://trello.com
+## Features and Implementation
 
-## Minimum Viable Product
+### Progress Bar with continuous play
 
-BeatWave is a web application inspired by SoundCloud built using Ruby on Rails
-and React/Redux.  BeatWave allows users to:
+BeatWave optimizes user experience by using a progress bar that operates continuously throughout navigation to different pages. It achieves this feature by storing audio tags in a universally rendered React component that is updated by upon new song selection and pauses. The progress bar is synchronized with track items through periodic global store updates.
 
-- [ ] Create a new account
-- [ ] Login and Logout
-- [ ] Upload audio files to create new tracks
-- [ ] Play songs in progress bar with continuous play
-- [ ] Comment on tracks
-- [ ] View and play other user's tracks
-- [ ] Follow other users
+### Stream
 
+The Stream offers users a randomly generated queue of music uploaded by other BeatWave users. Each Track component in the Stream allows users to navigate to play, pause, navigate to the track and user uploader show page.
 
-## Design Docs
-* [View Wireframes][wireframes]
-* [React Components][components]
-* [API endpoints][api-endpoints]
-* [DB schema][schema]
-* [Sample State][sample-state]
+### Comments
 
-[wireframes]: docs/wireframes
-[components]: docs/component-hierarchy.md
-[sample-state]: docs/sample-state.md
-[api-endpoints]: docs/api-endpoints.md
-[schema]: docs/schema.md
+Users can view and create comments when track items are rendered throughout the application. Comment creation triggers an immediate re-render that updates without disrupting the progress bar or requiring a page refresh.
 
-## Implementation Timeline
+### User Show Page
 
-### Phase 1: Backend setup and Front End User Authentication (2 days)
+User show pages display user bio, profile images, and a queue of all uploaded tracks.
 
-**Objective:** Functioning rails project with front-end Authentication
+### Track CRUD
 
-### Phase 2: Tracks Model, API, and components (2 days)
-
-**Objective:** Tracks can be created, read, and destroyed through
-the API.
-
-### Phase 3: Stream and Progress Bar (2 days)
-
-**Objective:** Stream is populated with tracks by other users. Progress Bar,
-once initiated, uses queue to continuously play Stream's tracks.
-
-### Phase 4: Comments (1 day)
-
-**Objective:** Stream's tracks can be commented upon, and update accordingly
-without interrupting the Progress Bar or refreshing the page.
-
-### Phase 5: User Show Page and update Auth to include profile picture (1 day)
-
-**Objective:** Auth includes optional image upload for cover and profile pictures.
-User page displays user images and tracks. Tracks can be played and commented.
+Tracks can be uploaded and destroyed. 
 
 
-### Bonus Features (TBD)
+### Todo
 - [ ] Wave Form for tracks
-- [ ] Track Show pages
 - [ ] Like tracks
 - [ ] Follows
 - [ ] Stream is populated with tracks of followed users
