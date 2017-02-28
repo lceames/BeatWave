@@ -17,9 +17,6 @@ document.addEventListener('DOMContentLoaded', () => {
     store = configureStore();
   }
 
-  window.store = store;
   Modal.setAppElement(root);
   ReactDOM.render(<Root store={store} />, root);
 });
-
-window.fetchTracks = fetchTracks;
