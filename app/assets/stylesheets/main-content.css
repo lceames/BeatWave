@@ -7,3 +7,8 @@
 .app {
   background-color: #F9F9F9;
 }
+
+
+.fa-play-circle {
+  cursor: pointer;
+}
