@@ -3,6 +3,6 @@ json.array! @comments do |comment|
   json.id @comment.id
   json.author @comment.user.username
   json.track @comment.track
-  json.bdoy @comment.body
+  json.body @comment.body
   json.elapsed_time @comment.elapsed_time
 end
