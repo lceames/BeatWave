@@ -1,3 +1,5 @@
 if @user
-  json.extract! @user, :username, :image, :id
+  json.username @user.username
+  json.image @user.image.url.insert(4, 's')
+  json.id @user.id
 end
