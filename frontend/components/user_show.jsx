@@ -7,14 +7,17 @@ export default class UserShow extends React.Component {
     super(props);
     this.state = {
       imageFile: null,
-      modalIsOpen: false
+      modalIsOpen: false,
+      loaded: false
     };
     this.handleProfileImage = this.handleProfileImage.bind(this);
   }
 
   componentDidMount() {
     this.props.fetchUser(this.props.params.userId);
-    this.props.fetchTracks('user-show', this.props.params.userId);
+    this.props.fetchTracks('user-show', this.props.params.userId).then( () => {
+      this.setState({loaded: true});
+    });
   }
 
   // componentWillUnmount() {
@@ -44,7 +47,7 @@ export default class UserShow extends React.Component {
         </label>
     }
 
-    if (!this.props.userProfile || this.props.userProfile.id !== parseInt(this.props.params.userId)) {
+    if (!this.state.loaded || !this.props.userProfile || this.props.userProfile.id !== parseInt(this.props.params.userId)) {
       return <div></div>
     }
 

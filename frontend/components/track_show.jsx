@@ -6,7 +6,9 @@ export default class TrackShow extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      body: ""
+      body: "",
+      trackLoaded: false,
+      userLoaded: false
     };
 
     this.setCurrentTrack = this.setCurrentTrack.bind(this);
@@ -17,8 +19,12 @@ export default class TrackShow extends React.Component {
   }
 
   componentDidMount() {
-    this.props.fetchTrackShow(this.props.params.trackId);
-    this.props.fetchUser(this.props.params.userId);
+    this.props.fetchTrackShow(this.props.params.trackId).then( () => {
+      this.setState({trackLoaded: true});
+    });
+    this.props.fetchUser(this.props.params.userId).then( () => {
+      this.setState({userLoaded: true});
+    });
   }
 
   // componentWillUnmount() {
@@ -65,7 +71,7 @@ export default class TrackShow extends React.Component {
     const currentTrack = this.props.currentTrack;
     const track = this.props.track[0];
 
-    if (this.props.track.length === 0) {
+    if (this.props.track.length === 0 || !this.state.trackLoaded || !this.state.userLoaded) {
       return <div></div>
     }
     let playPause;

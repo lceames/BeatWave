@@ -3,17 +3,21 @@ import {hashHistory} from 'react-router';
 import StreamIndexItemContainer from './stream_index_item_container';
 
 export default class Stream extends React.Component {
-  componentDidMount() {
-    this.props.fetchTracks("stream");
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      loaded: false
+    };
   }
 
-  // componentWillUnmount() {
-  //   this.props.resetTracks();
-  // }
+  componentDidMount() {
+    this.props.fetchTracks("stream").then( () => this.setState({loaded: true}));
+  }
 
   render () {
-    if (!this.props.tracks || this.props.tracks.length === 0) {
-      return (<div></div>)
+    if (!this.props.tracks || this.props.tracks.length === 0 || !this.state.loaded) {
+      return <div></div>
     }
 
     let tracks = this.props.tracks.map( (track) => {

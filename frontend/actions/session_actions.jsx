@@ -24,7 +24,6 @@ export const createUser = user => dispatch => {
 };
 
 export const receiveCurrentUser = (currentUser) => {
-  debugger
   return {
     type: RECEIVE_CURRENT_USER,
     currentUser
