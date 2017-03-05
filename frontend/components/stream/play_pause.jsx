@@ -32,6 +32,7 @@ class PlayPause extends React.Component {
       let lastTrackAudio;
       let queueIndex = this.props.queue.findIndex((el) => el === this.props.track);
       let track = this.props.track;
+
       let currentTrackItem = { queueIndex, track };
       this.props.setCurrentTrack(currentTrackItem);
     }
@@ -41,9 +42,8 @@ class PlayPause extends React.Component {
     const currentTrack = this.props.currentTrack;
     const track = this.props.track;
     const size = this.props.type ? "fa-5x" : "fa-3x";
-    debugger
 
-    if (!currentTrack || track.id !== currentTrack.track.id || currentTrack.paused === true) {
+    if (!currentTrack || !track || track.id !== currentTrack.track.id || currentTrack.paused === true) {
       return (
         <div className="play-pause">
           <i className={`fa fa-play-circle ${size}`} aria-hidden="true" onClick={this.setCurrentTrack}></i>

@@ -80,7 +80,7 @@ export default class TrackShow extends React.Component {
         <div className="header">
           <img className="background" src={window.images.userHeader}/>
           <img className="track-thumb" src={this.props.track[0].image} />
-          <PlayPause type="track-show"/>
+          <PlayPause type="track-show" track={track}/>
           <div className="track-info">
             <h2>{track.title}</h2>
             <h1>{track.author}</h1>
