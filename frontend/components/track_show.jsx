@@ -16,8 +16,6 @@ export default class TrackShow extends React.Component {
     this.setCurrentTrack = this.setCurrentTrack.bind(this);
     this.handlePause = this.handlePause.bind(this);
     this.handlePlay = this.handlePlay.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentDidMount() {
@@ -45,15 +43,6 @@ export default class TrackShow extends React.Component {
     audioTag.play();
   }
 
-  handleSubmit(e) {
-    e.preventDefault();
-    let elapsedTime = this.props.currentTrack ? this.props.currentTrack.elapsedTime : 0;
-    let comment = Object.assign({}, this.state);
-    comment["track_id"] = this.props.track.id;
-    comment["elapsed_time"] = elapsedTime;
-    this.props.createComment(comment).then( () => this.setState({body: ""}));
-  }
-
   setCurrentTrack(e) {
     if (this.props.currentTrack && this.props.currentTrack.id === this.props.track.id && this.props.currentTrack.paused) {
       this.handlePlay();
@@ -63,10 +52,6 @@ export default class TrackShow extends React.Component {
       let currentTrackItem = { queueIndex: 0, track };
       this.props.setCurrentTrack(currentTrackItem);
     }
-  }
-
-  handleChange(e) {
-    this.setState({body: e.target.value});
   }
 
   render() {
@@ -93,7 +78,7 @@ export default class TrackShow extends React.Component {
           </div>
         </div>
         <div className="track-content">
-          <NewComment />
+          <NewComment track={this.props.track[0]}/>
           <div className="track-details">
             <div className="user-info">
               <img src={this.props.userProfile.image} className="user-thumb" />
