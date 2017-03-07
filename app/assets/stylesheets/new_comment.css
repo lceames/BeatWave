@@ -1,0 +1,25 @@
+.new-comment {
+  height: 35px;
+  width: 100%;
+  background: #f2f2f2;
+  display: flex;
+  align-items: center;
+}
+
+.new-comment-thumb {
+  width: 20px;
+  height: 20px;
+}
+
+.new-comment input {
+  height: 22px;
+  border-radius: 0;
+  font-size: 12px;
+  width: 98%;
+  font: "Lucida Grande","Lucida Sans Unicode","Lucida Sans",Garuda,Verdana,Tahoma,sans-serif;
+}
+
+.new-comment .new-comment-form {
+  width: 100%;
+  padding-bottom: 10px;
+}

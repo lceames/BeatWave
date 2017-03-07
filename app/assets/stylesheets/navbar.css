@@ -93,12 +93,6 @@ html {
   padding-right: 7px;
 }
 
-.errors {
-  color: #f50;
-  list-style: none;
-  font-size: 12px;
-}
-
 #log-out {
   width: 80px;
 }

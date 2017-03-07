@@ -1,7 +1,7 @@
 .user-form {
   align-self: center;
   align-items: center;
-  margin-top: 200px;
+  margin-top: 140px
 }
 
 .user-form input {
@@ -26,9 +26,11 @@ input[type="text"], input[type="password"] {
   z-index: 1;
   box-sizing: border-box;
   align-content: center;
+  outline: none;
 }
 
 input[type="submit"] {
+  outline: none;
   margin-top: 10px;
   background-color: #f50;
   border-color: #f50;
@@ -50,8 +52,8 @@ input[type="submit"] {
   width: 100%;
 }
 
-.user-form .custom-file-input {
-  width: 200px;
+.user-form .user-thumb-upload {
+  width: 100%;
   height: 40px;
   background-color: #f50;
   text-align: center;
@@ -60,6 +62,18 @@ input[type="submit"] {
   font-size: 16px;
   line-height: 40px;
   margin-top: 10px;
+  outline: none;
+}
+
+.user-form .error {
+  border: 1px solid #f50;
+}
+
+.errors {
+  color: #f50;
+  list-style: none;
+  font-size: 12px;
+  padding-top: 8px;
 }
 
 .user-form {

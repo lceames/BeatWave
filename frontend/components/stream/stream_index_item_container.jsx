@@ -7,7 +7,8 @@ import { createComment } from '../../actions/comment_actions';
 const mapStateToProps = state => {
   return {
     queue: state.trackQueue.queue,
-    currentTrack: state.trackQueue.currentTrack
+    currentTrack: state.trackQueue.currentTrack,
+    currentUser: state.session.currentUser
   };
 };
 

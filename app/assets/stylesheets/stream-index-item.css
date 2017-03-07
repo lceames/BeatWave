@@ -52,20 +52,6 @@
   width: 75%;
 }
 
-.new-comment {
-  height: 35px;
-  width: 100%;
-  background: #f2f2f2;
-}
-
-.new-comment input {
-  height: 20px;
-  margin: 8px;
-  font-size: 12px;
-  width: 98%;
-  font: "Lucida Grande","Lucida Sans Unicode","Lucida Sans",Garuda,Verdana,Tahoma,sans-serif;
-}
-
 .comments {
   display: flex;
   justify-content: space-around;
