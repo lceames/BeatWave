@@ -16,7 +16,11 @@ class Api::TracksController < ApplicationController
 
   def index
     if params[:type] == "stream"
-      @tracks = Track.where.not({user_id: current_user.id}).includes(:comments)
+      if current_user
+        @tracks = Track.where.not({user_id: current_user.id}).includes(:comments)
+      else
+        @tracks = Track.all.includes(:comments)
+      end
     elsif params[:type] == "user-show"
       id = params[:id].to_i
       @tracks = Track.all.includes(:comments).where(user_id: id)

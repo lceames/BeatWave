@@ -40,7 +40,7 @@ export default class UserShow extends React.Component {
     });
     let updateUserImage = "";
 
-    if (this.props.currentUser.id === parseInt(this.props.params.userId)) {
+    if (this.props.currentUser && this.props.currentUser.id === parseInt(this.props.params.userId)) {
       updateUserImage =
         <label className="update-profile-image">Update image
           <input type="file" className="upload-image" onChange={this.handleProfileImage}></input>
