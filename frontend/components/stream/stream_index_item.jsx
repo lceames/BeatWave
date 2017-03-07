@@ -43,7 +43,7 @@ export default class StreamIndexItem extends React.Component {
           <PlayPause track={track} currentTrack={currentTrack} queue={queue}/>
           <div className="right-track-section">
             <Link className="track-title" to={`/${track.user_id}/${track.id}`}>{track.title}</Link>
-            <div className="waveform-placeholder"></div>
+            <Waveform class="waveform" track={track.id} route="stream"/>
             <div className="comments">
               {comments}
             </div>
