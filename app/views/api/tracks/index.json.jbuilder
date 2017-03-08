@@ -6,6 +6,7 @@ json.array! @tracks do |track|
   json.url asset_path(track.audio.url)
   json.image asset_path(track.image.url)
   json.user_id track.user_id
+  json.peaks track.peaks
   json.comments track.comments do |comment|
     json.thumb comment.user.image.url
     json.body comment.body

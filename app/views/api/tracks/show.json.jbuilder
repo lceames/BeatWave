@@ -5,6 +5,7 @@ json.description @track.description
 json.url @track.audio.url
 json.image @track.image.url
 json.user_id @track.user_id
+json.peaks @track.peaks
 json.comments @track.comments do |comment|
   json.thumb comment.user.image.url
   json.body comment.body
