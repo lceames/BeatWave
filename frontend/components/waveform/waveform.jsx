@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-class Waveform extends React.Component {
+export default class Waveform extends React.Component {
 
     componentDidMount() {
       const { track, currentTrack } = this.props;
@@ -25,7 +25,7 @@ class Waveform extends React.Component {
         let x = 5;
         let y = 0;
         columnHeights.map( (columnHeight) => {
-          if (currentTrack && currentTrack.track.id)
+          // if (currentTrack && currentTrack.track.id)
           ctx.fillRect(x, 90, 3, columnHeight * -80);
           x += 4;
         });
@@ -68,15 +68,15 @@ class Waveform extends React.Component {
     }
 };
 
-
-const mapStateToProps = state => {
-  debugger
-  return {
-    currentTrack: state.currentTrack
-  }
-}
-
-
-export default connect(
-  mapStateToProps, null
-)(Waveform);
+//
+// const mapStateToProps = state => {
+//   debugger
+//   return {
+//     currentTrack: state.currentTrack
+//   }
+// }
+//
+//
+// export default connect(
+//   mapStateToProps, null
+// )(Waveform);

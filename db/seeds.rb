@@ -136,13 +136,12 @@ life = Track.create!({
 
 cruel = Track.find_by({title: "Cruel"}).id
 eye = Track.find_by({title: "Wandering eye"}).id
-feelings = Track.find_by({title: "Catching feelings"}).id
 
 Comment.create!({body: "ok tune", track_id: cruel, elapsed_time: 0, user_id: jorge_id})
 Comment.create!({body: "good tune", track_id: eye, elapsed_time: 0, user_id: marshall_id})
 Comment.create!({body: "fine tune", track_id: eye, elapsed_time: 0, user_id: guest_id})
 Comment.create!({body: "swell tune", track_id: cruel, elapsed_time: 0, user_id: jimoh_id})
-Comment.create!({body: "great tune", track_id: feelings, elapsed_time: 0, user_id: jorge_id})
-Comment.create!({body: "bad tune", track_id: feelings, elapsed_time: 0, user_id: guest_id})
+Comment.create!({body: "great tune", track_id: life.id, elapsed_time: 0, user_id: jorge_id})
+Comment.create!({body: "bad tune", track_id: life.id, elapsed_time: 0, user_id: guest_id})
 Comment.create!({body: "no tune", track_id: cruel, elapsed_time: 0, user_id: quinn_id})
-Comment.create!({body: "sweet tune", track_id: feelings, elapsed_time: 0, user_id: quinn_id})
+Comment.create!({body: "sweet tune", track_id: eye, elapsed_time: 0, user_id: quinn_id})
