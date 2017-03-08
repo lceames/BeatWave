@@ -118,13 +118,6 @@ life = Track.create!({
   audio_file: "https://s3.amazonaws.com/beatwave-pro/tracks/audios/000/000/George+Michelle+-+Joyride+the+Stars.mp3",
   image: "http://s3.amazonaws.com/beatwave-dev/tracks/images/000/000/055/original/record.png?1487623659"
 })
-life = Track.create!({
-  user_id: quinn_id,
-  title:  "Catching feelings",
-  description: "big ting",
-  audio_file: "https://s3.amazonaws.com/beatwave-pro/tracks/audios/000/000/Mall+Grab+-+Catching+Feelings+(Official+Video)+-+Hot+Haus+Recs.mp3",
-  image: "http://s3.amazonaws.com/beatwave-dev/tracks/images/000/000/055/original/record.png?1487623659"
-})
 
 life = Track.create!({
   user_id: marshall_id,

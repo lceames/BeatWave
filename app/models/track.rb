@@ -53,12 +53,25 @@ class Track < ApplicationRecord
 
   def audio_file=(file)
     if file.class == String  #AWS url seed
-      self.audio = file
-      self.peaks = JsonWaveform.generate(open(file))
+      if (!file.include?(".wav"))
+        temp_dir = Dir.mktmpdir
+        `ffmpeg -i #{file} #{temp_dir}/local.wav`
+        self.peaks = JsonWaveform.generate(File.open("#{temp_dir}/local.wav"))
+        self.audio = file
+      else
+        self.peaks = JsonWaveform.generate(open(file))
+        self.audio = file
+      end
     else #upload from live site
-      file = file.tempfile
+      if !file.content_type.include?('wav')
+        file = file.tempfile
+        temp_dir = Dir.mktmpdir
+        `ffmpeg -i #{file.path} #{temp_dir}/local.wav`
+        self.peaks = JsonWaveform.generate(open("#{temp_dir}/local.wav"))
+      else
+        self.peaks = JsonWaveform.generate(open(file.tempfile))
+      end
       self.audio = file
-      self.peaks = JsonWaveform.generate(file)
     end
   end
 end
