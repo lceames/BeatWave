@@ -1,4 +1,3 @@
-
 # == Schema Information
 #
 # Table name: tracks
@@ -16,6 +15,7 @@
 #  image_file_size    :integer
 #  image_updated_at   :datetime
 #  peaks              :text
+#  duration           :integer
 #
 
 class Track < ApplicationRecord

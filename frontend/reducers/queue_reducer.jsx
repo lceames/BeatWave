@@ -7,7 +7,7 @@ import merge from 'lodash/merge';
 
 const queueReducer = (oldState = { currentTrack: null, queue: [] }, action) => {
   Object.freeze(oldState);
-  let currentTrackDefault = { elapsedTime: 0, paused: false };
+  let currentTrackDefault = { paused: false };
   let queue;
   let newState;
   let currentUser;
@@ -53,6 +53,7 @@ const queueReducer = (oldState = { currentTrack: null, queue: [] }, action) => {
       };
     case(SET_CURRENT_TRACK):
       let currentTrack = merge(currentTrackDefault, action.currentTrackItem);
+      currentTrack.elapsedTime = action.currentTrackItem.elapsedTime;
       queue = [...oldState.queue];
       return {
         currentTrack,
@@ -70,6 +71,8 @@ const queueReducer = (oldState = { currentTrack: null, queue: [] }, action) => {
       return newState;
     case(UPDATE_ELAPSED_TIME):
       newState = merge({}, oldState);
+      queueIndex = newState.queue.findIndex( (track) => track.id === newState.currentTrack.track.id);
+      newState.queue[queueIndex].elapsedTime = action.time;
       newState.currentTrack.elapsedTime = action.time;
       return newState;
     case(HANDLE_REWIND):

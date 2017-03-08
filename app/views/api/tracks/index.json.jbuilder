@@ -7,6 +7,7 @@ json.array! @tracks do |track|
   json.image asset_path(track.image.url)
   json.user_id track.user_id
   json.peaks track.peaks
+  json.elapsedTime 0
   json.duration track.duration
   json.comments track.comments do |comment|
     json.thumb comment.user.image.url

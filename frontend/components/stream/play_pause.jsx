@@ -32,8 +32,9 @@ class PlayPause extends React.Component {
       let lastTrackAudio;
       let queueIndex = this.props.queue.findIndex((el) => el === this.props.track);
       let track = this.props.track;
+      let elapsedTime = this.props.track.elapsedTime;
 
-      let currentTrackItem = { queueIndex, track };
+      let currentTrackItem = { queueIndex, track, elapsedTime };
       this.props.setCurrentTrack(currentTrackItem);
     }
   }

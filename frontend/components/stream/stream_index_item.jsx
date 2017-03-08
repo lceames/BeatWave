@@ -9,14 +9,16 @@ export default class StreamIndexItem extends React.Component {
   constructor(props) {
     super(props);
     this.handleDelete = this.handleDelete.bind(this);
-    this.state = { elapsedTime: 0, };
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (this.props.currentTrack && (this.props.currentTrack.track.id === this.props.track.id)) {
-      this.setState({elapsedTime: this.props.currentTrack.elapsedTime});
-    }
-  }
+  // componentWillReceiveProps(nextProps) {
+  //   if (this.props.currentTrack && (this.props.currentTrack.track.id === this.props.track.id)) {
+  //     this.setState({elapsedTime: this.props.currentTrack.elapsedTime});
+  //     if (this.state.elapsedTime >= this.props.track.duration) {
+  //
+  //     }
+  //   }
+  // }
 
   handleDelete() {
     this.props.deleteTrack(this.props.track.id);
@@ -50,9 +52,9 @@ export default class StreamIndexItem extends React.Component {
           <div className="right-track-section">
             <Link className="track-title" to={`/${track.user_id}/${track.id}`}>{track.title}</Link>
             <div className="waveform">
-              <Waveform track={this.props.track} elapsedTime={this.state.elapsedTime} type="stream"/>
+              <Waveform track={this.props.track} elapsedTime={track.elapsedTime} type="stream"/>
             </div>
-            <p>{this.state.elapsedTime}</p>
+            <p>{track.elapsedTime}</p>
             <div className="comments">
               {comments}
             </div>
