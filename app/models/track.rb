@@ -1,3 +1,4 @@
+
 # == Schema Information
 #
 # Table name: tracks
@@ -21,28 +22,28 @@ class Track < ApplicationRecord
   validates :title, :user_id, presence: true
   belongs_to :user
   has_many :comments
-  # before_validation :get_peaks
+  # before_validation :audio_file=
   serialize :peaks
   # after_create :get_peaks_after
 
-  def get_peaks_after
-    debugger
-    file = open(self.audio.url)
-
-    waveform = JsonWaveform.generate(file, sample: 1000)
-  end
-
-  def audio_contents()
-    open(self.upload.queued_for_write.url)
-  end
-
-  def get_peaks
-    debugger
-    peaks = Dir.chdir('app/models/wav2json/build'){
-      (`wav2json #{self.audio.url} --channels left -o -`)
-    }
-    self.peaks = peaks["left"]
-  end
+  # def get_peaks_after
+  #   debugger
+  #   file = open(self.audio.url)
+  #
+  #   waveform = JsonWaveform.generate(file, sample: 1000)
+  # end
+  #
+  # def audio_contents()
+  #   open(self.upload.queued_for_write.url)
+  # end
+  #
+  # def get_peaks
+  #   debugger
+  #   peaks = Dir.chdir('app/models/wav2json/build'){
+  #     (`wav2json #{self.audio.url} --channels left -o -`)
+  #   }
+  #   self.peaks = peaks["left"]
+  # end
 
   has_attached_file :audio, default_url: "life.mp3", s3_protocol: :https
   validates_attachment_content_type :audio, content_type: /\Aaudio\/.*\z/
@@ -51,11 +52,13 @@ class Track < ApplicationRecord
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
 
   def audio_file=(file)
-    self.peaks = JsonWaveform.generate(file)
-    # peaks = Dir.chdir('app/models/wav2json/build'){
-    #   (`wav2json #{file.path} --channels left -o -`)
-    # }
-    # self.peaks = peaks["left"]
-    self.audio = file
+    if file.class == String  #AWS url seed
+      self.audio = file
+      self.peaks = JsonWaveform.generate(open(file))
+    else #upload from live site
+      file = file.tempfile
+      self.audio = file
+      self.peaks = JsonWaveform.generate(file)
+    end
   end
 end
