@@ -1,59 +1,48 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-export default class Waveform extends React.Component {
+class Waveform extends React.Component {
+
+    componentWillReceiveProps(nextProps) {
+      this.paintWaveform.apply(this);
+    }
 
     componentDidMount() {
-      const { track, currentTrack } = this.props;
-      if (this.props.type === "stream") {
-        let peaks = this.props.track.peaks;
-        let peakInterval = Math.floor(peaks.length/140);
-        let columnHeights = [];
-        let sum = 0;
-        for (let i = 0; i < peaks.length; i++) {
-          sum += peaks[i];
-          if (i % peakInterval === 0) {
-            columnHeights.push(sum/peakInterval);
-            sum = 0;
-          }
-        }
+      this.paintWaveform.apply(this);
+    }
 
-        let width = 2;
-        let canvas = document.getElementById(`waveform-stream-${this.props.track.id}`);
-        let ctx = canvas.getContext('2d');
-        ctx.fillStyle = "#A6A4A4";
-        let x = 5;
-        let y = 0;
-        columnHeights.map( (columnHeight) => {
-          // if (currentTrack && currentTrack.track.id)
-          ctx.fillRect(x, 90, 3, columnHeight * -80);
-          x += 4;
-        });
+    paintWaveform() {
+      const { track, currentTrack } = this.props;
+      let peaks = this.props.track.peaks;
+      let peakInterval = Math.floor(peaks.length/140);
+      let columnHeights = [];
+      let sum = 0;
+      for (let i = 0; i < peaks.length; i++) {
+        sum += peaks[i];
+        if (i % peakInterval === 0) {
+          columnHeights.push(sum/peakInterval);
+          sum = 0;
+        }
       }
-      // else {
-      //   let peaks = catchingFeelings.left;
-      //   let peakInterval = Math.floor(peaks.length/130);
-      //   let averageHeights = [];
-      //   let sum = 0;
-      //   for (let i = 0; i < peaks.length; i++) {
-      //     sum += peaks[i];
-      //     if (i % peakInterval === 0) {
-      //       averageHeights.push(sum/peakInterval);
-      //       sum = 0;
-      //     }
-      //   }
-      //
-      //   let width = 2;
-      //   let canvas = document.getElementById('canvas');
-      //   canvas.fillStyle = "red";
-      //   let ctx = canvas.getContext('2d');
-      //   let x = 0;
-      //   let y = 300;
-      //   averageHeights.map( (averageHeight) => {
-      //     ctx.fillRect(x, 200, 3, averageHeight * -100);
-      //     x += 4;
-      //   });
-      // }
+
+      let width = 2;
+      let canvas = document.getElementById(`waveform-stream-${this.props.track.id}`);
+      let ctx = canvas.getContext('2d');
+      let x = 5;
+      let y = 0;
+      let trackPlaying = currentTrack && (currentTrack.track.id === track.id);
+      columnHeights.map( (columnHeight, idx) => {
+        let trackProgress = Math.floor(((idx)/columnHeights.length) * track.duration);
+        if (trackPlaying && currentTrack.elapsedTime >= trackProgress) {
+          ctx.fillStyle = "#f50";
+          ctx.fillRect(x, 90, 3, columnHeight * -80);
+        }
+        else {
+          ctx.fillStyle = "#A6A4A4";
+          ctx.fillRect(x, 90, 3, columnHeight * -80);
+        }
+        x += 4;
+      });
     }
 
 
@@ -68,15 +57,14 @@ export default class Waveform extends React.Component {
     }
 };
 
-//
-// const mapStateToProps = state => {
-//   debugger
-//   return {
-//     currentTrack: state.currentTrack
-//   }
-// }
-//
-//
-// export default connect(
-//   mapStateToProps, null
-// )(Waveform);
+
+const mapStateToProps = state => {
+  return {
+    currentTrack: state.trackQueue.currentTrack
+  }
+}
+
+
+export default connect(
+  mapStateToProps, null
+)(Waveform);

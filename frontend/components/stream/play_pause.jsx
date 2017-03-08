@@ -24,7 +24,7 @@ class PlayPause extends React.Component {
   }
 
   setCurrentTrack(e) {
-    if (this.props.currentTrack && this.props.currentTrack.id === this.props.track.id && this.props.currentTrack.paused) {
+    if (this.props.currentTrack && this.props.currentTrack.track.id === this.props.track.id && this.props.currentTrack.paused) {
       this.handlePlay();
     }
     else {
