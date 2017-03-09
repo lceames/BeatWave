@@ -20,6 +20,7 @@ const queueReducer = (oldState = { currentTrack: null, queue: [] }, action) => {
       queue = [...oldState.queue];
       queue = queue.map( (track) => {
         if (track.id === action.track.id) {
+          action.track.active = track.active;
           return action.track;
         }
         else {
@@ -57,7 +58,9 @@ const queueReducer = (oldState = { currentTrack: null, queue: [] }, action) => {
       newState = merge({}, oldState);
       if (newState.currentTrack) {
         let lastTrackIndex = newState.queue.findIndex( (track) => track.id === newState.currentTrack.track.id);
-        newState.queue[lastTrackIndex].active = false;
+        if (lastTrackIndex !== -1) {
+          newState.queue[lastTrackIndex].active = false;
+        }
       }
       nextTrack = merge(currentTrackDefault, action.currentTrackItem);
       nextTrack.elapsedTime = action.currentTrackItem.elapsedTime;
@@ -65,11 +68,6 @@ const queueReducer = (oldState = { currentTrack: null, queue: [] }, action) => {
       queueIndex = newState.queue.findIndex( (track) => track.id === newState.currentTrack.track.id);
       newState.queue[queueIndex].active = true;
       return newState;
-      // queue = [...newState.queue];
-      // return {
-      //   currentTrack,
-      //   queue
-      // };
     case(RESET_TRACKS):
       return { currentTrack: null, queue: [] };
     case(PAUSE_CURRENT_TRACK):
@@ -83,7 +81,9 @@ const queueReducer = (oldState = { currentTrack: null, queue: [] }, action) => {
     case(UPDATE_ELAPSED_TIME):
       newState = merge({}, oldState);
       queueIndex = newState.queue.findIndex( (track) => track.id === newState.currentTrack.track.id);
-      newState.queue[queueIndex].elapsedTime = action.time;
+      if (queueIndex >= 0) {
+        newState.queue[queueIndex].elapsedTime = action.time;
+      }
       newState.currentTrack.elapsedTime = action.time;
       return newState;
     case(HANDLE_REWIND):

@@ -19,7 +19,9 @@ class NewComment extends React.Component {
     let comment = Object.assign({}, this.state);
     comment["track_id"] = this.props.track.id;
     comment["elapsed_time"] = elapsedTime;
-    this.props.createComment(comment).then( () => this.setState({body: ""}));
+    this.props.createComment(comment).then( () => {
+      this.setState({body: ""});
+    });
   }
 
   handleChange(e) {
