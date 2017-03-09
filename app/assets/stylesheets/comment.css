@@ -2,10 +2,11 @@
   display: flex;
   position: absolute;
   max-width: 30%;
-  padding-top: 10px;
+  padding-top: 2px;
   padding-left: 10px;
   font: 12px/1.4 "Lucida Grande","Lucida Sans Unicode","Lucida Sans",Garuda,Verdana,Tahoma,sans-serif;
 }
+
 
 .comment-body .author {
   padding-right: 5px;

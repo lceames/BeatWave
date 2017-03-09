@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { updateElapsedTime } from '../../actions/track_actions';
 
 class Waveform extends React.Component {
 
@@ -14,7 +15,7 @@ class Waveform extends React.Component {
     paintWaveform() {
       const { track, currentTrack } = this.props;
       let peaks = this.props.track.peaks;
-      let peakInterval = Math.floor(peaks.length/170);
+      let peakInterval = Math.floor(peaks.length/167);
       let columnHeights = [];
       let sum = 0;
       for (let i = 0; i < peaks.length; i++) {
@@ -28,7 +29,7 @@ class Waveform extends React.Component {
       let width = 2;
       let canvas = document.getElementById(`waveform-stream-${this.props.track.id}`);
       let ctx = canvas.getContext('2d');
-      let x = 5;
+      let x = 0;
       let y = 0;
       let trackPlaying = currentTrack && (currentTrack.track.id === track.id);
       let elapsedTime = this.props.elapsedTime;
@@ -46,10 +47,25 @@ class Waveform extends React.Component {
       });
     }
 
+    handleClick(e) {
+      let track = this.props.track;
+      if (track.active) {
+        let canvasWidth = e.currentTarget.width;
+        let diffX = (e.clientX - e.currentTarget.getBoundingClientRect().left);
+        let trackPercentage = diffX/canvasWidth;
+        let trackProgress = Math.round(trackPercentage * track.duration);
+        this.props.updateElapsedTime(trackProgress);
+      }
+      else {
+        let currentTrackItem = { track, elapsedTime: 0 };
+        this.props.setCurrentTrack(currentTrackItem);
+      }
+    }
+
 
     render () {
       if (this.props.type == "stream") {
-        return <canvas id={`waveform-stream-${this.props.track.id}`} width="700" height="90"></canvas>;
+        return <canvas onClick={this.handleClick.bind(this)} id={`waveform-stream-${this.props.track.id}`} width="600" height="90"></canvas>;
       }
       else {
         return <canvas className="canvas" width="2000" height="600" id="canvas"></canvas>;
@@ -61,11 +77,20 @@ class Waveform extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    currentTrack: state.trackQueue.currentTrack
+    currentTrack: state.trackQueue.currentTrack,
+    queue: state.trackQueue.queue
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    updateElapsedTime: (time) => dispatch(updateElapsedTime(time)),
+    setCurrentTrack: (currentTrackItem) => dispatch(setCurrentTrack(currentTrackItem))
   }
 }
 
 
 export default connect(
-  mapStateToProps, null
+  mapStateToProps,
+  mapDispatchToProps
 )(Waveform);

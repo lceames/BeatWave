@@ -47,7 +47,7 @@ export default class StreamIndexItem extends React.Component {
     let comments = track.comments.map( (comment) => {
       return <Comment comment={comment} key={comment.id}/>
     })
-    let newComment = currentUser ? <NewComment track={track}/> : ""
+    let newComment = track.active ? <NewComment track={track}/> : ""
 
     return (
       <li className="stream-index-item">

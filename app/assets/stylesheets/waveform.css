@@ -5,16 +5,18 @@
 
 .waveform {
   display: flex;
+  position: relative;
+  cursor: pointer;
 }
 
 .waveform .elapsed-time {
   position: absolute;
-  bottom: 76px;
-  left: 272px;
+  bottom: 5px;
+  left: 5px;
 }
 
 .waveform .duration {
   position: absolute;
-  bottom: 76px;
-  left: 818px;
+  bottom: 5px;
+  right: 5px;
 }

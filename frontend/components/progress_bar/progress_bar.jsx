@@ -34,6 +34,9 @@ export default class ProgressBar extends React.Component {
       }
       this.setState({loaded: true, elapsedTime: this.props.currentTrack.elapsedTime});
     }
+    else if (this.state.elapsedTime !== currentTrack.elapsedTime){
+      this.audioTag.currentTime = currentTrack.elapsedTime;
+    }
   }
 
   handlePlay() {
@@ -85,6 +88,7 @@ export default class ProgressBar extends React.Component {
     const elapsedTime = Math.floor(this.audioTag.currentTime);
     if (elapsedTime < Math.floor(this.audioTag.duration)) {
       this.props.updateElapsedTime(elapsedTime);
+      this.setState({elapsedTime: elapsedTime});
     }
     else {
       this.handleNext();

@@ -36,6 +36,11 @@
 
 .fa-step-backward, .fa-play, .fa-step-forward, .fa-pause {
   padding: 17px;
+  cursor: pointer;
+}
+
+.fa-pause-circle {
+  cursor: pointer;
 }
 
 .elapsed-time, .duration {
