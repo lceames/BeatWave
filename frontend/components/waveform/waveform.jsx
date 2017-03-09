@@ -14,7 +14,7 @@ class Waveform extends React.Component {
     paintWaveform() {
       const { track, currentTrack } = this.props;
       let peaks = this.props.track.peaks;
-      let peakInterval = Math.floor(peaks.length/140);
+      let peakInterval = Math.floor(peaks.length/170);
       let columnHeights = [];
       let sum = 0;
       for (let i = 0; i < peaks.length; i++) {
@@ -36,13 +36,13 @@ class Waveform extends React.Component {
         let trackProgress = Math.floor(((idx)/columnHeights.length) * track.duration);
         if (elapsedTime > trackProgress) {
           ctx.fillStyle = "#f50";
-          ctx.fillRect(x, 90, 3, columnHeight * -80);
+          ctx.fillRect(x, 90, 2, columnHeight * -60);
         }
         else {
           ctx.fillStyle = "#A6A4A4";
-          ctx.fillRect(x, 90, 3, columnHeight * -80);
+          ctx.fillRect(x, 90, 2, columnHeight * -60);
         }
-        x += 4;
+        x += 3;
       });
     }
 
