@@ -13,6 +13,7 @@ const queueReducer = (oldState = { currentTrack: null, queue: [] }, action) => {
   let currentUser;
   let queueIndex;
   let currentTrack;
+  let nextTrack;
 
   switch(action.type) {
     case(RECEIVE_TRACK):
@@ -54,9 +55,13 @@ const queueReducer = (oldState = { currentTrack: null, queue: [] }, action) => {
       };
     case(SET_CURRENT_TRACK):
       newState = merge({}, oldState);
-      currentTrack = merge(currentTrackDefault, action.currentTrackItem);
-      currentTrack.elapsedTime = action.currentTrackItem.elapsedTime;
-      newState.currentTrack = currentTrack;
+      if (newState.currentTrack) {
+        let lastTrackIndex = newState.queue.findIndex( (track) => track.id === newState.currentTrack.track.id);
+        newState.queue[lastTrackIndex].active = false;
+      }
+      nextTrack = merge(currentTrackDefault, action.currentTrackItem);
+      nextTrack.elapsedTime = action.currentTrackItem.elapsedTime;
+      newState.currentTrack = nextTrack;
       queueIndex = newState.queue.findIndex( (track) => track.id === newState.currentTrack.track.id);
       newState.queue[queueIndex].active = true;
       return newState;
