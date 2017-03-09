@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
+import { formatTime } from '../../util/helper_functions';
 
 export default class ProgressBar extends React.Component {
   constructor(props) {
@@ -92,12 +93,13 @@ export default class ProgressBar extends React.Component {
 
   renderElapsedTime () {
     if (!this.audioTag) { return "0:00"; }
-    let seconds = (this.props.currentTrack.elapsedTime % 60).toString();
-    let minutes = Math.floor(this.props.currentTrack.elapsedTime / 60).toString();
-    if (seconds.length < 2) {
-      seconds = "0" + seconds;
-    }
-    return `${minutes}:${seconds}`;
+    return formatTime(this.props.currentTrack.elapsedTime);
+    // let seconds = (this.props.currentTrack.elapsedTime % 60).toString();
+    // let minutes = Math.floor(this.props.currentTrack.elapsedTime / 60).toString();
+    // if (seconds.length < 2) {
+    //   seconds = "0" + seconds;
+    // }
+    // return `${minutes}:${seconds}`;
   }
 
   handleProgress() {
@@ -116,12 +118,13 @@ export default class ProgressBar extends React.Component {
     }
     else {
       duration = Math.floor(this.audioTag.duration);
-      let seconds = (duration % 60).toString();
-      let minutes = Math.floor(duration / 60).toString();
-      if (seconds.length < 2) {
-        seconds = "0" + seconds;
-      }
-      return `${minutes}:${seconds}`;
+      return formatTime(duration);
+      // let seconds = (duration % 60).toString();
+      // let minutes = Math.floor(duration / 60).toString();
+      // if (seconds.length < 2) {
+      //   seconds = "0" + seconds;
+      // }
+      // return `${minutes}:${seconds}`;
     }
   }
 

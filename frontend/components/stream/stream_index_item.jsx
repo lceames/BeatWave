@@ -4,6 +4,7 @@ import Comment from './comment';
 import PlayPause from './play_pause';
 import NewComment from './new_comment';
 import Waveform from '../waveform/waveform';
+import { formatTime } from '../../util/helper_functions';
 
 export default class StreamIndexItem extends React.Component {
   constructor(props) {
@@ -41,7 +42,7 @@ export default class StreamIndexItem extends React.Component {
         posted <Link className="author-link" to={`/${track.user_id}/${track.id}`}>a track</Link></p>
     }
 
-    let elapsedTime = track.elapsedTime !== null ? <p>{track.elapsedTime}</p> : <div></div>
+    let elapsedTime = track.active ? <p className="elapsed-time">{formatTime(track.elapsedTime)}</p> : <div></div>
 
     let comments = track.comments.map( (comment) => {
       return <Comment comment={comment} key={comment.id}/>
@@ -58,8 +59,11 @@ export default class StreamIndexItem extends React.Component {
             <Link className="track-title" to={`/${track.user_id}/${track.id}`}>{track.title}</Link>
             <div className="waveform">
               <Waveform track={this.props.track} elapsedTime={track.elapsedTime} type="stream"/>
+              {elapsedTime}
+              <p className="duration">{formatTime(track.duration)}</p>
             </div>
-            {elapsedTime}
+
+
             <div className="comments">
               {comments}
             </div>

@@ -40,6 +40,16 @@
   font-family: "Interstate","Lucida Grande","Lucida Sans Unicode","Lucida Sans",Garuda,Verdana,Tahoma,sans-serif;
 }
 
+.stream-index-item .elapsed-time, .stream-index-item .duration {
+  font-size: 12px;
+  height: 15px;
+  color: gray;
+  background-color: black;
+  text-align: center;
+  margin: 0 auto;
+  padding: 2px;
+}
+
 .stream-index-item .fa {
   color: #f50;
   padding: 12px;
