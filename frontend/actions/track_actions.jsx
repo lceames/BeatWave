@@ -107,6 +107,12 @@ export const updateElapsedTime = (time) => {
   };
 };
 
+export const resetElapsedTime = () => {
+  return {
+    type: RESET_ELAPSED_TIME
+  };
+};
+
 export const handleRewind = () => {
   return {
     type: HANDLE_REWIND

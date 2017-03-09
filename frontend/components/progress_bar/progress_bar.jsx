@@ -22,9 +22,15 @@ export default class ProgressBar extends React.Component {
   }
 
   componentDidUpdate(prevState, prevProps) {
+    const { currentTrack, elapsedTime, resetElapsedTime } = this.props;
     if (!this.state.loaded && this.props.currentTrack.paused === false) {
       this.audioTag.play();
-      this.audioTag.currentTime = this.props.currentTrack.elapsedTime;
+      if (this.props.currentTrack.elapsedTime) {
+        this.audioTag.currentTime = this.props.currentTrack.elapsedTime;
+      }
+      else {
+        this.audioTag.currentTime = 0;
+      }
       this.setState({loaded: true, elapsedTime: this.props.currentTrack.elapsedTime});
     }
   }
@@ -58,6 +64,7 @@ export default class ProgressBar extends React.Component {
     let lastTrackAudio = document.getElementById(lastTrackId);
     // lastTrackAudio.pause();
     lastTrackAudio.currentTime = 0;
+    this.props.resetElapsedTime();
 
     let queueIndex = this.props.currentTrack.queueIndex + 1;
     if (this.props.queue.length === queueIndex || !queueIndex ) {
