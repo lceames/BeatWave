@@ -41,6 +41,8 @@ export default class StreamIndexItem extends React.Component {
         posted <Link className="author-link" to={`/${track.user_id}/${track.id}`}>a track</Link></p>
     }
 
+    let elapsedTime = track.elapsedTime !== null ? <p>{track.elapsedTime}</p> : <div></div>
+
     let comments = track.comments.map( (comment) => {
       return <Comment comment={comment} key={comment.id}/>
     })
@@ -57,7 +59,7 @@ export default class StreamIndexItem extends React.Component {
             <div className="waveform">
               <Waveform track={this.props.track} elapsedTime={track.elapsedTime} type="stream"/>
             </div>
-            <p>{track.elapsedTime}</p>
+            {elapsedTime}
             <div className="comments">
               {comments}
             </div>
