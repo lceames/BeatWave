@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { updateElapsedTime } from '../../actions/track_actions';
+import { updateElapsedTime, setCurrentTrack } from '../../actions/track_actions';
 
 class Waveform extends React.Component {
 
