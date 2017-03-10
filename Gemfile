@@ -25,7 +25,7 @@ gem 'jquery-rails'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
 gem 'ruby-audio-heroku', '~> 1.6.2'
-gem 'json-waveform', :git => 'https://github.com/lceames/json-waveform'
+# gem 'json-waveform', :git => 'https://github.com/lceames/json-waveform'
 
 gem 'paperclip',"~> 5.0.0.beta1"
 gem 'aws-sdk', '>= 2.0'
