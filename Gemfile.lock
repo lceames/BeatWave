@@ -1,8 +1,8 @@
 GIT
-  remote: git://github.com/khurramzaman/ruby-audio-heroku.git
-  revision: b48aee7e3ec6732b30e58d1cec21ac16ceca3221
+  remote: https://github.com/lceames/json-waveform
+  revision: 8e25c19f8849b5a2ad404cd62c32ada5db23979c
   specs:
-    ruby-audio-heroku (1.6.1)
+    json-waveform (0.2.1)
 
 GEM
   remote: https://rubygems.org/
@@ -211,6 +211,7 @@ DEPENDENCIES
   figaro
   jbuilder (~> 2.5)
   jquery-rails
+  json-waveform!
   listen (~> 3.0.5)
   paperclip (~> 5.0.0.beta1)
   pg (~> 0.18)
@@ -218,7 +219,6 @@ DEPENDENCIES
   puma (~> 3.0)
   rails (~> 5.0.1)
   rails_12factor
-  ruby-audio-heroku!
   sass-rails (~> 5.0)
   spring
   spring-watcher-listen (~> 2.0.0)
