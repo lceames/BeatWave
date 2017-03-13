@@ -24,8 +24,6 @@ gem 'coffee-rails', '~> 4.2'
 gem 'jquery-rails'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
-# gem 'ruby-audio'
-# gem 'ruby-audio-heroku', :git => "git://github.com/khurramzaman/ruby-audio-heroku.git"
 gem 'json-waveform'
 
 gem 'paperclip',"~> 5.0.0.beta1"
