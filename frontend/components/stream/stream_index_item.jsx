@@ -47,7 +47,7 @@ export default class StreamIndexItem extends React.Component {
     let comments = track.comments.map( (comment) => {
       return <Comment comment={comment} key={comment.id}/>
     })
-    
+
     let newComment = track.active ? <NewComment track={track}/> : ""
 
     return (
@@ -58,11 +58,6 @@ export default class StreamIndexItem extends React.Component {
           <PlayPause track={track} currentTrack={currentTrack} queue={queue}/>
           <div className="right-track-section">
             <Link className="track-title" to={`/${track.user_id}/${track.id}`}>{track.title}</Link>
-            <div className="waveform">
-              <Waveform track={this.props.track} elapsedTime={track.elapsedTime} type="stream"/>
-              {elapsedTime}
-              <p className="duration">{formatTime(track.duration)}</p>
-            </div>
 
 
             <div className="comments">
