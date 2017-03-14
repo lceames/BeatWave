@@ -6,26 +6,17 @@ BeatWave is a music sharing web application inspired by SoundCloud built using R
 
 ## Features and Implementation
 
-### Progress Bar with continuous play
+### User Auth
 
-BeatWave optimizes user experience by using a progress bar that operates continuously throughout navigation to different pages. It achieves this feature by storing audio tags in a universally rendered React component that is updated by upon new song selection and pauses. The progress bar is synchronized with track items through periodic global store updates.
+Beatwave relies on a BCrypt hashing function to create a hand-rolled user authentication pattern.
+
+### Continuous play
+
+BeatWave optimizes user experience by storing HTML audio tags in a globally rendered progress bar component. The progress bar initiates periodic global Redux store updates that ensure all audio-oriented components read from the audio tag's dynamic state. 
 
 ### Stream
 
 The Stream offers users a randomly generated queue of music uploaded by other BeatWave users. Each Track component in the Stream allows users to navigate to play, pause, navigate to the track and user uploader show page.
-
-### Comments
-
-Users can view and create comments when track items are rendered throughout the application. Comment creation triggers an immediate re-render that updates without disrupting the progress bar or requiring a page refresh.
-
-### User Show Page
-
-User show pages display user bio, profile images, and a queue of all uploaded tracks.
-
-### Track CRUD
-
-Tracks can be uploaded and destroyed. 
-
 
 ### Todo
 - [ ] Wave Form for tracks
