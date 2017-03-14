@@ -5,7 +5,6 @@ class Api::TracksController < ApplicationController
   end
 
   def create
-    debugger
     @track = Track.new(track_params)
     @track.user_id = current_user.id
     if @track.save
@@ -38,6 +37,6 @@ class Api::TracksController < ApplicationController
   private
 
   def track_params
-    params.require(:track).permit(:title, :description, :audio_file, :image)
+    params.require(:track).permit(:title, :description, :audio, :image)
   end
 end

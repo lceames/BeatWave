@@ -12,7 +12,7 @@ User.create!({
   username: "jorge",
   email: "spain@spain.org",
   password: "spain123",
-  image:"https://s3.amazonaws.com/beatwave-pro/users/images/000/000/jorge.jpg"
+  image: "https://s3.amazonaws.com/beatwave-pro/users/images/000/000/jorge.jpg"
   })
 
 User.create!({
@@ -56,35 +56,35 @@ Track.create!({
   user_id: jorge_id,
   title: "Life",
   description: "Dilla",
-  audio_file: "http://s3.amazonaws.com/beatwave-dev/tracks/audios/000/000/008/original/life.mp3?1487344012",
+  audio: "http://s3.amazonaws.com/beatwave-dev/tracks/audios/000/000/008/original/life.mp3?1487344012",
   image: "https://s3.amazonaws.com/beatwave-pro/tracks/images/000/000/dilla.jpg"
 })
 life = Track.create!({
   user_id: marshall_id,
   title: "Cigarettes and Coffee",
   description: "classic",
-  audio_file: "http://s3.amazonaws.com/beatwave-dev/tracks/audios/000/000/009/original/cigarettes-and-coffee.mp3?1487344018",
+  audio: "http://s3.amazonaws.com/beatwave-dev/tracks/audios/000/000/009/original/cigarettes-and-coffee.mp3?1487344018",
   image: "https://s3.amazonaws.com/beatwave-pro/tracks/images/000/000/otis.jpg"
 })
 life = Track.create!({
   user_id: quinn_id,
   title: "You and me",
   description: "Discovered in a yard sale decades after recording",
-  audio_file: "http://s3.amazonaws.com/beatwave-dev/tracks/audios/000/000/010/original/you-and-me.mp3?1487344019",
+  audio: "http://s3.amazonaws.com/beatwave-dev/tracks/audios/000/000/010/original/you-and-me.mp3?1487344019",
   image: "http://s3.amazonaws.com/beatwave-dev/tracks/images/000/000/055/original/record.png?1487623659"
 })
 life = Track.create!({
   user_id: guest_id,
   title: "Talk To Me, You'll Understand",
   description: "chune",
-  audio_file: "http://s3.amazonaws.com/beatwave-dev/tracks/audios/000/000/011/original/talk-to-me.mp3?1487344021",
+  audio: "http://s3.amazonaws.com/beatwave-dev/tracks/audios/000/000/011/original/talk-to-me.mp3?1487344021",
   image: "https://s3.amazonaws.com/beatwave-pro/tracks/images/000/000/ross.jpg"
 })
 life = Track.create!({
   user_id: jimoh_id,
   title: "Trapped in Da SpeedForce",
   description: "Slimhustlin",
-  audio_file: "https://s3.amazonaws.com/beatwave-pro/tracks/audios/000/000/SLIM+HUSTLA+-+TRAPPED+IN+DA+SPEED+FORCE.mp3",
+  audio: "https://s3.amazonaws.com/beatwave-pro/tracks/audios/000/000/SLIM+HUSTLA+-+TRAPPED+IN+DA+SPEED+FORCE.mp3",
   image: "https://s3.amazonaws.com/beatwave-pro/tracks/images/000/000/slimhustla.jpg"
 })
 
@@ -92,7 +92,7 @@ life = Track.create!({
   user_id: jorge_id,
   title:  "I Found you",
   description: "mhm",
-  audio_file: "http://s3.amazonaws.com/beatwave-dev/tracks/audios/000/000/012/original/i-found-you.mp3?1487344045",
+  audio: "http://s3.amazonaws.com/beatwave-dev/tracks/audios/000/000/012/original/i-found-you.mp3?1487344045",
   image: "http://s3.amazonaws.com/beatwave-dev/tracks/images/000/000/055/original/record.png?1487623659"
 })
 
@@ -100,14 +100,14 @@ life = Track.create!({
   user_id: jimoh_id,
   title:  "I will survive",
   description: "Cake",
-  audio_file: "https://s3.amazonaws.com/beatwave-pro/tracks/audios/000/000/Cake+-+i+will+survive.mp3",
+  audio: "https://s3.amazonaws.com/beatwave-pro/tracks/audios/000/000/Cake+-+i+will+survive.mp3",
   image: "https://s3.amazonaws.com/beatwave-pro/tracks/images/000/000/cake.jpg"
 })
 life = Track.create!({
   user_id: guest_id,
   title:  "Draped in Soft Twilight",
   description: "soso sweet",
-  audio_file: "https://s3.amazonaws.com/beatwave-pro/tracks/audios/000/000/Andrew+Reynolds+-+Draped+In+Soft+Twilight.mp3",
+  audio: "https://s3.amazonaws.com/beatwave-pro/tracks/audios/000/000/Andrew+Reynolds+-+Draped+In+Soft+Twilight.mp3",
   image: "https://s3.amazonaws.com/beatwave-pro/tracks/images/000/000/louis.jpg"
 })
 
@@ -115,7 +115,7 @@ life = Track.create!({
   user_id: marshall_id,
   title:  "Joyride the stars",
   description: "it's good",
-  audio_file: "https://s3.amazonaws.com/beatwave-pro/tracks/audios/000/000/George+Michelle+-+Joyride+the+Stars.mp3",
+  audio: "https://s3.amazonaws.com/beatwave-pro/tracks/audios/000/000/George+Michelle+-+Joyride+the+Stars.mp3",
   image: "http://s3.amazonaws.com/beatwave-dev/tracks/images/000/000/055/original/record.png?1487623659"
 })
 
@@ -123,14 +123,14 @@ life = Track.create!({
   user_id: marshall_id,
   title:  "Wandering eye",
   description: "Copyright mark harris",
-  audio_file: "https://s3.amazonaws.com/beatwave-pro/tracks/audios/000/000/Mark+Harris-+Wandering+Eye.mp3",
+  audio: "https://s3.amazonaws.com/beatwave-pro/tracks/audios/000/000/Mark+Harris-+Wandering+Eye.mp3",
   image: "https://s3.amazonaws.com/beatwave-pro/users/images/000/000/mark.jpg"
 })
 life = Track.create!({
   user_id: jorge_id,
   title:  "Cruel",
   description: "cruel sprouts",
-  audio_file: "https://s3.amazonaws.com/beatwave-pro/tracks/audios/000/000/Prefab+Sprout+-+Cruel.mp3",
+  audio: "https://s3.amazonaws.com/beatwave-pro/tracks/audios/000/000/Prefab+Sprout+-+Cruel.mp3",
   image: "http://s3.amazonaws.com/beatwave-dev/tracks/images/000/000/055/original/record.png?1487623659"
 })
 

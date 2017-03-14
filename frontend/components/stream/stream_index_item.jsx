@@ -12,18 +12,6 @@ export default class StreamIndexItem extends React.Component {
     this.handleDelete = this.handleDelete.bind(this);
   }
 
-  componentWillReceiveProps(nextProps) {
-    // if (nextProps.track.elapsedTime === nextProps.track.duration) {
-    //   nextProps.resetElapsedTime(nextProps.track.id);
-    // }
-    // if (this.props.currentTrack && (this.props.currentTrack.track.id === this.props.track.id)) {
-    //   this.setState({elapsedTime: this.props.currentTrack.elapsedTime});
-    //   if (this.state.elapsedTime >= this.props.track.duration) {
-    //
-    //   }
-    // }
-  }
-
   handleDelete() {
     this.props.deleteTrack(this.props.track.id);
   }
@@ -47,7 +35,7 @@ export default class StreamIndexItem extends React.Component {
     let comments = track.comments.map( (comment) => {
       return <Comment comment={comment} key={comment.id}/>
     })
-    
+
     let newComment = track.active ? <NewComment track={track}/> : ""
 
     return (

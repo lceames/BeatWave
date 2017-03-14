@@ -9947,17 +9947,6 @@ var Waveform = function (_React$Component) {
           currentTrack = _props.currentTrack;
 
       var peaks = this.props.track.peaks;
-      var peakInterval = Math.floor(peaks.length / 167);
-      var columnHeights = [];
-      var sum = 0;
-      for (var i = 0; i < peaks.length; i++) {
-        sum += peaks[i];
-        if (i % peakInterval === 0) {
-          columnHeights.push(sum / peakInterval);
-          sum = 0;
-        }
-      }
-
       var width = 2;
       var canvas = document.getElementById('waveform-stream-' + this.props.track.id);
       var ctx = canvas.getContext('2d');
@@ -9965,14 +9954,14 @@ var Waveform = function (_React$Component) {
       var y = 0;
       var trackPlaying = currentTrack && currentTrack.track.id === track.id;
       var elapsedTime = this.props.elapsedTime;
-      columnHeights.map(function (columnHeight, idx) {
-        var trackProgress = Math.floor(idx / columnHeights.length * track.duration);
+      peaks.map(function (peak, idx) {
+        var trackProgress = Math.floor(idx / peaks.length * track.duration);
         if (elapsedTime > trackProgress) {
           ctx.fillStyle = "#f50";
-          ctx.fillRect(x, 90, 2, columnHeight * -60);
+          ctx.fillRect(x, 90, 2, peak * -900);
         } else {
           ctx.fillStyle = "#A6A4A4";
-          ctx.fillRect(x, 90, 2, columnHeight * -60);
+          ctx.fillRect(x, 90, 2, peak * -900);
         }
         x += 3;
       });
@@ -16725,19 +16714,6 @@ var StreamIndexItem = function (_React$Component) {
   }
 
   _createClass(StreamIndexItem, [{
-    key: 'componentWillReceiveProps',
-    value: function componentWillReceiveProps(nextProps) {
-      // if (nextProps.track.elapsedTime === nextProps.track.duration) {
-      //   nextProps.resetElapsedTime(nextProps.track.id);
-      // }
-      // if (this.props.currentTrack && (this.props.currentTrack.track.id === this.props.track.id)) {
-      //   this.setState({elapsedTime: this.props.currentTrack.elapsedTime});
-      //   if (this.state.elapsedTime >= this.props.track.duration) {
-      //
-      //   }
-      // }
-    }
-  }, {
     key: 'handleDelete',
     value: function handleDelete() {
       this.props.deleteTrack(this.props.track.id);
@@ -17175,7 +17151,7 @@ var Upload = function (_React$Component) {
       var formData = new FormData();
       formData.append("track[title]", this.state.title);
       formData.append("track[description]", this.state.description);
-      formData.append("track[audio_file]", this.state.audioFile);
+      formData.append("track[audio]", this.state.audioFile);
       if (this.state.imageFile) {
         formData.append("track[image]", this.state.imageFile);
       }

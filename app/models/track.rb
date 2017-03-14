@@ -6,9 +6,9 @@
 #  title              :string           not null
 #  user_id            :integer          not null
 #  description        :text
-#  audio_file_name    :string
+#  audio_name    :string
 #  audio_content_type :string
-#  audio_file_size    :integer
+#  audio_size    :integer
 #  audio_updated_at   :datetime
 #  image_file_name    :string
 #  image_content_type :string
@@ -23,38 +23,41 @@ class Track < ApplicationRecord
   belongs_to :user
   has_many :comments
   serialize :peaks
+  before_validation :extract_metadata
 
-  has_attached_file :audio, default_url: "life.mp3", s3_protocol: :https
+  has_attached_file :audio, s3_protocol: :https
   validates_attachment_content_type :audio, content_type: /\Aaudio\/.*\z/
 
   has_attached_file :image, default_url: "record.png", s3_protocol: :https
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
 
-  def audio_file=(file)
-    if file.class == String  #AWS url seed
-      if (!file.include?(".wav"))
-        temp_dir = Dir.mktmpdir
-        `ffmpeg -i #{file} #{temp_dir}/local.wav`
-        self.peaks = JsonWaveform.generate(File.open("#{temp_dir}/local.wav"), samples: 1000)
-        duration = `ffprobe -i #{temp_dir}/local.wav -show_entries format=duration -v quiet -of csv="p=0"`
-        self.duration = duration.to_i
-        self.audio = file
-      else
-        self.peaks = JsonWaveform.generate(open(file))
-        self.audio = file
+  def extract_metadata
+    path = audio.queued_for_write[:original] &&
+           audio.queued_for_write[:original].path ||
+           audio.url
+
+    open(path) do |url_file|
+      io_command = "php lib/assets/php-waveform-json.php #{url_file.path}"
+      IO.popen(io_command) do |io|
+        peaks = JSON.parse(io.read)['left']
+        interval = peaks.length/200
+        average_peaks = []
+        sum = 0
+        peaks.each_with_index do |peak, idx|
+          if idx % interval === 0
+            average_peaks.push(sum/interval)
+            sum = 0
+          else
+            sum += peak
+          end
+        end
+        self.peaks = average_peaks
       end
-    else #upload from live site
-      if !file.content_type.include?('wav')
-        file = file.tempfile
-        temp_dir = Dir.mktmpdir
-        `ffmpeg -i #{file.path} #{temp_dir}/local.wav`
-        duration = `ffprobe -i #{temp_dir}/local.wav -show_entries format=duration -v quiet -of csv="p=0"`
-        self.duration = duration.to_i
-        self.peaks = JsonWaveform.generate(open("#{temp_dir}/local.wav"), samples: 1000)
-      else
-        self.peaks = JsonWaveform.generate(open(file.tempfile))
+
+      open_opts = { :encoding => 'utf-8' }
+      Mp3Info.open(url_file.path, open_opts) do |mp3info|
+        self.duration = mp3info.length.to_i
       end
-      self.audio = file
     end
   end
 end

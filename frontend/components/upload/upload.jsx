@@ -41,7 +41,7 @@ export default class Upload extends React.Component {
     let formData = new FormData();
     formData.append("track[title]", this.state.title);
     formData.append("track[description]", this.state.description);
-    formData.append("track[audio_file]", this.state.audioFile);
+    formData.append("track[audio]", this.state.audioFile);
     if (this.state.imageFile) {
       formData.append("track[image]", this.state.imageFile);
     }
