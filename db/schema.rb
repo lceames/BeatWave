@@ -26,9 +26,9 @@ ActiveRecord::Schema.define(version: 20170308162703) do
     t.string   "title",              null: false
     t.integer  "user_id",            null: false
     t.text     "description"
-    t.string   "audio_file_name"
+    t.string   "audio_name"
     t.string   "audio_content_type"
-    t.integer  "audio_file_size"
+    t.integer  "audio_size"
     t.datetime "audio_updated_at"
     t.string   "image_file_name"
     t.string   "image_content_type"

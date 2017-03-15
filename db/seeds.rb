@@ -12,7 +12,7 @@ User.create!({
   username: "jorge",
   email: "spain@spain.org",
   password: "spain123",
-  image:"https://s3.amazonaws.com/beatwave-pro/users/images/000/000/jorge.jpg"
+  image: "https://s3.amazonaws.com/beatwave-pro/users/images/000/000/jorge.jpg"
   })
 
 User.create!({

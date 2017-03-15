@@ -15,17 +15,6 @@ class Waveform extends React.Component {
     paintWaveform() {
       const { track, currentTrack } = this.props;
       let peaks = this.props.track.peaks;
-      let peakInterval = Math.floor(peaks.length/167);
-      let columnHeights = [];
-      let sum = 0;
-      for (let i = 0; i < peaks.length; i++) {
-        sum += peaks[i];
-        if (i % peakInterval === 0) {
-          columnHeights.push(sum/peakInterval);
-          sum = 0;
-        }
-      }
-
       let width = 2;
       let canvas = document.getElementById(`waveform-stream-${this.props.track.id}`);
       let ctx = canvas.getContext('2d');
@@ -33,15 +22,15 @@ class Waveform extends React.Component {
       let y = 0;
       let trackPlaying = currentTrack && (currentTrack.track.id === track.id);
       let elapsedTime = this.props.elapsedTime;
-      columnHeights.map( (columnHeight, idx) => {
-        let trackProgress = Math.floor(((idx)/columnHeights.length) * track.duration);
+      peaks.map( (peak, idx) => {
+        let trackProgress = Math.floor(((idx)/peaks.length) * track.duration);
         if (elapsedTime > trackProgress) {
           ctx.fillStyle = "#f50";
-          ctx.fillRect(x, 90, 2, columnHeight * -60);
+          ctx.fillRect(x, 90, 2, peak * -600);
         }
         else {
           ctx.fillStyle = "#A6A4A4";
-          ctx.fillRect(x, 90, 2, columnHeight * -60);
+          ctx.fillRect(x, 90, 2, peak * -600);
         }
         x += 3;
       });
