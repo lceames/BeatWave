@@ -21,7 +21,7 @@ class Waveform extends React.Component {
       let x = 0;
       let y = 0;
       let trackPlaying = currentTrack && (currentTrack.track.id === track.id);
-      let elapsedTime = this.props.elapsedTime;
+      let elapsedTime = track.elapsedTime;
       peaks.map( (peak, idx) => {
         let trackProgress = Math.floor(((idx)/peaks.length) * track.duration);
         if (elapsedTime > trackProgress) {
