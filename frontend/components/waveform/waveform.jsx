@@ -26,11 +26,11 @@ class Waveform extends React.Component {
         let trackProgress = Math.floor(((idx)/peaks.length) * track.duration);
         if (elapsedTime > trackProgress) {
           ctx.fillStyle = "#f50";
-          ctx.fillRect(x, 90, 2, peak * -900);
+          ctx.fillRect(x, 90, 2, peak * -600);
         }
         else {
           ctx.fillStyle = "#A6A4A4";
-          ctx.fillRect(x, 90, 2, peak * -900);
+          ctx.fillRect(x, 90, 2, peak * -600);
         }
         x += 3;
       });
