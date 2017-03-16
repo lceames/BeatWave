@@ -18,8 +18,11 @@ export default class UserNavSection extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.userProfile && this.props.userProfile.image !== nextProps.userProfile.image) {
-      this.props.currentUser.image = nextProps.userProfile.image;
+    if (!this.props.currentUser || !this.props.userProfile) { return; }
+    if (this.props.currentUser.id === nextProps.userProfile.id) {
+      if (nextProps.userProfile.image !== this.props.userProfile.image) {
+        this.props.currentUser.image = nextProps.userProfile.image;
+      }
     }
   }
 

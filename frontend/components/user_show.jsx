@@ -20,6 +20,16 @@ export default class UserShow extends React.Component {
     });
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (parseInt(nextProps.params.userId) !== this.props.userProfile.id) {
+      this.setState({loaded: false});
+      this.props.fetchUser(this.props.params.userId);
+      this.props.fetchTracks('user-show', this.props.params.userId).then( () => {
+        this.setState({loaded: true});
+      });
+    }
+  }
+
   handleProfileImage (e) {
     let file = e.currentTarget.files[0];
     if (file) {
