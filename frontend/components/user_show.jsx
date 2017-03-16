@@ -48,7 +48,7 @@ export default class UserShow extends React.Component {
     }
 
     if (!this.state.loaded || !this.props.userProfile || this.props.userProfile.id !== parseInt(this.props.params.userId)) {
-      return <div></div>
+      return <div className="loader"></div>
     }
 
     return (

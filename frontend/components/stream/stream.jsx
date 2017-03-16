@@ -17,7 +17,7 @@ export default class Stream extends React.Component {
 
   render () {
     if (!this.props.tracks || this.props.tracks.length === 0 || !this.state.loaded) {
-      return <div></div>
+      return  <div className="loader"></div>
     }
 
     let tracks = this.props.tracks.map( (track) => {

@@ -58,10 +58,10 @@ export default class TrackShow extends React.Component {
   render() {
     const currentTrack = this.props.currentTrack;
     const track = this.props.track[0];
-    //
-    // if (this.props.track.length === 0 || !this.state.trackLoaded || !this.state.userLoaded) {
-    //   return <div></div>;
-    // }
+
+    if (this.props.track.length === 0 || !this.state.trackLoaded || !this.state.userLoaded) {
+      return <div className="loader"></div>
+    }
 
     if (this.props.track.length === 0) {
       return <canvas id='canvas' width="645" height="40" ></canvas>
