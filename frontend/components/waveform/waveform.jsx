@@ -17,12 +17,19 @@ class Waveform extends React.Component {
       this.state = {
         hoverPoint: null,
         hoverTime: null,
-        commentTime: null
+        commentTime: null,
+        commentActive: false
       };
     }
 
     componentWillReceiveProps(nextProps) {
       this.paintWaveform.apply(this);
+      if (this.props.track.comments !== nextProps.track.comments) {
+        this.setState({
+          commentActive: false,
+          commentTime: null
+        });
+      }
     }
 
     componentDidMount() {
@@ -100,7 +107,10 @@ class Waveform extends React.Component {
       let diffX = (e.clientX - e.currentTarget.getBoundingClientRect().left);
       let trackPercentage = diffX/canvasWidth;
       let trackProgress = Math.round(trackPercentage * track.duration);
-      this.setState({commentTime: trackProgress});
+      this.setState({
+        commentTime: trackProgress,
+        commentActive: true
+      });
     }
 
     displayElapsedTime() {
@@ -123,7 +133,7 @@ class Waveform extends React.Component {
       if (this.props.type == "stream") {
         let elapsedTime = track.active? this.displayElapsedTime() : <div></div>
         let duration = <p className="duration">{formatTime(track.duration)}</p>
-        let newComment = track.active ? <NewComment track={track} time={this.state.commentTime}/> : ""
+        let newComment = this.state.commentActive ? <NewComment track={track} time={this.state.commentTime}/> : ""
         let commentThumb = <div></div>
         if (this.state.commentTime) {
           let proportion = this.state.commentTime/track.duration;

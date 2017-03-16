@@ -8,6 +8,17 @@
   font: 12px/1.4 "Lucida Grande","Lucida Sans Unicode","Lucida Sans",Garuda,Verdana,Tahoma,sans-serif;
 }
 
+.comment-thumb img {
+  width: 15px;
+  height: 15px;
+}
+
+.comment-thumb {
+  width: 15px;
+  height: 15px;
+}
+
+
 .comment {
   position: absolute;
 }
