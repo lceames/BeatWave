@@ -24,7 +24,7 @@ class Waveform extends React.Component {
 
     componentWillReceiveProps(nextProps) {
       this.paintWaveform.apply(this);
-      if (this.props.track.comments !== nextProps.track.comments) {
+      if (this.props.track.comments.length !== nextProps.track.comments.length) {
         this.setState({
           commentActive: false,
           commentTime: null
@@ -102,15 +102,17 @@ class Waveform extends React.Component {
     }
 
     queueComment(e) {
-      let track = this.props.track;
-      let canvasWidth = e.currentTarget.width;
-      let diffX = (e.clientX - e.currentTarget.getBoundingClientRect().left);
-      let trackPercentage = diffX/canvasWidth;
-      let trackProgress = Math.round(trackPercentage * track.duration);
-      this.setState({
-        commentTime: trackProgress,
-        commentActive: true
-      });
+      if (this.props.currentUser) {    
+        let track = this.props.track;
+        let canvasWidth = e.currentTarget.width;
+        let diffX = (e.clientX - e.currentTarget.getBoundingClientRect().left);
+        let trackPercentage = diffX/canvasWidth;
+        let trackProgress = Math.round(trackPercentage * track.duration);
+        this.setState({
+          commentTime: trackProgress,
+          commentActive: true
+        });
+      }
     }
 
     displayElapsedTime() {
