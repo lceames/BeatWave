@@ -14,9 +14,10 @@ export default class ProgressBar extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (!this.props.currentTrack) {
+    if (!this.props.currentTrack || !nextProps.currentTrack) {
       return;
     }
+    
     if (this.props.currentTrack.track.id !== nextProps.currentTrack.track.id) {
       this.setState({loaded: false});
     }
