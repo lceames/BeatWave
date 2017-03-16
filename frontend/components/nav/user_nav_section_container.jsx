@@ -5,9 +5,10 @@ import { logout, login } from '../../actions/session_actions';
 import { hashHistory } from 'react-redux';
 
 const mapStateToProps = (state) => {
-  let loggedIn = state.session.currentUser ? true : false;
-  let currentUser = state.session.currentUser;
-  return { loggedIn, currentUser };
+  const loggedIn = state.session.currentUser ? true : false;
+  const currentUser = state.session.currentUser;
+  const userProfile = state.userProfile;
+  return { loggedIn, currentUser, userProfile };
 };
 
 const mapDispatchToProps = dispatch => {

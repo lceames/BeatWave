@@ -17,6 +17,12 @@ export default class UserNavSection extends React.Component {
     this.loginGuest = this.loginGuest.bind(this);
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (this.props.userProfile && this.props.userProfile.image !== nextProps.userProfile.image) {
+      this.props.currentUser.image = nextProps.userProfile.image;
+    }
+  }
+
   openModal (formType) {
     this.setState({
       modalIsOpen: true,
@@ -40,7 +46,7 @@ export default class UserNavSection extends React.Component {
   }
   render () {
     if (this.props.loggedIn) {
-      const currentUser = this.props.currentUser
+      const currentUser = this.props.currentUser;
       return (
         <div className="nav-user-logged-in">
           <img src={this.props.currentUser.image} className="user-nav-thumb"/>

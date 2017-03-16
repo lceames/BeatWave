@@ -20,10 +20,6 @@ export default class UserShow extends React.Component {
     });
   }
 
-  // componentWillUnmount() {
-  //   this.props.resetTracks();
-  // }
-
   handleProfileImage (e) {
     let file = e.currentTarget.files[0];
     if (file) {
