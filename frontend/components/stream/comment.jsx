@@ -9,8 +9,9 @@ export default class Comment extends React.Component {
 
   render() {
     const comment = this.props.comment;
+    const proportion = comment.elapsedTime/comment.duration;
     return (
-      <div className="comment">
+      <div className="comment" style={{left: proportion * 590}}>
         <img src={comment.thumb} className="comment-thumb" />
           <div className="comment-body">
             <p className="author">{comment.author}</p>

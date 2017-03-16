@@ -48,11 +48,7 @@ export default class StreamIndexItem extends React.Component {
           <div className="right-track-section">
             <Link className="track-title" to={`/${track.user_id}/${track.id}`}>{track.title}</Link>
               <Waveform track={track} type="stream"/>
-            <div className="comments">
-              {comments}
-            </div>
             {deleteTrack}
-            {newComment}
           </div>
         </div>
       </li>

@@ -1,26 +1,35 @@
 .comment-body {
   display: flex;
   position: absolute;
+  top: 120px;
   max-width: 30%;
   padding-top: 2px;
   padding-left: 10px;
   font: 12px/1.4 "Lucida Grande","Lucida Sans Unicode","Lucida Sans",Garuda,Verdana,Tahoma,sans-serif;
 }
 
+.comment {
+  position: absolute;
+}
+
 
 .comment-body .author {
+  position: relative;
   padding-right: 5px;
   color: #f50;
 }
 
 .comment .body, .comment .author{
+  position: relative;
   display: none;
 }
 
 .comment:hover .body, .comment:hover .author {
+  position: relative;
   display: block;
 }
 
 .comment-text {
+  position: relative;
   outline: none;
 }

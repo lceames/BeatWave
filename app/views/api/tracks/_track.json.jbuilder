@@ -15,4 +15,5 @@ json.comments track.comments do |comment|
   json.author comment.user.username
   json.id comment.id
   json.elapsedTime comment.elapsed_time
+  json.duration comment.track.duration
 end

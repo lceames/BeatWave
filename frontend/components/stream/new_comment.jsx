@@ -18,7 +18,7 @@ class NewComment extends React.Component {
     let elapsedTime = this.props.currentTrack ? this.props.currentTrack.elapsedTime : 0;
     let comment = Object.assign({}, this.state);
     comment["track_id"] = this.props.track.id;
-    comment["elapsed_time"] = elapsedTime;
+    comment["elapsed_time"] = this.props.time;
     this.props.createComment(comment).then( () => {
       this.setState({body: ""});
     });
