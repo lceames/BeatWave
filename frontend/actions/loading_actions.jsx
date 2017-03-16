@@ -1,10 +1,10 @@
 import React from 'react';
 
-export const START_LOADING_TRACK = "START_LOADING_TRACK";
+export const START_LOADING = "START_LOADING";
 export const RECEIVE_ERRORS = "RECEIVE_ERRORS";
 
-export const startLoadingTrack = () => {
+export const startLoading = () => {
   return {
-    type: START_LOADING_TRACK
+    type: START_LOADING
   };
 };

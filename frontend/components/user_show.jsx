@@ -5,39 +5,34 @@ import Modal from 'react-modal';
 export default class UserShow extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      imageFile: null,
-      modalIsOpen: false,
-      loaded: false
-    };
     this.handleProfileImage = this.handleProfileImage.bind(this);
+    this.fetchData = this.fetchData.bind(this);
   }
 
   componentDidMount() {
-    this.props.fetchUser(this.props.params.userId);
-    this.props.fetchTracks('user-show', this.props.params.userId).then( () => {
-      this.setState({loaded: true});
-    });
+    this.fetchData(this.props);
   }
 
   componentWillReceiveProps(nextProps) {
-    if (parseInt(nextProps.params.userId) !== this.props.userProfile.id) {
-      this.setState({loaded: false});
-      this.props.fetchUser(this.props.params.userId);
-      this.props.fetchTracks('user-show', this.props.params.userId).then( () => {
-        this.setState({loaded: true});
-      });
+    if (this.props.userProfile && !this.props.loading.state && parseInt(nextProps.params.userId) !== this.props.userProfile.id) {
+      this.fetchData(nextProps);
     }
+  }
+
+  fetchData(props) {
+    this.props.startLoading();
+    this.props.fetchUser(props.params.userId);
+    this.props.fetchTracks('user-show', props.params.userId);
   }
 
   handleProfileImage (e) {
     let file = e.currentTarget.files[0];
     if (file) {
-      this.setState({imageFile: file});
+      let formData = new FormData();
+      formData.append("user[image]", file);
+      this.props.startLoading();
+      this.props.updateUserImage(formData, this.props.params.userId);
     }
-    let formData = new FormData();
-    formData.append("user[image]", file);
-    this.props.updateUserImage(formData, this.props.params.userId);
   }
 
   render() {
@@ -53,7 +48,7 @@ export default class UserShow extends React.Component {
         </label>
     }
 
-    if (!this.state.loaded || !this.props.userProfile || this.props.userProfile.id !== parseInt(this.props.params.userId)) {
+    if (this.props.loading.state || !this.props.userProfile || this.props.userProfile.id !== parseInt(this.props.params.userId)) {
       return <div className="loader"></div>
     }
 
