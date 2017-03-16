@@ -44,13 +44,27 @@ class SessionForm extends React.Component {
 
     let action = this.props.formType === "login" ? this.props.login : this.props.signup;
     let user = Object.assign({}, this.state);
-    
+
     if (this.props.formType === "login") {
-      action(user).then((currentUser) => this.redirectToStream(currentUser));
+      action(user).then(
+        (currentUser) => this.redirectToStream(currentUser),
+        () => this.resetForm()
+      );
     }
     else {
-      action(formData).then((currentUser) => this.redirectToStream(currentUser));
+      action(formData).then(
+        (currentUser) => this.redirectToStream(currentUser),
+        () => this.resetForm()
+      );
     }
+  }
+
+  resetForm() {
+    this.setState({
+      username: "",
+      email: "",
+      password: ""
+    });
   }
 
   redirectToStream (user) {
@@ -64,6 +78,7 @@ class SessionForm extends React.Component {
   }
 
   render () {
+    debugger
     let usernameClass = "username";
     let passwordClass = "password";
     let emailClass = "email";
