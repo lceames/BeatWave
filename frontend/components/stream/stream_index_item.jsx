@@ -30,6 +30,7 @@ export default class StreamIndexItem extends React.Component {
         posted <Link className="author-link" to={`/${track.user_id}/${track.id}`}>a track</Link></p>
     }
 
+    let duration = <p className="duration">{formatTime(track.duration)}</p>
     let elapsedTime = track.active ? <p className="elapsed-time">{formatTime(track.elapsedTime)}</p> : <div></div>
 
     let comments = track.comments.map( (comment) => {
@@ -46,7 +47,11 @@ export default class StreamIndexItem extends React.Component {
           <PlayPause track={track} currentTrack={currentTrack} queue={queue}/>
           <div className="right-track-section">
             <Link className="track-title" to={`/${track.user_id}/${track.id}`}>{track.title}</Link>
-            <Waveform track={track} type="stream"/>
+            <div className="waveform">
+              <Waveform track={track} type="stream"/>
+              {elapsedTime}
+              {duration}
+            </div>
 
             <div className="comments">
               {comments}

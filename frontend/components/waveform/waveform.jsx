@@ -4,6 +4,16 @@ import { updateElapsedTime, setCurrentTrack } from '../../actions/track_actions'
 
 class Waveform extends React.Component {
 
+    constructor(props) {
+      super(props);
+      this.handleClick = this.handleClick.bind(this);
+      this.handleHover = this.handleHover.bind(this);
+      this.resetHover = this.resetHover.bind(this);
+      this.state = {
+        hoverPoint: null
+      };
+    }
+
     componentWillReceiveProps(nextProps) {
       this.paintWaveform.apply(this);
     }
@@ -14,8 +24,8 @@ class Waveform extends React.Component {
 
     paintWaveform() {
       const { track, currentTrack } = this.props;
+      const hoverPoint = this.state.hoverPoint;
       let peaks = this.props.track.peaks;
-      let width = 2;
       let canvas = document.getElementById(`waveform-stream-${this.props.track.id}`);
       let ctx = canvas.getContext('2d');
       let x = 0;
@@ -26,6 +36,10 @@ class Waveform extends React.Component {
         let trackProgress = Math.floor(((idx)/peaks.length) * track.duration);
         if (elapsedTime > trackProgress) {
           ctx.fillStyle = "#f50";
+          ctx.fillRect(x, 90, 2, peak * -600);
+        }
+        else if (hoverPoint && hoverPoint > trackProgress) {
+          ctx.fillStyle = "#b2611e";
           ctx.fillRect(x, 90, 2, peak * -600);
         }
         else {
@@ -51,10 +65,27 @@ class Waveform extends React.Component {
       }
     }
 
+    handleHover(e) {
+      let track = this.props.track;
+      if (track.active) {
+        let canvasWidth = e.currentTarget.width;
+        let diffX = (e.clientX - e.currentTarget.getBoundingClientRect().left);
+        let trackPercentage = diffX/canvasWidth;
+        let trackProgress = Math.round(trackPercentage * track.duration);
+        this.setState({hoverPoint: trackProgress});
+      }
+    }
+
+    resetHover(e) {
+      this.setState({hoverPoint: null});
+    }
 
     render () {
       if (this.props.type == "stream") {
-        return <canvas onClick={this.handleClick.bind(this)} id={`waveform-stream-${this.props.track.id}`} width="600" height="90"></canvas>;
+        return <canvas onClick={this.handleClick} id={`waveform-stream-${this.props.track.id}`}
+          onMouseOver={this.handleHover} width="600" height="90" onMouseMove={this.handleHover}
+          onMouseLeave={this.resetHover}
+          ></canvas>;
       }
       else {
         return <canvas className="canvas" width="2000" height="600" id="canvas"></canvas>;
