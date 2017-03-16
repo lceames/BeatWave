@@ -51,6 +51,10 @@
   padding: 2px;
 }
 
+.stream-index-item .elapsed-time {
+  color: #f50;
+}
+
 .stream-index-item .fa {
   color: #f50;
   padding: 12px;

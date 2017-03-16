@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { updateElapsedTime, setCurrentTrack } from '../../actions/track_actions';
+import { formatTime } from '../../util/helper_functions';
 
 class Waveform extends React.Component {
 
@@ -9,8 +10,10 @@ class Waveform extends React.Component {
       this.handleClick = this.handleClick.bind(this);
       this.handleHover = this.handleHover.bind(this);
       this.resetHover = this.resetHover.bind(this);
+      this.displayElapsedTime = this.displayElapsedTime.bind(this);
       this.state = {
-        hoverPoint: null
+        hoverPoint: null,
+        hoverTime: null
       };
     }
 
@@ -39,7 +42,7 @@ class Waveform extends React.Component {
           ctx.fillRect(x, 90, 2, peak * -600);
         }
         else if (hoverPoint && hoverPoint > trackProgress) {
-          ctx.fillStyle = "#b2611e";
+          ctx.fillStyle = "#af5103";
           ctx.fillRect(x, 90, 2, peak * -600);
         }
         else {
@@ -72,20 +75,43 @@ class Waveform extends React.Component {
         let diffX = (e.clientX - e.currentTarget.getBoundingClientRect().left);
         let trackPercentage = diffX/canvasWidth;
         let trackProgress = Math.round(trackPercentage * track.duration);
-        this.setState({hoverPoint: trackProgress});
+        this.setState({
+          hoverPoint: trackProgress,
+          hoverTime: trackProgress
+        });
       }
     }
 
+    displayElapsedTime() {
+      let time;
+      if (this.state.hoverTime) {
+        debugger
+        time = this.state.hoverTime;
+      }
+      else {
+        time = this.props.track.elapsedTime;
+      }
+      return <p className="elapsed-time">{formatTime(time)}</p>
+    }
+
     resetHover(e) {
-      this.setState({hoverPoint: null});
+      this.setState({hoverPoint: null, hoverTime: null});
     }
 
     render () {
       if (this.props.type == "stream") {
-        return <canvas onClick={this.handleClick} id={`waveform-stream-${this.props.track.id}`}
-          onMouseOver={this.handleHover} width="600" height="90" onMouseMove={this.handleHover}
-          onMouseLeave={this.resetHover}
-          ></canvas>;
+        let elapsedTime = this.props.track.active? this.displayElapsedTime() : <div></div>
+        let duration = <p className="duration">{formatTime(this.props.track.duration)}</p>
+        return (
+          <div className="waveform">
+            <canvas onClick={this.handleClick} id={`waveform-stream-${this.props.track.id}`}
+              onMouseOver={this.handleHover} width="600" height="90" onMouseMove={this.handleHover}
+              onMouseLeave={this.resetHover}>
+            </canvas>;
+            {elapsedTime}
+            {duration}
+          </div>
+        )
       }
       else {
         return <canvas className="canvas" width="2000" height="600" id="canvas"></canvas>;
