@@ -48,21 +48,18 @@ class SessionForm extends React.Component {
     if (this.props.formType === "login") {
       action(user).then(
         (currentUser) => this.redirectToStream(currentUser),
-        () => this.resetForm()
+        () => this.setState({password: ""})
       );
     }
     else {
       action(formData).then(
-        (currentUser) => this.redirectToStream(currentUser),
-        () => this.resetForm()
+        (currentUser) => this.redirectToStream(currentUser)
       );
     }
   }
 
-  resetForm() {
+  resetLoginForm() {
     this.setState({
-      username: "",
-      email: "",
       password: ""
     });
   }
@@ -78,7 +75,6 @@ class SessionForm extends React.Component {
   }
 
   render () {
-    debugger
     let usernameClass = "username";
     let passwordClass = "password";
     let emailClass = "email";
@@ -112,8 +108,8 @@ class SessionForm extends React.Component {
       <div className="user-form-container">
         <form onSubmit={this.handleSubmit} className="user-form">
           {emailInput}
-          <input className={usernameClass} type="text" placeholder="Username" onChange={this.update('username')}></input>
-          <input className={passwordClass} type="password" placeholder="Password" onChange={this.update('password')}></input>
+          <input className={usernameClass} type="text" placeholder="Username" value={this.state.username} onChange={this.update('username')}></input>
+          <input className={passwordClass} type="password" placeholder="Password" value={this.state.password} onChange={this.update('password')}></input>
           {fileInput}
           <ul className="errors">{errors}</ul>
           <input type="submit" value="Continue"></input>
