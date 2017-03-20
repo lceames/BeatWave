@@ -1,10 +1,11 @@
 # BeatWave
 
-BeatWave is a social music streaming web application inspired by SoundCloud built on a Ruby on Rails backend and a React/Redux frontend.
+BeatWave is a social music streaming web application inspired by SoundCloud built on a Ruby on Rails backend and a React/Redux front-end.
 
-![]: app/assets/images/beat-wave-preview-image.png
+![]:(app/assets/images/beat-wave-preview-image.png)
 
-[beatwave]: https://www.beatwave.stream
+[beatwave]: (https://www.beatwave.stream)
+
 ## Features and Implementation
 
 ### Track CRUD
@@ -14,6 +15,22 @@ BeatWave's core functionality revolves the CRUD (Create, Read, Update, Destroy) 
 ### Queue
 
 The track queue is another centerpiece of BeatWave's functionality. The queue is generated through variable GET requests that accord with the current route. For instance, the Stream home page fetches a randomly generated queue of other users' uploads while a user's profile page shows tracks they uploaded, and a track's profile page creates a single-item queue.
+
+```ruby
+def index
+  if params[:type] == "stream"
+    if current_user
+      @tracks = Track.where.not({user_id: current_user.id}).includes(:comments)
+    else
+      @tracks = Track.all.includes(:comments)
+    end
+  elsif params[:type] == "user-show"
+    id = params[:id].to_i
+    @tracks = Track.all.includes(:comments).where(user_id: id)
+  end
+  render :index
+end
+```
 
 ### Progress Bar
 
@@ -30,6 +47,26 @@ BeatWave optimizes user experience by ensuring that the current track is never d
 Waveforms are another crucial aspect of BeatWave's U/I. They visually represent each track's sound levels, progress, elapsed time and duration. The waveforms are rendered using HTML5 Canvas by painting columns that correspond to sound levels at progressive timestamps throughout the track. Each track's progress is represented by repainting columns up until a particular track's elapsed time. The columns change color dynamically as a track progresses, and reset to their default color once a track finishes.
 
 Implementing waveforms required a restructuring of BeatWave's state shape. The progress bar only demanded storing state for the current track. To render waveforms however, the current track's progress had to be dynamically mapped to a corresponding track object in the queue. This allows users to have multiple active tracks at a given time. Each track holds it's own elapsed time state that dictates where to begin playing an active track that was previously paused.
+
+```javascript
+peaks.map( (peak, idx) => {
+  let trackProgress = Math.floor(((idx)/peaks.length) * track.duration);
+  if (elapsedTime > trackProgress) {
+    mainCtx.fillStyle = "#f50";
+    mainCtx.fillRect(x, 90, 2, peak * -600);
+    shadowCtx.fillRect(x, 0, 2, peak * 250);
+  }
+  else if (hoverPoint && hoverPoint > trackProgress) {
+    mainCtx.fillStyle = "#af5103";
+    mainCtx.fillRect(x, 90, 2, peak * -600);
+    shadowCtx.fillRect(x, 0, 2, peak * 250);
+  }
+  else {
+    mainCtx.fillStyle = "#A6A4A4";
+    mainCtx.fillRect(x, 90, 2, peak * -600);
+    shadowCtx.fillRect(x, 0, 2, peak * 250);
+  }
+```
 
 ### Comments
 

@@ -44,6 +44,7 @@ class Waveform extends React.Component {
       let mainCtx = mainCanvas.getContext('2d');
       let shadowCanvas = document.getElementById(`shadow-stream-${this.props.track.id}`);
       let shadowCtx = shadowCanvas.getContext('2d');
+      shadowCtx.fillStyle = "#d8d8d8";
       let x = 0;
       let y = 0;
       let trackPlaying = currentTrack && (currentTrack.track.id === track.id);
@@ -53,19 +54,16 @@ class Waveform extends React.Component {
         if (elapsedTime > trackProgress) {
           mainCtx.fillStyle = "#f50";
           mainCtx.fillRect(x, 90, 2, peak * -600);
-          shadowCtx.fillStyle = "#d8d8d8";
           shadowCtx.fillRect(x, 0, 2, peak * 250);
         }
         else if (hoverPoint && hoverPoint > trackProgress) {
           mainCtx.fillStyle = "#af5103";
           mainCtx.fillRect(x, 90, 2, peak * -600);
-          shadowCtx.fillStyle = "#d8d8d8";
           shadowCtx.fillRect(x, 0, 2, peak * 250);
         }
         else {
           mainCtx.fillStyle = "#A6A4A4";
           mainCtx.fillRect(x, 90, 2, peak * -600);
-          shadowCtx.fillStyle = "#d8d8d8";
           shadowCtx.fillRect(x, 0, 2, peak * 250);
         }
         x += 3;
@@ -102,7 +100,7 @@ class Waveform extends React.Component {
     }
 
     queueComment(e) {
-      if (this.props.currentUser) {    
+      if (this.props.currentUser) {
         let track = this.props.track;
         let canvasWidth = e.currentTarget.width;
         let diffX = (e.clientX - e.currentTarget.getBoundingClientRect().left);
