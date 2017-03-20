@@ -17,7 +17,7 @@ export default class ProgressBar extends React.Component {
     if (!this.props.currentTrack || !nextProps.currentTrack) {
       return;
     }
-    
+
     if (this.props.currentTrack.track.id !== nextProps.currentTrack.track.id) {
       this.setState({loaded: false});
     }
@@ -67,7 +67,6 @@ export default class ProgressBar extends React.Component {
   handleNext() {
     let lastTrackId = (this.props.currentTrack.track.id).toString();
     let lastTrackAudio = document.getElementById(lastTrackId);
-    // lastTrackAudio.pause();
     lastTrackAudio.currentTime = 0;
     this.props.resetElapsedTime();
 
@@ -99,12 +98,6 @@ export default class ProgressBar extends React.Component {
   renderElapsedTime () {
     if (!this.audioTag) { return "0:00"; }
     return formatTime(this.props.currentTrack.elapsedTime);
-    // let seconds = (this.props.currentTrack.elapsedTime % 60).toString();
-    // let minutes = Math.floor(this.props.currentTrack.elapsedTime / 60).toString();
-    // if (seconds.length < 2) {
-    //   seconds = "0" + seconds;
-    // }
-    // return `${minutes}:${seconds}`;
   }
 
   handleProgress() {
@@ -124,12 +117,6 @@ export default class ProgressBar extends React.Component {
     else {
       duration = Math.floor(this.audioTag.duration);
       return formatTime(duration);
-      // let seconds = (duration % 60).toString();
-      // let minutes = Math.floor(duration / 60).toString();
-      // if (seconds.length < 2) {
-      //   seconds = "0" + seconds;
-      // }
-      // return `${minutes}:${seconds}`;
     }
   }
 
