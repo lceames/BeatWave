@@ -1,10 +1,13 @@
 .comment-body {
   display: flex;
   position: absolute;
-  top: 110px;
   padding-top: 2px;
   padding-left: 10px;
   font: 12px/1.4 "Lucida Grande","Lucida Sans Unicode","Lucida Sans",Garuda,Verdana,Tahoma,sans-serif;
+}
+
+.stream-index-item .comment-body {
+  top: 110px;
 }
 
 .comment-thumb img {
