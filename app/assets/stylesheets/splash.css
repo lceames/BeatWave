@@ -8,10 +8,57 @@
 }
 
 .splash {
-  width: 90%;
+  min-width: 1240px;
+  max-width: 1240px;
   margin-left: 5%;
   height: 100%;
   background-color: #fff;
+}
+
+.splash-content {
+  text-align: center;
+  padding-top: 20px;
+}
+
+.splash-content h2 {
+  font-family: "Interstate", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Garuda, Verdana, Tahoma, sans-serif;
+  font-weight: 100;
+  font-size: 24px;
+  margin-bottom: 30px;
+}
+
+.splash-items {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+  padding-left: 18px;
+}
+
+.splash-index-item {
+  position: relative;
+  width: 180px;
+  height: 180px;
+  padding: 10px;
+}
+
+.splash-index-item .track-image {
+  position: relative;
+  z-index: 0;
+  height: 180px;
+  width: 180px;
+}
+
+.splash-index-item .play-pause {
+  display: none;
+  position: absolute;
+  z-index: 1;
+  top: 62px;
+  left: 62px;
+  color: #f50;
+}
+
+.splash-index-item:hover .play-pause {
+  display: block;
 }
 
 .nav-splash {
