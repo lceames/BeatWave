@@ -8,8 +8,8 @@
 }
 
 .splash {
-  min-width: 1240px;
-  max-width: 1240px;
+  min-width: 1300px;
+  max-width: 1300px;
   margin-left: 5%;
   height: 100%;
   background-color: #fff;
@@ -31,7 +31,7 @@
   display: flex;
   flex-wrap: wrap;
   margin-bottom: 30px;
-  padding-left: 18px;
+  padding-left: 50px;
 }
 
 .splash-index-item {
