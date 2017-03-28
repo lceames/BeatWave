@@ -20,7 +20,7 @@ export default class TrackShow extends React.Component {
   }
 
   componentDidMount() {
-    this.props.fetchTrackShow(this.props.params.trackId).then( () => {
+    this.props.fetchTracks("track-show", this.props.params.trackId).then( () => {
       this.setState({trackLoaded: true});
     });
     this.props.fetchUser(this.props.params.userId).then( () => {
@@ -64,8 +64,10 @@ export default class TrackShow extends React.Component {
     }
 
     let comments = track.comments.map( (comment) => {
-      return <Comment comment={comment} key={comment.id}/>
+      return <Comment comment={comment} type="track-profile" key={comment.id}/>
     })
+
+    if (!track.commentTime) { track.commentTime = track.elapsedTime }
 
     return (
       <div className="track-show-content">
@@ -80,7 +82,7 @@ export default class TrackShow extends React.Component {
           <Waveform track={track} type="track-show"/>
         </div>
         <div className="track-content">
-          <NewComment track={track} time={0}/>
+          <NewComment track={track} time={track.commentTime}/>
           <div className="track-details">
             <div className="user-info">
               <img src={this.props.userProfile.image} className="user-thumb" />

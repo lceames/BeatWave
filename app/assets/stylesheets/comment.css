@@ -6,6 +6,14 @@
   font: 12px/1.4 "Lucida Grande","Lucida Sans Unicode","Lucida Sans",Garuda,Verdana,Tahoma,sans-serif;
 }
 
+.user-comment-section {
+  display: flex;
+}
+
+.user-comment-section .timestamp {
+  color: gray;
+}
+
 .waveform .comment-body {
   top: 110px;
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import TrackShow from './track_show';
 import { connect } from 'react-redux';
-import { playCurrentTrack, fetchTrackShow, resetTracks, setCurrentTrack, pauseCurrentTrack } from '../actions/track_actions';
+import { playCurrentTrack, fetchTracks, resetTracks, setCurrentTrack, pauseCurrentTrack } from '../actions/track_actions';
 import { fetchUser } from '../actions/user_actions';
 import { createComment } from '../actions/comment_actions';
 
@@ -16,7 +16,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchTrackShow: (id) => dispatch(fetchTrackShow(id)),
+    fetchTracks: (type, id) => dispatch(fetchTracks(type, id)),
     fetchUser: (id) => dispatch(fetchUser(id)),
     resetTracks: () => dispatch(resetTracks()),
     setCurrentTrack: (item) => dispatch(setCurrentTrack(item)),

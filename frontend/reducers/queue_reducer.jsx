@@ -1,7 +1,7 @@
 import React from 'react';
 import {
   REMOVE_TRACK, RECEIVE_TRACK, RECEIVE_TRACK_SHOW, RECEIVE_TRACKS, SET_CURRENT_TRACK, RESET_TRACKS,
-  PAUSE_CURRENT_TRACK, UPDATE_ELAPSED_TIME, PLAY_CURRENT_TRACK, HANDLE_REWIND, RESET_ELAPSED_TIME
+  PAUSE_CURRENT_TRACK, UPDATE_ELAPSED_TIME, PLAY_CURRENT_TRACK, HANDLE_REWIND, RESET_ELAPSED_TIME, SET_COMMENT_TIME
   } from '../actions/track_actions';
 import merge from 'lodash/merge';
 
@@ -31,12 +31,6 @@ const queueReducer = (oldState = { currentTrack: null, queue: [] }, action) => {
         currentTrack: oldState.currentTrack,
         queue
       };
-    case(RECEIVE_TRACK_SHOW):
-      queue = [action.track];
-      return {
-        currentTrack: oldState.currentTrack,
-        queue
-      };
     case(REMOVE_TRACK): {
       queue = [];
       queueIndex = oldState.queue.findIndex( (track) => {
@@ -52,6 +46,13 @@ const queueReducer = (oldState = { currentTrack: null, queue: [] }, action) => {
     }
     case(RECEIVE_TRACKS):
       queue = action.tracks;
+      if (oldState.currentTrack) {
+        queue.forEach( track => {
+          if (track.id === oldState.currentTrack.track.id) {
+            track.active = true;
+          }
+        });
+      }
       return {
         currentTrack: oldState.currentTrack,
         queue
@@ -96,6 +97,11 @@ const queueReducer = (oldState = { currentTrack: null, queue: [] }, action) => {
       newState = merge({}, oldState);
       queueIndex = newState.queue.findIndex( (track) => track.id === newState.currentTrack.track.id);
       newState.queue[queueIndex].elapsedTime = 0;
+      return newState;
+    case(SET_COMMENT_TIME):
+      newState = merge({}, oldState);
+      queueIndex = newState.queue.findIndex( (track) => track.id === action.trackId);
+      newState.queue[queueIndex].commentTime = action.time;
       return newState;
     default:
       return oldState;

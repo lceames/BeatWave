@@ -24,6 +24,8 @@ class Api::TracksController < ApplicationController
     elsif params[:type] == "user-show"
       id = params[:id].to_i
       @tracks = Track.all.includes(:comments).where(user_id: id)
+    elsif params[:type] == "track-show"
+      @tracks = [Track.find(params[:id])]
     elsif params[:type] == "splash"
       @tracks = Track.all
     end

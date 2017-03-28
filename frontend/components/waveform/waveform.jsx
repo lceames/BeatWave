@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { updateElapsedTime, setCurrentTrack } from '../../actions/track_actions';
+import { updateElapsedTime, setCurrentTrack, setCommentTime } from '../../actions/track_actions';
 import { formatTime } from '../../util/helper_functions';
 import NewComment from '../stream/new_comment';
 import Comment from '../stream/comment';
@@ -17,7 +17,6 @@ class Waveform extends React.Component {
       this.state = {
         hoverPoint: null,
         hoverTime: null,
-        commentTime: null,
         commentActive: false
       };
     }
@@ -25,10 +24,8 @@ class Waveform extends React.Component {
     componentWillReceiveProps(nextProps) {
       this.paintWaveform.apply(this);
       if (this.props.track.comments.length !== nextProps.track.comments.length) {
-        this.setState({
-          commentActive: false,
-          commentTime: null
-        });
+        this.setState({ commentActive: false });
+        this.props.setCommentTime(this.props.track.id, null);
       }
     }
 
@@ -107,10 +104,8 @@ class Waveform extends React.Component {
         let diffX = (e.clientX - e.currentTarget.getBoundingClientRect().left);
         let trackPercentage = diffX/canvasWidth;
         let trackProgress = Math.round(trackPercentage * track.duration);
-        this.setState({
-          commentTime: trackProgress,
-          commentActive: true
-        });
+        this.setState({ commentActive: true });
+        this.props.setCommentTime(track.id, trackProgress);
       }
     }
 
@@ -130,23 +125,23 @@ class Waveform extends React.Component {
     }
 
     render () {
-      const { track, currentUser } = this.props
+      const { track, currentUser, type } = this.props
       let elapsedTime = track.active? this.displayElapsedTime() : <div></div>
       let duration = <p className="duration">{formatTime(track.duration)}</p>
-      let newComment = this.state.commentActive ? <NewComment track={track} time={this.state.commentTime}/> : ""
+      let newComment = this.state.commentActive && type == "stream" ? <NewComment track={track} time={track.commentTime}/> : ""
       let commentThumb = <div></div>
-      if (this.state.commentTime) {
-        let proportion = this.state.commentTime/track.duration;
+      let wavelength = this.props.type === "stream" ? 600 : 800;
+      if (this.state.commentActive) {
+        let proportion = track.commentTime/track.duration;
         commentThumb = (
-          <div className="comment-thumb" style={{left: proportion * 590}} >
+          <div className="comment-thumb" style={{left: proportion * wavelength}} >
             <img src={currentUser.image} id={this.state.commentTime} />
           </div>
           )
       }
-      let wavelength = this.props.type === "stream" ? 600 : 800;
 
       let comments = track.comments.map( (comment) => {
-        return <Comment comment={comment} key={comment.id}/>
+        return <Comment comment={comment} type={this.props.type} key={comment.id}/>
       })
       if (document.getElementById(`waveform-stream-${this.props.track.id}`)) {
         this.paintWaveform.apply(this);
@@ -183,7 +178,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     updateElapsedTime: (time) => dispatch(updateElapsedTime(time)),
-    setCurrentTrack: (currentTrackItem) => dispatch(setCurrentTrack(currentTrackItem))
+    setCurrentTrack: (currentTrackItem) => dispatch(setCurrentTrack(currentTrackItem)),
+    setCommentTime: (trackId, time) => dispatch(setCommentTime(trackId, time))
   }
 }
 

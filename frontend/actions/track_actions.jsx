@@ -13,18 +13,7 @@ export const RESET_ELAPSED_TIME = "RESET_ELAPSED_TIME";
 export const RESET_TRACKS = "RESET_TRACKS";
 export const RECEIVE_TRACK_SHOW = "RECEIVE_TRACK_SHOW";
 export const RECEIVE_TRACK_ERRORS = "RECEIVE_TRACK_ERRORS";
-
-export const fetchTrack = (id) => dispatch => {
-  return TrackApiUtil.fetchTrack(id).then(
-    (track) => dispatch(receiveTrack(track))
-  );
-};
-
-export const fetchTrackShow = (id) => dispatch => {
-  return TrackApiUtil.fetchTrack(id).then(
-    (track) => dispatch(receiveTrackShow(track))
-  );
-};
+export const SET_COMMENT_TIME = "SET_COMMENT_TIME";
 
 export const fetchTracks = (type, id) => dispatch => {
   return TrackApiUtil.fetchTracks(type, id).then(
@@ -57,6 +46,14 @@ export const receiveTracks = tracks => {
 export const resetTracks = () => {
   return {
     type: RESET_TRACKS
+  };
+};
+
+export const setCommentTime = (trackId, time) => {
+  return {
+    type: SET_COMMENT_TIME,
+    time,
+    trackId
   };
 };
 

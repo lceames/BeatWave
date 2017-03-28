@@ -43,7 +43,7 @@
   cursor: pointer;
 }
 
-.elapsed-time, .duration {
+.progress-bar .elapsed-time, .progress-bar .duration {
   font-size: 12px;
   padding-top: 18px;
 }

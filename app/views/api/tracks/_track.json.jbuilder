@@ -9,7 +9,7 @@ json.elapsedTime 0
 json.duration track.duration
 json.active false
 json.peaks track.peaks
-json.comments track.comments do |comment|
+json.comments track.comments.sort_by { |comment| comment.elapsed_time } do |comment|
   json.thumb asset_path(comment.user.image.url)
   json.body comment.body
   json.author comment.user.username
