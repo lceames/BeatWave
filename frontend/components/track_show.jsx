@@ -77,7 +77,7 @@ export default class TrackShow extends React.Component {
             <h2>{track.title}</h2>
             <h1>{track.author}</h1>
           </div>
-          <Waveform track={track} type="stream"/>
+          <Waveform track={track} type="track-show"/>
         </div>
         <div className="track-content">
           <NewComment track={track} time={0}/>

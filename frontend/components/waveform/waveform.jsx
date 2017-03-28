@@ -44,6 +44,7 @@ class Waveform extends React.Component {
       let mainCtx = mainCanvas.getContext('2d');
       let shadowCanvas = document.getElementById(`shadow-stream-${this.props.track.id}`);
       let shadowCtx = shadowCanvas.getContext('2d');
+      let columnSize = this.props.type === "stream" ? 2 : 3;
       shadowCtx.fillStyle = "#d8d8d8";
       let x = 0;
       let y = 0;
@@ -53,20 +54,20 @@ class Waveform extends React.Component {
         let trackProgress = Math.floor(((idx)/peaks.length) * track.duration);
         if (elapsedTime > trackProgress) {
           mainCtx.fillStyle = "#f50";
-          mainCtx.fillRect(x, 90, 2, peak * -600);
-          shadowCtx.fillRect(x, 0, 2, peak * 250);
+          mainCtx.fillRect(x, 90, columnSize, peak * -600);
+          shadowCtx.fillRect(x, 0, columnSize, peak * 250);
         }
         else if (hoverPoint && hoverPoint > trackProgress) {
           mainCtx.fillStyle = "#af5103";
-          mainCtx.fillRect(x, 90, 2, peak * -600);
-          shadowCtx.fillRect(x, 0, 2, peak * 250);
+          mainCtx.fillRect(x, 90, columnSize, peak * -600);
+          shadowCtx.fillRect(x, 0, columnSize, peak * 250);
         }
         else {
           mainCtx.fillStyle = "#A6A4A4";
-          mainCtx.fillRect(x, 90, 2, peak * -600);
-          shadowCtx.fillRect(x, 0, 2, peak * 250);
+          mainCtx.fillRect(x, 90, columnSize, peak * -600);
+          shadowCtx.fillRect(x, 0, columnSize, peak * 250);
         }
-        x += 3;
+        x += (columnSize + 1);
       });
     }
 
@@ -130,45 +131,43 @@ class Waveform extends React.Component {
 
     render () {
       const { track, currentUser } = this.props
-      if (this.props.type == "stream") {
-        let elapsedTime = track.active? this.displayElapsedTime() : <div></div>
-        let duration = <p className="duration">{formatTime(track.duration)}</p>
-        let newComment = this.state.commentActive ? <NewComment track={track} time={this.state.commentTime}/> : ""
-        let commentThumb = <div></div>
-        if (this.state.commentTime) {
-          let proportion = this.state.commentTime/track.duration;
-          commentThumb = (
-            <div className="comment-thumb" style={{left: proportion * 590}} >
-              <img src={currentUser.image} id={this.state.commentTime} />
-            </div>
-            )
-        }
-
-        let comments = track.comments.map( (comment) => {
-          return <Comment comment={comment} key={comment.id}/>
-        })
-
-        return (
-          <div className="waveform">
-            <canvas onClick={this.handleClick} id={`waveform-stream-${this.props.track.id}`}
-              onMouseOver={this.handleHover} width="600" height="90" onMouseMove={this.handleHover}
-              onMouseLeave={this.resetHover}>
-            </canvas>
-            <canvas width="600" height="50" id={`shadow-stream-${this.props.track.id}`}
-              onClick={this.queueComment}>
-            </canvas>
-            {elapsedTime}
-            {duration}
-            {comments}
-            {commentThumb}
-            {newComment}
+      let elapsedTime = track.active? this.displayElapsedTime() : <div></div>
+      let duration = <p className="duration">{formatTime(track.duration)}</p>
+      let newComment = this.state.commentActive ? <NewComment track={track} time={this.state.commentTime}/> : ""
+      let commentThumb = <div></div>
+      if (this.state.commentTime) {
+        let proportion = this.state.commentTime/track.duration;
+        commentThumb = (
+          <div className="comment-thumb" style={{left: proportion * 590}} >
+            <img src={currentUser.image} id={this.state.commentTime} />
           </div>
-        )
+          )
       }
-      else {
-        return <canvas className="canvas" width="2000" height="600" id="canvas"></canvas>;
+      let wavelength = this.props.type === "stream" ? 600 : 800;
+
+      let comments = track.comments.map( (comment) => {
+        return <Comment comment={comment} key={comment.id}/>
+      })
+      if (document.getElementById(`waveform-stream-${this.props.track.id}`)) {
+        this.paintWaveform.apply(this);
       }
 
+      return (
+        <div className="waveform">
+          <canvas onClick={this.handleClick} id={`waveform-stream-${this.props.track.id}`}
+            onMouseOver={this.handleHover} width={wavelength} height="90" onMouseMove={this.handleHover}
+            onMouseLeave={this.resetHover}>
+          </canvas>
+          <canvas width={wavelength} height="50" id={`shadow-stream-${this.props.track.id}`}
+            onClick={this.queueComment}>
+          </canvas>
+          {elapsedTime}
+          {duration}
+          {comments}
+          {commentThumb}
+          {newComment}
+        </div>
+      )
     }
 };
 
