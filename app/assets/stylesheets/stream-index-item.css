@@ -37,7 +37,7 @@
   font-family: "Interstate","Lucida Grande","Lucida Sans Unicode","Lucida Sans",Garuda,Verdana,Tahoma,sans-serif;
 }
 
-.stream-index-item .elapsed-time, .stream-index-item .duration {
+.waveform .elapsed-time, .waveform .duration {
   font-size: 12px;
   height: 15px;
   color: gray;
@@ -47,7 +47,7 @@
   padding: 2px;
 }
 
-.stream-index-item .elapsed-time {
+.waveform .elapsed-time {
   color: #f50;
 }
 

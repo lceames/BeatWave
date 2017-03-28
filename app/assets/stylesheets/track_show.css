@@ -138,7 +138,7 @@
   font-size: 12px;
 }
 
-.track-show-content .comment-body .author, .track-show-content .comment-body .body {
+.track-content .comment-body .author, .track-content .comment-body .body {
   display: block;
 }
 
@@ -157,17 +157,17 @@
   padding-bottom: 5px;
 }
 
-.track-show-content .new-comment {
+.track-content .new-comment {
   height: 40px;
   margin-left: 40px;
   margin-bottom: 15px;
 }
 
-.track-show-content .track-details {
+.track-content .track-details {
   border-top: 1px solid #f2f2f2;
 }
 
-.track-show-content .new-comment .user-thumb {
+.track-content .new-comment .user-thumb {
   border-radius: 0;
   width: 40px;
   height: 40px;

@@ -1,5 +1,4 @@
 .waveform:hover {
-
 }
 
 
@@ -8,6 +7,13 @@
   flex-direction: column;
   position: relative;
   cursor: pointer;
+  max-width: 600px;
+}
+
+.track-show-content .waveform {
+  position: absolute;
+  top: 120px;
+  left: 50px;
 }
 
 .waveform .elapsed-time {

@@ -28,10 +28,6 @@ export default class TrackShow extends React.Component {
     });
   }
 
-  // componentWillUnmount() {
-  //   this.props.resetTracks();
-  // }
-
   handlePause() {
     let audioTag = document.getElementById(this.props.track[0].id);
     this.props.pauseCurrentTrack();
@@ -81,9 +77,10 @@ export default class TrackShow extends React.Component {
             <h2>{track.title}</h2>
             <h1>{track.author}</h1>
           </div>
+          <Waveform track={track} type="stream"/>
         </div>
         <div className="track-content">
-          <NewComment track={this.props.track[0]}/>
+          <NewComment track={track} time={0}/>
           <div className="track-details">
             <div className="user-info">
               <img src={this.props.userProfile.image} className="user-thumb" />
