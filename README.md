@@ -2,6 +2,8 @@
 
 BeatWave is a social music streaming web application inspired by SoundCloud built on a Ruby on Rails backend and a React/Redux front-end.
 
+[Live version](www.beatwave.stream)
+
 ![](app/assets/images/beatwave-preview-image.png)
 
 [beatwave]: (https://www.beatwave.stream)
