@@ -1,10 +1,10 @@
 import React from 'react';
 import { hashHistory } from 'react-router';
-import NavBar from './nav/navbar';
-import StreamContainer from './stream/stream_container';
+import NavBar from '../nav/navbar';
+import StreamContainer from '../stream/stream_container';
 import { connect } from 'react-redux';
-import { fetchTracks } from '../actions/track_actions';
-import SplashIndexItem from './splash_index_item';
+import { fetchTracks } from '../../actions/track_actions';
+import SplashIndexItem from '../splash/splash_index_item';
 
 
 class Splash extends React.Component {

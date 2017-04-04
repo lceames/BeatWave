@@ -1,9 +1,9 @@
 import React from 'react';
-import { fetchTracks, resetTracks } from '../actions/track_actions';
-import UserShow from './user_show';
+import { fetchTracks, resetTracks } from '../../actions/track_actions';
+import UserShow from '../user_show/user_show';
 import { connect } from 'react-redux';
-import { fetchUser, updateUserImage } from '../actions/user_actions';
-import { startLoading } from '../actions/loading_actions';
+import { fetchUser, updateUserImage } from '../../actions/user_actions';
+import { startLoading } from '../../actions/loading_actions';
 
 const mapStateToProps = state => {
   return {

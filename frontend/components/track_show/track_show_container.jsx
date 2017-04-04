@@ -1,9 +1,9 @@
 import React from 'react';
-import TrackShow from './track_show';
+import TrackShow from '../track_show/track_show';
 import { connect } from 'react-redux';
-import { playCurrentTrack, fetchTracks, resetTracks, setCurrentTrack, pauseCurrentTrack } from '../actions/track_actions';
-import { fetchUser } from '../actions/user_actions';
-import { createComment } from '../actions/comment_actions';
+import { playCurrentTrack, fetchTracks, resetTracks, setCurrentTrack, pauseCurrentTrack } from '../../actions/track_actions';
+import { fetchUser } from '../../actions/user_actions';
+import { createComment } from '../../actions/comment_actions';
 
 const mapStateToProps = state => {
   return {

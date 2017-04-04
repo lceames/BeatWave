@@ -1,9 +1,9 @@
 import React from 'react';
-import StreamIndexItemContainer from './stream/stream_index_item_container';
-import Comment from './stream/comment';
-import NewComment from './stream/new_comment';
-import PlayPause from './stream/play_pause';
-import Waveform from './waveform/waveform';
+import StreamIndexItemContainer from '../stream/stream_index_item_container';
+import Comment from '../stream/comment';
+import NewComment from '../stream/new_comment';
+import PlayPause from '../stream/play_pause';
+import Waveform from '../waveform/waveform';
 
 export default class TrackShow extends React.Component {
   constructor(props) {

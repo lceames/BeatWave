@@ -20,6 +20,7 @@ export default class StreamIndexItem extends React.Component {
     const { track, queue, currentTrack, currentUser } = this.props;
     let deleteTrack = <div></div>;
     let poster = "";
+    let posterThumb = "";
 
     if (currentUser && currentUser.id === track.userId) {
       deleteTrack = <i onClick={this.handleDelete} className="fa fa-trash-o" aria-hidden="true"></i>
@@ -30,12 +31,15 @@ export default class StreamIndexItem extends React.Component {
         <p className="stream-item-author"><Link to={`/${track.userId}`} className="author-link">{track.author} </Link>
         posted <Link className="author-link" to={`/${track.userId}/${track.id}`}>a track</Link></p>
       )
+      posterThumb = (
+        <Link to={`/${track.userId}`} className="author-link"><img src={track.authorImage} className="user-nav-thumb"/></Link>
+      )
     }
 
     return (
       <li className="stream-index-item">
         <div className="poster-info">
-          <Link to={`/${track.userId}`} className="author-link"><img src={track.authorImage} className="user-nav-thumb"/></Link>
+          {posterThumb}
           {poster}
         </div>
         <div className="stream-item-content">

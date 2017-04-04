@@ -133,11 +133,11 @@ export default class ProgressBar extends React.Component {
 
     return (
       <div className="progress-bar">
-        <nav className="control-buttons">
+        <div className="control-buttons">
           <i className="fa fa-step-backward fa-lg" aria-hidden="true" onClick={this.handleRewind}></i>
           {playPause}
           <i className="fa fa-step-forward fa-lg" aria-hidden="true" onClick={this.handleNext}></i>
-        </nav>
+        </div>
         <div className="bar-section">
           <span className="elapsed-time">{this.renderElapsedTime.apply(this)}</span>
           <progress className="bar" value={this.handleProgress.apply(this)}></progress>

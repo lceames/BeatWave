@@ -1,5 +1,5 @@
 import React from 'react';
-import StreamIndexItemContainer from './stream/stream_index_item_container';
+import StreamIndexItemContainer from '../stream/stream_index_item_container';
 import Modal from 'react-modal';
 
 export default class UserShow extends React.Component {

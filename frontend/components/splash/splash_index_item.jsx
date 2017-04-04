@@ -1,5 +1,5 @@
 import React from 'react';
-import PlayPause from './stream/play_pause';
+import PlayPause from '../stream/play_pause';
 import { connect } from 'react-redux';
 import { hashHistory } from 'react-router';
 

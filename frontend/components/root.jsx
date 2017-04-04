@@ -3,11 +3,11 @@ import { Provider } from 'react-redux';
 import { Router, Route, IndexRoute, hashHistory } from 'react-router';
 import App from './app.jsx';
 import SessionFormContainer from './session/session_form_container';
-import Splash from './splash';
+import Splash from './splash/splash';
 import StreamContainer from './stream/stream_container';
 import UploadContainer from './upload/upload_container';
-import UserShowContainer from './user_show_container';
-import TrackShowContainer from './track_show_container';
+import UserShowContainer from './user_show/user_show_container';
+import TrackShowContainer from './track_show/track_show_container';
 
 export default ({store}) => {
   function redirectIfLoggedIn(nextState, replace) {
