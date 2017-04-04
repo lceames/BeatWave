@@ -23,6 +23,20 @@
   line-height: 40px;
   cursor: pointer;
 }
+
+.imagePreview {
+  height: 200px;
+  width: 200px;
+  margin: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.custom-file-input:hover {
+  background-color: #f30;
+}
+
 .upload-form, .upload-form-content {
   display: flex;
   flex-direction: column;
@@ -35,11 +49,6 @@
   align-items: center;
   margin-top: 6%;
 }
-
-.upload-form-content .custom-file-input {
-  margin-top: 4%;
-}
-
 
 
 .upload-thumb {
@@ -79,6 +88,14 @@
   margin-top: 77px;
 }
 
+.submit {
+  cursor: pointer;
+}
+
+.submit:hover {
+  background-color: #f30;
+}
+
 .file-upload {
   display: none
 }
@@ -91,6 +108,7 @@
 
 .upload-form-content h1 {
   padding: 10px;
+  font-size: 20px;
 }
 
 .upload-form-content .errors {

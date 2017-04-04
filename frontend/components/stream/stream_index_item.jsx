@@ -10,10 +10,20 @@ export default class StreamIndexItem extends React.Component {
   constructor(props) {
     super(props);
     this.handleDelete = this.handleDelete.bind(this);
+    this.state = {
+      dropDownOpen: false
+    };
   }
 
   handleDelete() {
     this.props.deleteTrack(this.props.track.id);
+  }
+
+  renderDropdown() {
+    // return (
+    //   <div>
+    //   </div>
+    // );
   }
 
   render () {
@@ -36,6 +46,8 @@ export default class StreamIndexItem extends React.Component {
       )
     }
 
+    let dropdown = this.state.dropDownOpen ? this.renderDropdown() : ""
+
     return (
       <li className="stream-index-item">
         <div className="poster-info">
@@ -48,7 +60,10 @@ export default class StreamIndexItem extends React.Component {
           <div className="right-track-section">
             <Link className="track-title" to={`/${track.userId}/${track.id}`}>{track.title}</Link>
               <Waveform track={track} type="stream"/>
+            <div className="icons">
             {deleteTrack}
+
+            </div>
           </div>
         </div>
       </li>

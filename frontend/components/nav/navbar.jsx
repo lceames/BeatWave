@@ -11,7 +11,9 @@ export default (props) => {
     <nav className={className}>
       <div className="left-header-section">
         <button className="logo-background">
-          <img id="logo" src={window.images.beatWaveLogo}/>
+          <Link to={home}>
+            <img id="logo" src={window.images.beatWaveLogo}/>
+          </Link>
         </button>
         {homeLink}
       </div>

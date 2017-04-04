@@ -17,6 +17,10 @@
   color: #999;
 }
 
+.icons {
+  display: flex;
+}
+
 .author-link {
   color: #333;
 }

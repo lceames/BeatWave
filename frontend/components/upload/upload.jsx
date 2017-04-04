@@ -31,8 +31,16 @@ export default class Upload extends React.Component {
 
   handleThumb (e) {
     let file = e.currentTarget.files[0];
+    let reader = new FileReader();
+    reader.onloadend = () => {
+      this.setState({ imageUrl: reader.result, imageFile: file});
+    };
+
     if (file) {
-      this.setState({imageFile: file});
+      reader.readAsDataURL(file);
+      this.openModal();
+    } else {
+      this.setState({ imageUrl: "", imageFile: null });
     }
   }
 
@@ -70,19 +78,23 @@ export default class Upload extends React.Component {
     const errors = this.props.errors.map( (error, idx) => {
       return <li key={idx}>{error}</li>
     })
+    let preview = this.state.imageUrl ? (<img src={this.state.imageUrl} />) : <i className="fa fa-file-image-o fa-5x" aria-hidden="true"></i>;
 
     const modalContent = (this.props.loading && this.props.errors.length === 0) ? <div className="loader"></div> : (
       <form className="upload-form-content" onSubmit={this.handleSubmit}>
         <h1>Upload Track</h1>
-        <errors className="errors">
+        <div className="errors">
           {errors}
-        </errors>
+        </div>
         <input type='text' value={this.state.title} placeholder="Title" onChange={this.update('title')}/>
         <input type='text' value={this.state.description}placeholder="Description" onChange={this.update('description')}/>
+        <div className="imagePreview">
+          {preview}
+        </div>
         <label className="custom-file-input">Choose a thumbnail image
           <input className="upload-thumb" type='file' onChange={this.handleThumb}></input>
         </label>
-        <input type='submit' />
+        <input type='submit' className="submit"/>
       </form>
     )
 

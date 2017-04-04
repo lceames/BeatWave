@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170308162703) do
+ActiveRecord::Schema.define(version: 20170404160938) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,10 +26,10 @@ ActiveRecord::Schema.define(version: 20170308162703) do
     t.string   "title",              null: false
     t.integer  "user_id",            null: false
     t.text     "description"
-    t.string   "audio_name"
-    t.string   "audio_content_type"
-    t.integer  "audio_size"
-    t.datetime "audio_updated_at"
+    t.string   "audio_file_name",    null: false
+    t.string   "audio_content_type", null: false
+    t.integer  "audio_file_size",    null: false
+    t.datetime "audio_updated_at",   null: false
     t.string   "image_file_name"
     t.string   "image_content_type"
     t.integer  "image_file_size"
@@ -49,6 +49,8 @@ ActiveRecord::Schema.define(version: 20170308162703) do
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
+    t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
+    t.index ["username"], name: "index_users_on_username", unique: true, using: :btree
   end
 
 end
