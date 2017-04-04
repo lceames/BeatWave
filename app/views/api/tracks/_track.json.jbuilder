@@ -1,10 +1,11 @@
 json.title track.title
 json.id track.id
 json.author track.user.username
+json.authorImage track.user.image
 json.description track.description
 json.url track.audio.url
 json.image asset_path(track.image.url)
-json.user_id track.user_id
+json.userId track.user_id
 json.elapsedTime 0
 json.duration track.duration
 json.active false

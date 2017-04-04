@@ -141,7 +141,7 @@ class Waveform extends React.Component {
       }
 
       let comments = track.comments.map( (comment) => {
-        return <Comment comment={comment} type={this.props.type} key={comment.id}/>
+        return <Comment comment={comment} track={track} type={this.props.type} key={comment.id}/>
       })
       if (document.getElementById(`waveform-stream-${this.props.track.id}`)) {
         this.paintWaveform.apply(this);

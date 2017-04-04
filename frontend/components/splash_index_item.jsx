@@ -6,7 +6,7 @@ import { hashHistory } from 'react-router';
 const SplashIndexItem = props => {
   return (
     <div className="splash-index-item">
-      <img src={props.track.image} className="track-image" onClick={ () => hashHistory.push(`/${props.track.user_id}/${props.track.id}`)}/>
+      <img src={props.track.image} className="track-image" onClick={ () => hashHistory.push(`/${props.track.userId}/${props.track.id}`)}/>
       <PlayPause track={props.track} type="splash" currentTrack={props.currentTrack} queue={props.queue}/>
     </div>
   );

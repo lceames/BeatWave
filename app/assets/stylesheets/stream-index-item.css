@@ -51,9 +51,21 @@
   color: #f50;
 }
 
+.poster-info {
+  display: flex;
+}
+
+.poster-info .user-nav-thumb {
+  margin-right: 10px;
+}
+
 .stream-index-item .fa {
   color: #f50;
   padding: 12px;
+}
+
+.stream-index-item .fa:hover {
+  color: #f30;
 }
 
 .right-track-section {

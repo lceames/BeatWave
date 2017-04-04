@@ -67,11 +67,11 @@ export default class Upload extends React.Component {
   }
 
   render () {
-    let errors = this.props.errors.map( (error, idx) => {
+    const errors = this.props.errors.map( (error, idx) => {
       return <li key={idx}>{error}</li>
     })
 
-    let modalContent = (this.props.loading && this.props.errors.length === 0) ? <div className="loader"></div> : (
+    const modalContent = (this.props.loading && this.props.errors.length === 0) ? <div className="loader"></div> : (
       <form className="upload-form-content" onSubmit={this.handleSubmit}>
         <h1>Upload Track</h1>
         <errors className="errors">
