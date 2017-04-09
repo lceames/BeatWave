@@ -1,6 +1,7 @@
 import React from 'react';
 import {hashHistory} from 'react-router';
 import StreamIndexItemContainer from './stream_index_item_container';
+import PlaylistModal from '../playlist/playlist_modal';
 
 export default class Stream extends React.Component {
 
@@ -26,6 +27,7 @@ export default class Stream extends React.Component {
 
     return (
       <div className="stream content">
+        {<PlaylistModal />}
         {tracks}
       </div>
     )

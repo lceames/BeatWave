@@ -5,25 +5,23 @@ import PlayPause from './play_pause';
 import NewComment from './new_comment';
 import Waveform from '../waveform/waveform';
 import { formatTime } from '../../util/helper_functions';
+import PlaylistModal from '../playlist/playlist_modal';
 
 export default class StreamIndexItem extends React.Component {
   constructor(props) {
     super(props);
     this.handleDelete = this.handleDelete.bind(this);
     this.state = {
-      dropDownOpen: false
+      dropdownOpen: false
     };
+  }
+
+  openPlaylistModal() {
+    this.props.openPlaylistModal(this.props.track.id);
   }
 
   handleDelete() {
     this.props.deleteTrack(this.props.track.id);
-  }
-
-  renderDropdown() {
-    // return (
-    //   <div>
-    //   </div>
-    // );
   }
 
   render () {
@@ -46,8 +44,6 @@ export default class StreamIndexItem extends React.Component {
       )
     }
 
-    let dropdown = this.state.dropDownOpen ? this.renderDropdown() : ""
-
     return (
       <li className="stream-index-item">
         <div className="poster-info">
@@ -61,8 +57,10 @@ export default class StreamIndexItem extends React.Component {
             <Link className="track-title" to={`/${track.userId}/${track.id}`}>{track.title}</Link>
               <Waveform track={track} type="stream"/>
             <div className="icons">
-            {deleteTrack}
-
+              {deleteTrack}
+              <div onClick={() => this.props.openPlaylistModal(track.id)} className="playlist-dropdown">
+                <p>Add to playlist</p>
+              </div>
             </div>
           </div>
         </div>

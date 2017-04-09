@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { setCurrentTrack, deleteTrack, pauseCurrentTrack, playCurrentTrack } from '../../actions/track_actions';
 import StreamIndexItem from './stream_index_item';
 import { createComment } from '../../actions/comment_actions';
+import { openPlaylistModal } from '../../actions/modal_actions';
 
 const mapStateToProps = state => {
   return {
@@ -18,7 +19,8 @@ const mapDispatchToProps = dispatch => {
     deleteTrack: (id) => dispatch(deleteTrack(id)),
     createComment: (comment) => dispatch(createComment(comment)),
     pauseCurrentTrack: () => dispatch(pauseCurrentTrack()),
-    playCurrentTrack: () => dispatch(playCurrentTrack())
+    playCurrentTrack: () => dispatch(playCurrentTrack()),
+    openPlaylistModal: (trackId) => dispatch(openPlaylistModal(trackId))
   };
 };
 
