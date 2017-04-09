@@ -22,6 +22,8 @@ class Track < ApplicationRecord
   validates :title, :user_id, presence: true
   belongs_to :user
   has_many :comments
+  has_many :track_playlists
+  has_many :playlists, through: :track_playlists
   serialize :peaks
   before_validation :extract_metadata
 
