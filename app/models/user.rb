@@ -24,6 +24,7 @@ class User < ApplicationRecord
   after_initialize :ensure_session_token
 
   has_many :tweets
+  has_many :playlists
 
   has_attached_file :image, default_url: "record.png", s3_protocol: :https
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/

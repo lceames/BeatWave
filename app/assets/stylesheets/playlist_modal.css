@@ -1,0 +1,29 @@
+.playlist-modal .headers {
+  display: flex;
+  justify-content: space-around;
+  border-bottom: 1px solid #f2f2f2;
+  font-size: 14px;
+}
+
+.playlist-modal {
+  display: flex;
+  flex-direction: column;
+}
+
+.playlist-modal .content {
+  align-self: center;
+  padding-top: 20px;
+}
+
+.headers .selected {
+  color: #f50;
+  cursor: pointer;
+}
+
+.headers .existing {
+  cursor: pointer;
+}
+
+.headers .new {
+  cursor: pointer;
+}
