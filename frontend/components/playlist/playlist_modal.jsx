@@ -2,13 +2,15 @@ import React from 'react';
 import Modal from 'react-modal';
 import { connect } from 'react-redux';
 import { closePlaylistModal } from '../../actions/modal_actions';
+import { createPlaylist, addToPlaylist } from '../../actions/playlist_actions';
 
 class PlaylistModal extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      type: "existing"
+      type: "existing",
+      title: ""
     };
   }
 
@@ -16,9 +18,15 @@ class PlaylistModal extends React.Component {
     return this.state.type === "existing" ? this.existingContent() : this.newContent();
   }
 
+  handleSubmit(e) {
+    e.preventDefault();
+    let formData = new FormData();
+    formData.append("playlist[title]", this.state.title);
+    this.props.createPlaylist(formData);
+  }
+
   existingContent() {
     let userPlaylists = this.props.currentUser.playlists;
-    debugger
     if (userPlaylists.length === 0) {
       return <p>No playlists to add to yet :(</p>;
     }
@@ -27,8 +35,30 @@ class PlaylistModal extends React.Component {
     }
   }
 
-  newContent() {
+  update(field) {
+    return (e) => {
+      this.setState({[field]: e.target.value});
+    };
+  }
 
+
+  newContent() {
+    let playlists = this.props.playlists
+    if (playlists instanceof Object && !(playlists instanceof Array)) {
+      <div className="created-playlist">
+        <img src={playlists.image} />
+        <span></span>
+      </div>
+    }
+    else if (playlists instance of Object && playlists instanceof Array) {
+      return (<form className="new-playlist" onSubmit={this.handleSubmit.bind(this)}>
+        <div className="title">
+          <label>Playlist title</label>
+          <input type="text" value={this.state.title} onChange={this.update('title')}/>
+        </div>
+        <input type="submit" value="Save"/>
+      </form>)
+    }
   }
 
   render() {
@@ -60,13 +90,16 @@ class PlaylistModal extends React.Component {
 const mapStateToProps = state => {
   return {
     open: state.modal.playlist,
-    currentUser: state.session.currentUser
+    currentUser: state.session.currentUser,
+    playlists: state.playlist
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    closePlaylistModal: () => dispatch(closePlaylistModal())
+    closePlaylistModal: () => dispatch(closePlaylistModal()),
+    createPlaylist: playlist => dispatch(createPlaylist(playlist)),
+    addToPlaylist: trackPlaylist => dispatch(addToPlaylist(trackPlaylist))
   }
 }
 

@@ -10,6 +10,36 @@
   flex-direction: column;
 }
 
+.playlist-modal .title label {
+  line-height: 16px;
+  font-size: 12px;
+}
+
+.playlist-modal .title input {
+  height: 28px;
+}
+
+.playlist-modal input[type="text"] {
+  width: 400px;
+}
+
+.playlist-modal input[type="submit"] {
+  width: 50px;
+  background-color: #f50;
+  border-color: #f50;
+  color: #fff;
+  display: inline-block;
+  position: relative;
+  height: 26px;
+  padding: 2px 11px 2px 10px;
+  border: 1px solid #e5e5e5;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 20px;
+  white-space: nowrap;
+}
+
 .playlist-modal .content {
   align-self: center;
   padding-top: 20px;

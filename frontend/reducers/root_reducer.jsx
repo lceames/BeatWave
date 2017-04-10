@@ -4,12 +4,14 @@ import sessionReducer from './sessions_reducer';
 import queueReducer from './queue_reducer';
 import userProfileReducer from './user_profile_reducer';
 import loadingReducer from './loading_reducer';
-import modalReducer from './modal_reducer'
+import modalReducer from './modal_reducer';
+import playlistReducer from './playlist_reducer';
 
 export default combineReducers({
   session: sessionReducer,
   trackQueue: queueReducer,
   userProfile: userProfileReducer,
   loading: loadingReducer,
-  modal: modalReducer
+  modal: modalReducer,
+  playlist: playlistReducer
 });
